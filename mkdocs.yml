@@ -4,9 +4,55 @@ site_author: Michael Taylor
 
 theme:
   name: material
+  features:
+    - content.code.copy
 
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed
+  - admonition
+  - toc:
+      permalink: true
+      
 docs_dir: docs
 site_dir: site
 
 nav:
   - Home: index.md
+
+  - Projects:
+      - CMS Platform:
+
+          - Overview: projects/cms-platform/index.md
+
+          - Power App Architecture:
+              - Standalone Design Doc: projects/cms-platform/power-app-design/PowerApp_Standalone_DesignDoc.md
+              - Feature Modules:
+                  - App Startup, Architecture, and UI Logic: projects/cms-platform/power-app-design/power-app-features/ScreenBreakdownAndLogic.md
+                  - Delegable Filtering & Searching: projects/cms-platform/power-app-design/power-app-features/DelegableFilteringAndSearching.md
+                  - Article Versioning: projects/cms-platform/power-app-design/power-app-features/ArticleVersioningFeature.md
+                  - Archive History Management: projects/cms-platform/power-app-design/power-app-features/ArchivedHistoryManagement.md
+                  - Generic UI Components: projects/cms-platform/power-app-design/power-app-features/GenericUIComponents.md
+                  - UI/UX Best Practices: projects/cms-platform/power-app-design/power-app-features/UIUXBestPractices.md
+                  - Troubleshooting & Key Fixes: projects/cms-platform/power-app-design/power-app-features/TroubleshootingAndKeyFixes.md
+                  - Advanced Troubleshooting: projects/cms-platform/power-app-design/power-app-features/AdvancedTroubleshooting.md
+
+          - Power Automate Orchestration:
+              - Create New Article Version: projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Create_New_Article_Version.md
+              - Discard Draft: projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Discard_Article_Draft.md
+              - Article Archive Feature: projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Expire_Single_KB_Article_v2.md
+              - Manage SME Approval: projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Manage_SME_Approval.md
+              - Reactivate Archived Article: projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Reactivate_Archived_Article.md
+              - Revert to Version: projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Revert_to_Version.md
+              - Start KB Approval: projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Start_KB_Article_Approval.md
+              - KB API Endpoint: projects/cms-platform/power-automate-flows/flow-designs/KB-API-Endpoint.md
+              - KB ID Generator: projects/cms-platform/power-automate-flows/flow-designs/KB_ID_Generator_Child.md
+              - Log Audit Event: projects/cms-platform/power-automate-flows/flow-designs/LogAuditEvent_designDoc.md
+              - Log System Event: projects/cms-platform/power-automate-flows/flow-designs/LogSystemEvent_designDoc.md
+              - Notify Stripped Character: projects/cms-platform/power-automate-flows/flow-designs/Notify-StrippedCharacter.md
+              - Orchestrate Generate Alt Text: projects/cms-platform/power-automate-flows/flow-designs/Orchestrate-GenerateAltTextAndSaveArticle.md
+              - Scheduled Unassigned Reminder: projects/cms-platform/power-automate-flows/flow-designs/Scheduled_-_Unassigned_Article_Reminder.md

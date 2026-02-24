@@ -1,14 +1,16 @@
-# Documentation Platform Portfolio
+# Michael Taylor – Documentation as a Platform
 
-This repository demonstrates a deterministic documentation ingestion
-and transformation pipeline.
+This site demonstrates a deterministic documentation platform architecture built using:
 
-The system is designed around:
+- MkDocs (presentation layer)
+- Python ingestion pipeline
+- Format-aware transformation (Markdown + DITA)
+- GitHub Actions (PR-gated validation)
+- Manual promotion workflow
+- Enterprise-style governance separation
 
-- Structured source ingestion
-- Format detection
-- Deterministic transformation
-- PR-gated publishing
-- Platform-oriented governance
+## Architecture Overview
 
-AI-assisted normalization will be layered on top in future iterations.
+Source → Transformation → Validation → Publish
+
+Documentation is treated as release-critical infrastructure, not a publishing afterthought.
