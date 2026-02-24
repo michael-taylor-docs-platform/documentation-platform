@@ -1,0 +1,10 @@
+# Converted from DITA
+
+```
+<topic>
+    <title>DITA Sample</title>
+    <body>
+        <p>This is a DITA test file.</p>
+    </body>
+</topic>
+```
