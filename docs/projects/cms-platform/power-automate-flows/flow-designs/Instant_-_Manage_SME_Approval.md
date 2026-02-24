@@ -1,24 +1,24 @@
-# Design Doc: Instant - Manage SME Approval (V2 - Decoupled Response)
+# Instant - Manage SME Approval (V2 - Decoupled Response)
 
-## 1. Overview
+## Overview
 
 This document provides a complete, granular specification for the `Instant - Manage SME Approval` Power Automate workflow. This flow is a cornerstone of the event-driven approval architecture, triggered directly by the Power App to manage the approval lifecycle for a specific article.
 
 This V2 design incorporates a critical architectural change based on established best practices: it **decouples the immediate response to the Power App from the long-running approval process**. The flow now uses a `Try/Catch` block to handle the initial synchronous assignment and immediately responds to the app, before starting the asynchronous approval task. This provides a more responsive and robust user experience, preventing the app from freezing while waiting for a lengthy background process.
 
-### 1.1. Architectural Context
+### 1. Architectural Context
 
 This workflow is a key component of the V3 decoupled application architecture. It is not a standalone process but is orchestrated and called directly by the main Power App when an SME is assigned to an article. For a complete understanding of how this flow integrates with the user interface and other backend processes, please see the central design document.
 
-*   **Parent Document:** [`ScreenBreakdownAndLogic.md`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
+*   **Parent Document:** [`App Startup, Architecture, and UI Logic`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
 
-### 1.2. Architectural Pattern
+### 2. Architectural Pattern
 
 1.  **Synchronous Assignment:** The flow immediately attempts to set the article's status and `RunningWorkflowID`. This includes handling re-assignments by canceling previous flow runs. This entire transaction is wrapped in a `Try` scope.
 2.  **Immediate Feedback:** The flow instantly responds to the calling Power App with a structured JSON object containing a `responsestatus` (`Success` or `Failure`) and a `responsemessage`. This happens immediately after the `Try/Catch` block completes.
 3.  **Asynchronous Approval:** Only if the initial assignment was successful, the flow proceeds to begin the long-running `Start and wait for an approval` process. This runs in the background, completely independent of the Power App's UI thread.
 
-## 2. Process Flow Diagram
+## Process Flow Diagram
 
 ```mermaid
 graph TD
@@ -52,9 +52,9 @@ graph TD
     end
 ```
 
-## 3. Detailed Implementation Steps
+## Detailed Implementation Steps
 
-### 3.1. Trigger: PowerApps (V2)
+### 1. Trigger: PowerApps (V2)
 
 *   **Type:** `PowerApps (V2)`
 *   **Purpose:** To allow the Power App to initiate this workflow directly.
@@ -64,7 +64,7 @@ graph TD
     *   `appURL` (Type: String, Required): The base URL of the Power App.
     *   `modifiedBy` (Type: String, Required): The UPN/email of the user performing the assignment.
 
-### 3.2. Initialize Variables
+### 2. Initialize Variables
 
 These actions must be placed immediately after the trigger.
 
@@ -77,11 +77,11 @@ These actions must be placed immediately after the trigger.
     *   **Type:** `String`
     *   **Value:** `An unknown error occurred during the SME assignment process.`
 
-### 3.3. Try (Scope)
+### 3. Try (Scope)
 
 This scope contains the core synchronous logic that must execute immediately.
 
-#### 3.3.1. Get Article Properties
+#### 3.1. Get Article Properties
 
 *   **Action:** `Get item` (SharePoint)
 *   **Name:** `Get_item`
@@ -91,7 +91,7 @@ This scope contains the core synchronous logic that must execute immediately.
     *   **List Name:** `(kmt_KnowledgeManagementKBArticlesListName)` (Environment Variable)
     *   **Id:** `@triggerBody()?['number']`
 
-#### 3.3.2. Condition: Check if Re-Assignment is Needed
+#### 3.2. Condition: Check if Re-Assignment is Needed
 
 *   **Action:** `Condition`
 *   **Name:** `Condition_Check_if_Re-Assignment_is_Needed`
@@ -119,14 +119,14 @@ This scope contains the core synchronous logic that must execute immediately.
     *   **Id:** `@outputs('Get_item')?['body/ID']`
     *   **Status (`field_4`):** `In Review`
 
-#### 3.3.3. Compose SME Claims String
+#### 3.3. Compose SME Claims String
 
 *   **Action:** `Compose`
 *   **Name:** `Compose_SME_Claims_String`
 *   **Purpose:** To construct the required claims token for updating a SharePoint Person field.
 *   **Inputs:** `concat('i:0#.f|membership|', triggerBody()?['text'])`
 
-#### 3.3.4. Update SME and Set Running Workflow ID
+#### 3.4. Update SME and Set Running Workflow ID
 
 *   **Action:** `Update item` (SharePoint)
 *   **Name:** `Update_SME_and_Set_RunningWorkflowID`
@@ -138,7 +138,7 @@ This scope contains the core synchronous logic that must execute immediately.
     *   **RunningWorkflowID:** `@workflow()?['run']?['name']`
     *   **ReminderTimestamp:** `@utcNow()`
 
-#### 3.3.5. Log SME Assignment
+#### 3.5. Log SME Assignment
 
 *   **Action:** `Run a Child Flow`
 *   **Flow:** `Instant - LogAuditEvent`
@@ -150,7 +150,7 @@ This scope contains the core synchronous logic that must execute immediately.
     *   `details` (Text): `Concat('User assigned SME ', triggerBody()?['text'], ' to article.')`
     *   `contentDiff` (Text): (leave blank)
 
-#### 3.3.6. Set Success Response Variables
+#### 3.6. Set Success Response Variables
 
 *   **Action 1: Set `responseStatus`**
     *   **Name:** `Set_variable_responseStatus_to_Success`
@@ -159,7 +159,7 @@ This scope contains the core synchronous logic that must execute immediately.
     *   **Name:** `Set_variable_responseMessage_to_Success`
     *   **Value:** `SME assignment was successful. The approval process has been initiated.`
 
-### 3.4. Catch (Scope)
+### 4. Catch (Scope)
 
 *   **Configure run after:** Click the ellipsis (...) on the `Catch` scope and select "Configure run after". Check **only** the `has failed` box for the `Try` scope.
 *   **Inside the Catch Scope:**
@@ -184,7 +184,7 @@ This scope contains the core synchronous logic that must execute immediately.
                 }
                 ```
 
-### 3.5. Respond to Power App
+### 5. Respond to Power App
 
 *   **Configure run after:** Check the boxes for `is successful`, `has failed`, `is skipped`, and `has timed out` for the `Catch` scope. This ensures this action runs regardless of whether the `Try` block succeeded or failed.
 *   **Action:** `Respond to a PowerApp or flow`
@@ -192,11 +192,11 @@ This scope contains the core synchronous logic that must execute immediately.
     *   `responsestatus` (Text): `variables('responseStatus')`
     *   `responsemessage` (Text): `variables('responseMessage')`
 
-### 3.6. Asynchronous Approval Process (Wrapped in Try/Catch)
+### 6. Asynchronous Approval Process (Wrapped in Try/Catch)
 
 This entire section runs in the background and is wrapped in its own Try/Catch block to handle failures during the long-running approval.
 
-#### 3.6.1. Try (Asynchronous)
+#### 6.1. Try (Asynchronous)
 
 *   **Configure run after:** Check **only** the `is skipped` box for the `Catch` scope (the synchronous one).
 *   **Inside this Try scope, place the following actions:**
@@ -257,7 +257,7 @@ This entire section runs in the background and is wrapped in its own Try/Catch b
                     *   `details` (Text): `Concat('SME rejected the article. Comments: ', outputs('Start_and_wait_for_SME_approval')?['body/responses']?[0]?['comments'])`
                     *   `contentDiff` (Text): (leave blank)
 
-#### 3.6.2. Catch (Asynchronous)
+#### 6.2. Catch (Asynchronous)
 
 *   **Configure run after:** Check **only** the `has failed` box for the `Try (Asynchronous)` scope.
 *   **Inside this Catch scope, place the following actions:**

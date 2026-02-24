@@ -1,16 +1,16 @@
-# Design Doc: Instant - Start KB Article Approval (V2 - Decoupled Response)
+# Instant - Start KB Article Approval (V2 - Decoupled Response)
 
 This document provides a complete, granular specification for the `Instant - Start KB Article Approval` workflow, ensuring it follows the established V2 decoupled response pattern for consistency and robustness.
 
-## 1. Overview
+## Overview
 
 This workflow is triggered on-demand from the Power App to initiate the formal review process for a KB article. It provides immediate feedback to the user while handling routing and potentially long-running approvals in the background.
 
-### 1.1. Architectural Context
+### 1. Architectural Context
 
 This workflow is a key component of the V3 decoupled application architecture. It is not a standalone process but is orchestrated and called directly by the main Power App. For a complete understanding of how this flow integrates with the user interface and other backend processes, please see the central design document.
 
-*   **Parent Document:** [`ScreenBreakdownAndLogic.md`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
+*   **Parent Document:** [`App Startup, Architecture, and UI Logic`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
 
 Its primary responsibilities are:
 1.  Receive the `ArticleID` from the Power App.
@@ -20,16 +20,16 @@ Its primary responsibilities are:
 5.  Manage the long-running approval process asynchronously.
 6.  Reliably unlock the article upon completion or failure.
 
-### 1.2. Architectural Pattern
+### 2. Architectural Pattern
 
 1.  **Default to Failure:** The flow initializes response variables to a "Failure" state.
 2.  **Synchronous Logic in Try/Catch:** The flow gets the article and author details, then uses a `Switch` to route by region. Each regional branch contains a `Try/Catch` block for its synchronous actions (e.g., locking the item, updating status). If the synchronous actions succeed, response variables are updated to reflect success.
 3.  **Single Immediate Response:** A single `Respond to a PowerApp or flow` action is placed after the main `Switch`. It runs regardless of the outcome and sends the final status of the variables back to the app.
 4.  **Conditional Asynchronous Approval:** For branches requiring a long-running approval (i.e., Europe), the `Start and wait for an approval` action is placed *after* the response and is configured to run only if its preceding `Try` block was successful.
 
-## 2. Detailed Implementation Steps
+## Detailed Implementation Steps
 
-### 2.1. Trigger: PowerApps (V2)
+### 1. Trigger: PowerApps (V2)
 
 - **Action:** `PowerApps (V2)`
 - **Name:** `PowerApps (V2)`
@@ -41,7 +41,7 @@ Its primary responsibilities are:
     - **Type:** `Text`
     - **Required:** `Yes`
 
-### 2.2. Initialize Variables
+### 2. Initialize Variables
 
 These actions must be placed immediately after the trigger.
 
@@ -54,9 +54,9 @@ These actions must be placed immediately after the trigger.
     *   **Type:** `String`
     *   **Value:** `An unknown error occurred while starting the review process.`
 
-## 3. Workflow Logic
+## Workflow Logic
 
-### 3.1. Get KB Article Details
+### 1. Get KB Article Details
 - **Action:** `Get item` (SharePoint)
 - **Name:** `GetKBArticle`
 - **Site Address:** `(kmt_KnowledgeManagementSharePointSiteURL)` (Environment Variable)
@@ -64,14 +64,14 @@ These actions must be placed immediately after the trigger.
 - **Id:** `@triggerBody()?['ArticleID']`
 - **Purpose:** This action retrieves all the properties and column values for the SharePoint list item based on the `ArticleID` passed from the Power App.
 
-### 3.2. Get Author's Profile
+### 2. Get Author's Profile
 - **Action:** `Get user profile (V2)` (Office 365 Users)
 - **Name:** `GetAuthorProfile`
 - **Purpose:** This action retrieves the Office 365 user profile of the person who last authored the article. This is essential for routing the approval based on the author's region.
 - **Configuration:**
     - **User (UPN):** `@outputs('GetKBArticle')?['body/LastAuthor/Email']`
 
-### 3.3. Route Approval based on Author's Region
+### 3. Route Approval based on Author's Region
 - **Action:** `Switch`
 - **Name:** `Check Region`
 - **Purpose:** This action routes the approval to a specific regional approval path. If the author's region doesn't match a defined case, it proceeds to a default process.
@@ -82,11 +82,11 @@ These actions must be placed immediately after the trigger.
     - **Case 'EU':** Contains the dedicated approval process for authors based in Europe, which includes a long-running approval and requires a locking mechanism.
     - **Default:** Contains the standard process for all other regions, which involves posting to a Teams channel and terminating.
 
-### 3.4. Default Case Logic
+### 4. Default Case Logic
 
 This branch executes if the author's region does not match the 'EU' case. It uses a `Try/Catch` block to handle the synchronous actions and provide immediate feedback to the Power App.
 
-#### 3.4.1. Try Block (Default Case)
+#### 4.1. Try Block (Default Case)
 
 - **Action: `Update Status to Waiting for Reviewer`**
     - **Action:** `Update item` (SharePoint)
@@ -178,7 +178,7 @@ This branch executes if the author's region does not match the 'EU' case. It use
         - **Name:** `Set_variable_responseMessage_to_Success`
         - **Value:** `The review request has been posted to the SME channel.`
 
-#### 3.4.2. Catch Block (Default Case)
+#### 4.2. Catch Block (Default Case)
 
 This block only runs if any action in the preceding `Try` block fails.
 
@@ -203,7 +203,7 @@ This block only runs if any action in the preceding `Try` block fails.
                 }
                 ```
 
-#### 3.4.3. Respond to Power App (Default Case)
+#### 4.3. Respond to Power App (Default Case)
 
 This action is the final step in the `Default Case` branch. It is configured to run after the `Catch_Default_Review` scope, regardless of whether the preceding `Try` block succeeded or failed. This guarantees that the Power App always receives a response for this branch.
 
@@ -213,11 +213,11 @@ This action is the final step in the `Default Case` branch. It is configured to 
     - **`responsestatus`** (Text): `variables('responseStatus')`
     - **`responsemessage`** (Text): `variables('responseMessage')`
 
-### 3.5. Case 'EU' Logic
+### 5. Case 'EU' Logic
 
 This branch executes if the author's `country` from their O365 profile is `EU`. It uses a `Try/Catch` block to manage the initial synchronous actions before kicking off the long-running approval.
 
-#### 3.5.1. Try Block (EU Case)
+#### 5.1. Try Block (EU Case)
 
 - **Action: `Lock Article and Set Status`**
     - **Action:** `Update item` (SharePoint)
@@ -245,7 +245,7 @@ This branch executes if the author's `country` from their O365 profile is `EU`. 
         - **Name:** `Set_variable_responseMessage_to_Success`
         - **Value:** `The article has been sent for EU approval.`
 
-#### 3.5.2. Catch Block (EU Case)
+#### 5.2. Catch Block (EU Case)
 
 This block only runs if the `Update item` action in the `Try` block fails.
 
@@ -270,7 +270,7 @@ This block only runs if the `Update item` action in the `Try` block fails.
                 }
                 ```
 
-#### 3.5.3. Respond to Power App (EU Case)
+#### 5.3. Respond to Power App (EU Case)
 
 This action is the final synchronous step in the `EU Case` branch. It is configured to run after the `Catch_Europe_Review` scope, regardless of whether the preceding `Try` block succeeded or failed. This guarantees that the Power App always receives a response for this branch.
 
@@ -281,7 +281,7 @@ This action is the final synchronous step in the `EU Case` branch. It is configu
     - **`responsestatus`** (Text): `variables('responseStatus')`
     - **`responsemessage`** (Text): `variables('responseMessage')`
 
-### 3.6. Asynchronous EU Approval Process
+### 6. Asynchronous EU Approval Process
 
 This section only runs if the initial synchronous part of the EU case was successful. It runs completely in the background, after the response has already been sent to the Power App.
 
@@ -293,7 +293,7 @@ This section only runs if the initial synchronous part of the EU case was succes
     - **Purpose:** Formally initiates the approval process, pausing the workflow until the approver responds.
     - **Configuration:**
         - **Approval type:** `Approve/Reject - First to respond`
-        - **Assigned to:** `michael_taylor@trendmicro.com` (Placeholder for EU Reviewers DL)
+        - **Assigned to:** `euapprovalDLPlaceholder@trendmicro.com` (Placeholder for EU Reviewers DL)
         - **Title:** `KB Article Review Request: @{outputs('GetKBArticle')?['body/Title']}`
         - **Item link:** `concat(triggerBody()?['text'], '?tenantId=3e04753a-ae5b-42d4-a86d-d6f05460f9e4&ArticleID=', outputs('GetKBArticle')?['body/field_3'])`
 

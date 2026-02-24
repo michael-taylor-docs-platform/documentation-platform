@@ -1,8 +1,8 @@
-## Article Versioning Feature
+# Article Versioning 
 
 This section details the complete UI implementation for the article versioning feature, which allows users to view historical versions of an article and create new drafts from them.
 
-### 8.1. "View version history" Button
+## "View version history" Button
 
 This button initiates the version history workflow.
 
@@ -48,7 +48,7 @@ This button initiates the version history workflow.
             30
             ```
 
-### 8.2. Version History Dialog
+## Version History Dialog
 
 The dialog is a group of controls that overlay the main screen content.
 
@@ -56,7 +56,7 @@ The dialog is a group of controls that overlay the main screen content.
 *   **`Visible` Property:** The `Visible` property of all these controls is set to the context variable `showVersionHistory`.
 *   **Close Icon `OnSelect`:** The close icon sets the context variable back to false: `UpdateContext({ showVersionHistory: false })`.
 
-### 8.3. Version History Gallery (`gal_VersionHistory`)
+## Version History Gallery (`gal_VersionHistory`)
 
 This gallery, placed inside the dialog container, lists all available versions of the selected article.
 
@@ -75,7 +75,7 @@ This gallery, placed inside the dialog container, lists all available versions o
     *   **Title Label `Text`:** `"Version " & ThisItem.ArticleVersion & " (" & ThisItem.Status.Value & ")"`
     *   **Subtitle Label `Text`:** `"Modified by " & ThisItem.LastAuthor.DisplayName & " on " & Text(ThisItem.Modified, DateTimeFormat.ShortDate)`
 
-### 8.4. In-Form Preview and Revert Logic
+## In-Form Preview and Revert Logic
 
 This section describes the final, improved user experience for previewing and reverting to old versions.
 

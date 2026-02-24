@@ -1,17 +1,19 @@
+# Archive History Management
+
 ## Archive Viewer (UI)
 
-### 9.1.1. Overview
+### Overview
 
 This document outlines the design for viewing and reactivating articles from the "Knowledge Base Articles Archive" list within the existing V2 application architecture. The goal is to provide a seamless user experience by integrating archive management directly into the main app interface, reusing existing components, and simplifying backend logic. This approach replaces the V1 design, which relied on separate screens and more complex flows.
 
-### 9.1.2. Core Principles
+### Core Principles
 
 *   **UI/UX Consistency**: Integrate the archive view directly into the main user interface to provide a seamless experience. Avoid duplicating screens.
 *   **Component Reuse**: Leverage existing galleries, forms, and controls to the greatest extent possible.
 *   **Simplified Backend**: Consolidate all backend logic into a single, streamlined Power Automate flow.
 *   **Maintainability**: Ensure the new functionality is easy to understand, maintain, and extend.
 
-### 9.1.3. Power App UI/UX Design
+### Power App UI/UX Design
 
 The archive functionality will be integrated directly into the main application screen.
 
@@ -33,7 +35,7 @@ graph TD
     end
 ```
 
-### 9.1.3.1. Main Screen Enhancements
+### Main Screen Enhancements
 
 To maintain a clean and responsive user interface, a single `Icon` control will be added to the header area of the main screen. This icon will function as a button to toggle the gallery's view between active and archived articles. This approach was chosen over a standard `Toggle` control to better align with the existing icon-based UI and prevent layout issues on smaller screen sizes.
 
@@ -84,7 +86,7 @@ To maintain a clean and responsive user interface, a single `Icon` control will 
             })
             ```
 
-### 9.1.3.2. Confirmation Dialog Enhancement
+### Confirmation Dialog Enhancement
 
 The generic confirmation dialog's `OnSelect` property for the confirm button will be updated to handle the new `isReactivateAction` flag.
 
@@ -133,17 +135,17 @@ The generic confirmation dialog's `OnSelect` property for the confirm button wil
     });
     ```
 
-## 9.1.4. Backend Workflow
+## Backend Workflow
 
 The backend logic for reactivating an article is handled by a dedicated Power Automate flow. This flow is responsible for the transactional process of moving all article versions, creating a new draft, and handling any potential errors.
 
-For a complete, step-by-step implementation guide for the backend workflow, please see the **[Instant - Reactivate Archived Article Design Doc](../../power-automate-flows/flow-designs/Instant_-_Reactivate_Archived_Article.md)**.
+For a complete, step-by-step implementation guide for the backend workflow, please see the [Instant - Reactivate Archived Article Design Doc](../../power-automate-flows/flow-designs/Instant_-_Reactivate_Archived_Article.md)**.
 
-## 9.1.5. Data Model Considerations
+## Data Model Considerations
 
 *   No schema changes are required. The logic relies on the existing columns in both the active and archive lists.
 
-## 9.1.6. Security and Permissions
+## Security and Permissions
 
 *   **Flow Execution Context**: The Power Automate flow is configured to use a connection to SharePoint with a dedicated service account. Therefore, the flow executes with the permissions of the service account, not the user who triggers it from the app.
 *   **User Permissions**: As long as a user is authorized to access and use the Power App, they will be able to perform the reactivate action. The underlying SharePoint permissions are handled by the service account, abstracting them away from the end-user.

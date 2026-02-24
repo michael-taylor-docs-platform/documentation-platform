@@ -1,20 +1,22 @@
-# Design: KB ID Generator Child Flow
+# KB ID Generator Child Flow
 
-## 1. Executive Summary
+## Executive Summary
 This document provides the detailed technical design and logic for the `KB-ID-Generator-Child` Power Automate flow. This flow is a reusable component designed to be called by parent flows (such as an API endpoint or a Power App) to handle the complex logic of generating and validating `Article ID` and `CanonicalArticleID` values for the Knowledge Base system. It operates based on a `mode` parameter to determine which logic path to execute.
 
-## 2. Parent Flows
+## Parent Flows
 
 This child flow is called by the following parent flows:
 
 *   [`Instant - Create New Article Version`](./Instant_-_Create_New_Article_Version.md)
 
-## 3. Detailed Logic: ID Generation Flow (Child Flow)
+## Detailed Logic: ID Generation Flow (Child Flow)
 
 This section provides the corrected, robust logic for the child flow to prevent save-time errors.
 
 **Trigger:** `Manually trigger a flow`
+
 *   **Inputs:** When defining the trigger, rename the default input names for clarity. **Crucially, the underlying expressions must use the original, immutable property names assigned by Power Automate, NOT the new titles.**
+
     *   `mode` (Text) -> `text`
     *   `canonicalArticleId` (Text) -> `text_1`
     *   `language` (Text) -> `text_2`
@@ -23,6 +25,7 @@ This section provides the corrected, robust logic for the child flow to prevent 
     *   `articlePayload` (Text) -> `text_4` (The JSON payload as a string. Required for `version` mode)
 
 **Action: Initialize 6 variables**
+
 *   `status` (String)
 *   `NewArticleID` (String)
 *   `NewCanonicalArticleID` (String)
@@ -42,6 +45,7 @@ This section provides the corrected, robust logic for the child flow to prevent 
     *   **Note:** This condition uses `trim()` to handle a specific requirement of the parent flow (`Instant-GenerateNextArticleID`). The parent flow intentionally passes a single space (`' '`) instead of a true empty string. This is because Power Automate can incorrectly wrap empty strings in quotes (`"''"`), causing them to evaluate as having a length of 2. The `trim()` function correctly removes the single space, allowing the length to be evaluated as `0` as intended.
 
     **If Yes (ID is blank, generate a new one):**
+
     1.  **Action: Get items (SP)** - `SP: Get Max ID from Active List`
         *   **Order By:** `CanonicalArticleID desc`, **Top Count:** `1`
     2.  **Action: Get items (SP)** - `SP: Get Max ID from Archive List`
@@ -61,6 +65,7 @@ This section provides the corrected, robust logic for the child flow to prevent 
         *   **Value:** Output of `Compose: Format New Canonical ID`
 
     **If No (ID is provided, use it):**
+
     1.  **Action: Set variable** - `Set NewCanonicalArticleID from payload`
         *   **Name:** `NewCanonicalArticleID`
         *   **Value:** `triggerBody()?['text_1']`
@@ -202,6 +207,7 @@ This section provides the corrected, robust logic for the child flow to prevent 
 | **`Source`** | `body('Select:_Cleaned_Source')` |
 | **`LegacyCreatedBy`** | `coalesce(body('Parse_Payload')?['legacyCreatedBy'], outputs('SP:_Get_Parent_Article_Properties')?['body/LegacyCreatedBy'])` |
 | **`FirstPublishedDate`** | `coalesce(body('Parse_Payload')?['firstPublishedDate'], outputs('SP:_Get_Parent_Article_Properties')?['body/FirstPublishedDate'])` |
+
 13. **Action: Update item (SP)** - `SP: Demote Parent Version`
     *   *This action now runs AFTER the new version is created, ensuring transactional integrity.*
     *   **Configure run after:** `SP: Create New Version` has succeeded.
@@ -226,6 +232,7 @@ This section provides the corrected, robust logic for the child flow to prevent 
     *   **Condition:** `length(outputs('SP:_Validate_Primary_Version')?['body/value'])` is greater than `0`.
 
 **If Yes (Validation Succeeded):**
+
 1.  **Action: Compose** - `Compose: Format Translation ID`
     *   **Inputs:** `concat(triggerBody()?['text_1'], '-', triggerBody()?['text_2'], '-v', triggerBody()?['text_3'])`
 2.  **Action: Set multiple variables**
@@ -234,6 +241,7 @@ This section provides the corrected, robust logic for the child flow to prevent 
     *   `NewCanonicalArticleID`: `triggerBody()?['text_1']`
 
 **If No (Validation Failed):**
+
 1.  **Action: Get items (SP)** - `SP: Get Primary Language Code`
     *   **Filter Query:** `CanonicalArticleID eq '@{triggerBody()?['text_1']}' and isPrimary eq 1`
     *   **Top Count:** `1`
@@ -249,6 +257,7 @@ This section provides the corrected, robust logic for the child flow to prevent 
 **(Outside the Switch)**
 
 **Action: Respond to a PowerApp or flow**
+
 *   **Outputs:**
     *   `status` (Text): `variables('status')`
     *   `NewArticleID` (Text): `variables('NewArticleID')`
@@ -259,7 +268,7 @@ This section provides the corrected, robust logic for the child flow to prevent 
     *   `NewItemURL` (Text): `variables('NewItemURL')`
 
 ---
-## 4. Core Concept: The 'mode' Input Parameter
+## Core Concept: The 'mode' Input Parameter
 
 The `mode` input parameter is the key to making the `KB-ID-Generator-Child` flow reusable. It is a simple text value that acts as a command, telling the child flow which specific set of logic to execute. The parent flow (either the API Router or the refactored Power App flow) is responsible for determining the correct mode to use.
 

@@ -1,14 +1,14 @@
-# Design Document: AI-Powered Alt Text & Article Save Workflow
+# AI-Powered Alt Text & Article Save Workflow
 
 **Version: 2.0**
 
-## 1. Overview & Architectural Shift
+## Overview & Architectural Shift
 
 This document outlines the architecture for the `Orchestrate-GenerateAltTextAndSaveArticle` Power Automate flow. This flow represents a significant architectural shift. It is no longer just an `alt` text generator; it is now the **central orchestrator for all article save and submit operations**, completely replacing the `Patch()` logic previously located in the Power App.
 
 This change was made to accommodate the complex, multi-step server-side processing required for AI `alt` text generation, while also centralizing all critical business logic in a single, secure, and maintainable location.
 
-## 2. Purpose & Core Responsibilities
+## Purpose & Core Responsibilities
 
 *   **Centralized Business Logic:** Consolidate all business rules for creating and updating articles, including author/contributor management, ID generation, and status changes.
 *   **AI `alt` Text Generation:** (Phased Approach) Parse embedded images from article HTML, call an external AI service to generate descriptions, and inject the results into the `alt` attribute of `<img>` tags.
@@ -16,7 +16,7 @@ This change was made to accommodate the complex, multi-step server-side processi
 *   **Security:** Securely manage the Bearer Token for the AI service, ensuring it is never exposed to the client-side Power App.
 *   **Transactional Integrity:** Ensure that the article is saved only after all processing steps are complete.
 
-## 3. User Auditing Strategy
+## User Auditing Strategy
 
 Since this workflow runs under a service account context, the default SharePoint `Created By` and `Modified By` columns will always reflect the service account, not the end-user. To ensure a clear and accurate audit trail of user actions, the following fields are used:
 
@@ -26,15 +26,15 @@ Since this workflow runs under a service account context, the default SharePoint
 
 This strategy ensures that even though the system uses a service account for operations, all user-driven modifications are accurately tracked and attributed to the correct individuals directly within the list item.
 
-## 4. Detailed Architecture
+## Detailed Architecture
 
-### 3.1. Power App: The Trigger
+### 1. Power App: The Trigger
 
 The Power App's role is now simplified to data collection and triggering the workflow. The `OnSelect` properties of `btn_SaveDraft` and `btn_StartReview` will be completely replaced. The specific implementation for this is detailed in the following document:
 
-*   **Calling Document:** [`ScreenBreakdownAndLogic.md`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
+*   **Calling Document:** [`App Startup, Architecture, and UI Logic`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
 
-#### 3.1.1. Capturing the Load Timestamp (Concurrency Control)
+#### 1.1. Capturing the Load Timestamp (Concurrency Control)
 
 To implement the timestamp-based concurrency check, a context variable `locLoadTimestamp` must be set whenever an article is loaded for viewing or editing.
 
@@ -55,13 +55,13 @@ To implement the timestamp-based concurrency check, a context variable `locLoadT
 
 This ensures that the `locLoadTimestamp` variable always holds the time the user *started* their session, which is crucial for the concurrency check.
 
-#### 3.1.2. `OnSelect` Logic
+#### 1.2. `OnSelect` Logic
 
 The complete Power Fx formula and implementation details for the `OnSelect` property of the save buttons are maintained in the Power App's design document to ensure a single source of truth.
 
-*   **Canonical Source:** [`ScreenBreakdownAndLogic.md`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
+*   **Canonical Source:** [`App Startup, Architecture, and UI Logic`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
 
-### 3.2. Power Automate Flow: `Orchestrate-GenerateAltTextAndSaveArticle`
+### 2. Power Automate Flow: `Orchestrate-GenerateAltTextAndSaveArticle`
 
 This flow is the new heart of the save process.
 
@@ -174,7 +174,7 @@ This flow is the new heart of the save process.
                 }
                 ```
 
-    2.1. **Get Configuration from SharePoint (Scope):**
+    3. **Get Configuration from SharePoint (Scope):**
         *   **Purpose:** To retrieve dynamic configuration values, such as external endpoint URLs, from the `appConfiguration` SharePoint list. This avoids hardcoding values within the flow, making it more maintainable.
         *   **Action: `Get items` from SharePoint**
             *   **List Name:** `appConfiguration`
@@ -182,7 +182,7 @@ This flow is the new heart of the save process.
             *   **Top Count:** `1`
             *   **Note:** This action should be renamed to `Get_HTML_Sanitizer_URL_Config` for clarity.
 
-    2.5. **Sanitize HTML Inputs (Scope):**
+    4. **Sanitize HTML Inputs (Scope):**
         *   **Purpose:** This scope calls the `html-sanitizer` Azure Function for each of the three rich text fields (`articleHTML`, `overviewHTML`, `internalNotesHTML`). This is a critical security and data integrity step that solves several complex issues simultaneously:
             1.  **Strips Invalid Characters:** Removes invisible XML control characters that break the downstream DITA conversion process.
             2.  **Removes Wrapper Tags:** Strips the extraneous `<div class=\"ExternalClass...\">` and `<p class=\"editor-paragraph\">` tags added by SharePoint and the Power Apps Rich Text Editor. This prevents the infinite nesting of tags with each save.
@@ -597,7 +597,7 @@ This flow is the new heart of the save process.
                 *   `message` (Text): `variables('responseMessage')`
                 *   `itemID` (Number): `variables('responseItemID')`
 
-## 10. Phased Implementation Plan
+## Phased Implementation Plan
 
 1.  **Phase 1 (Current):**
     *   Implement the full Power App and Power Automate changes as described above, but with the **placeholder** `alt` text logic.

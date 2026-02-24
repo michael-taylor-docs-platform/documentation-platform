@@ -17,12 +17,15 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: true
-      
+
 docs_dir: docs
 site_dir: site
 
 nav:
   - Home: index.md
+
+  - Architecture:
+      - Platform Architecture: architecture/platform-architecture.md
 
   - Projects:
       - CMS Platform:
@@ -56,3 +59,4 @@ nav:
               - Notify Stripped Character: projects/cms-platform/power-automate-flows/flow-designs/Notify-StrippedCharacter.md
               - Orchestrate Generate Alt Text: projects/cms-platform/power-automate-flows/flow-designs/Orchestrate-GenerateAltTextAndSaveArticle.md
               - Scheduled Unassigned Reminder: projects/cms-platform/power-automate-flows/flow-designs/Scheduled_-_Unassigned_Article_Reminder.md
+

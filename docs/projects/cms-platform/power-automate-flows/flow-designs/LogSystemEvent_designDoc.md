@@ -1,6 +1,6 @@
-# Comprehensive Design Guide: Child Flow - LogSystemEvent
+# LogSystemEvent
 
-## 1. Executive Summary
+## Executive Summary
 
 This document provides a complete and detailed specification for the `Child Flow - LogSystemEvent` Power Automate workflow. This is a critical infrastructure component, acting as the centralized error and activity logger for the entire Knowledge Base backend system.
 
@@ -8,7 +8,7 @@ Its primary function is to be called as a **Child Flow** from the `Catch` block 
 
 --- 
 
-## 2. Prerequisites: Centralized Configuration
+## Prerequisites: Centralized Configuration
 
 To ensure the system is maintainable and adaptable to different environments (e.g., Dev, Test, Prod), we avoid hardcoding environment-specific values. Instead, we use a central SharePoint list named `appConfiguration` to store these settings.
 
@@ -22,11 +22,11 @@ To ensure the system is maintainable and adaptable to different environments (e.
 
 --- 
 
-## 3. Detailed Implementation Guide
+## Detailed Implementation Guide
 
 This section provides a step-by-step walkthrough for building the flow.
 
-### 3.1. Trigger: Manually trigger a flow
+### 1. Trigger: Manually trigger a flow
 
 This seems counter-intuitive, but to create a flow that can be called as a child, you start with the `Manually trigger a flow` trigger. When you save this flow inside a solution, it automatically becomes available to be called by other flows in the same solution.
 
@@ -37,7 +37,7 @@ This seems counter-intuitive, but to create a flow that can be called as a child
     *   `message`
     *   `context`
 
-### 3.2. Step 1: Variable Initialization
+### 2. Step 1: Variable Initialization
 
 We initialize all variables at the beginning of the flow. This is a best practice that improves readability and makes the flow easier to debug.
 
@@ -51,7 +51,7 @@ We initialize all variables at the beginning of the flow. This is a best practic
     *   **Value:** `@utcNow('yyyy-MM-dd')`
     *   **Explanation:** This creates a simple date string (e.g., `2026-01-23`). We use this as the `PartitionKey` to group all of a day's system logs together. This is highly efficient for querying all logs for a specific day.
 
-### 3.3. Step 2: Retrieve Configuration
+### 3. Step 2: Retrieve Configuration
 
 Here, we fetch our configuration values from the `appConfiguration` list.
 
@@ -69,7 +69,7 @@ Here, we fetch our configuration values from the `appConfiguration` list.
         *   **Case 2:** `AUDIT_TABLE_SYSTEM_LOGS` -> **Action:** `Set variable` `systemLogTableName` to `@item()?['Value']`
         *   **Case 3:** `DEV_CONTACT_EMAIL` -> **Action:** `Set variable` `devContactEmail` to `@item()?['Value']`
 
-### 3.4. Step 3: Core Logic (`Try` Scope)
+### 4. Step 3: Core Logic (`Try` Scope)
 
 We will place the main logic inside a `Try` scope. This allows us to "catch" any failures that occur within it and handle them gracefully in a separate `Catch` scope.
 
@@ -95,7 +95,7 @@ We will place the main logic inside a `Try` scope. This allows us to "catch" any
 
 **Explanation of Entity Expressions:** The `trigger()` expressions now refer to the input fields from the manual trigger. `text` corresponds to the first input (`logLevel`), `text_1` to the second (`source`), and so on.
 
-### 3.5. Step 4: Robust Error Handling (`Catch` Scope)
+### 5. Step 4: Robust Error Handling (`Catch` Scope)
 
 This scope will only execute if any action inside the `Try` scope fails.
 
@@ -124,7 +124,7 @@ This scope will only execute if any action inside the `Try` scope fails.
         <pre>@{first(skip(result('Try'), 0))?['error']?['message']}</pre>
         ```
 
-### 3.6. Step 5: Respond to Parent Flow
+### 6. Step 5: Respond to Parent Flow
 
 A child flow must formally respond to its parent so the parent knows it has finished.
 
@@ -135,12 +135,12 @@ A child flow must formally respond to its parent so the parent knows it has fini
 
 --- 
 
-## 4. Security Model
+## Security Model
 
 *   **Authentication:** This flow authenticates using the **shared Connection Reference** from the solution. This is the key to centralized secret management. The Service Principal (`SharePoint-KB-Publisher-Action`) permissions are managed in one place.
 
 --- 
 
-## 5. Testing
+## Testing
 
 Because this is a child flow, it cannot be run directly. It must be tested by a parent flow. The `LogAuditEvent` flow will serve as its first parent and test harness.

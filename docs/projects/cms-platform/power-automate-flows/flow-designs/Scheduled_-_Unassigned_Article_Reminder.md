@@ -1,20 +1,20 @@
-# Design Doc: Scheduled - Article Review Reminder
+# Scheduled - Article Review Reminder
 
 **Prerequisite:** This workflow requires a new column named `ReminderTimestamp` (Date and Time type) to be added to the `Knowledge Base Articles` SharePoint list.
 
 This document provides a complete, granular specification for the `Scheduled - Article Review Reminder` workflow. This workflow is designed to be robust, maintainable, and clearly documented.
 
-## 1.0. Overview
+## Overview
 
 This workflow runs on a daily schedule to identify and act upon knowledge base articles that have become stale in the review process. It handles two distinct scenarios in parallel:
 
-### 1.1. Architectural Context
+### 1. Architectural Context
 
 This scheduled workflow is a supporting background process for the V3 decoupled application architecture. It is not triggered by the Power App directly but is a critical part of the ecosystem, ensuring articles do not get stuck in the approval pipeline. For a complete understanding of the main application logic that this flow supports, please see the central design document.
 
-*   **Parent Document:** [`ScreenBreakdownAndLogic.md`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
+*   **Parent Document:** [`App Startup, Architecture, and UI Logic`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
 
-### 1.2. Core Responsibilities
+### 2. Core Responsibilities
 
 1.  **Unassigned Articles:** It finds articles in the "Waiting for Reviewer" status for more than 24 hours and posts a general reminder to the Knowledge Management team channel.
 2.  **Stale Assigned Articles:** It finds articles in the "In Review" status for more than 24 hours and sends a direct reminder to the assigned Subject Matter Expert (SME) via a private Teams chat.
@@ -26,9 +26,9 @@ Its primary responsibilities are:
 4.  For assigned articles, send a private reminder to the assigned SME.
 5.  Update each reminded article in SharePoint to refresh its `Modified` date, preventing continuous reminders.
 
-## 2.0. Detailed Implementation Steps
+## Detailed Implementation Steps
 
-### 2.1. Trigger: Schedule
+### 1. Trigger: Schedule
 
 - **Action:** `Recurrence`
 - **Name:** `Recurrence`
@@ -37,7 +37,7 @@ Its primary responsibilities are:
     - **Interval:** `1`
     - **Frequency:** `Hour`
 
-### 2.2. Initialize App URL Variable
+### 2. Initialize App URL Variable
 
 Immediately after the trigger, the flow must initialize a variable to hold the hard-coded URL for the Power App.
 
@@ -49,17 +49,17 @@ Immediately after the trigger, the flow must initialize a variable to hold the h
 - **Type:** `String`
 - **Value:** `https://apps.powerapps.com/play/e/6a796a64-8b93-e3d8-9837-7d6a4b43508c/a/ff359c83-d62e-4b89-a659-6454df83cca1`
 
-### 2.3. Parallel Branches
+### 3. Parallel Branches
 
 To handle both scenarios simultaneously, the workflow will use a `Parallel branch` control immediately after the initialization step.
 
 ---
 
-### 3.0. Branch A: Unassigned Article Reminders
+### Branch A: Unassigned Article Reminders
 
 This branch handles articles waiting for an SME to be assigned.
 
-#### 3.1. Get Stale, Unassigned Articles
+#### 1. Get Stale, Unassigned Articles
 
 - **Action:** `Get items` (SharePoint)
 - **Name:** `Get_Stale_Unassigned_Articles`
@@ -77,7 +77,7 @@ This branch handles articles waiting for an SME to be assigned.
         - **Pagination:** Turn the toggle **On**.
         - **Threshold:** Set the limit to `5000`.
 
-#### 3.2. Process Each Unassigned Article
+#### 2. Process Each Unassigned Article
 
 - **Action:** `Apply to each`
 - **Name:** `For_each_unassigned_article`
@@ -85,7 +85,7 @@ This branch handles articles waiting for an SME to be assigned.
 - **Configuration:**
     - **Select an output from previous steps:** `value` (from `Get_Stale_Unassigned_Articles`)
 
-##### 3.2.1. Post Reminder to Teams Channel
+##### 2.1. Post Reminder to Teams Channel
 
 - **Action:** `Post card in a chat or channel` (Microsoft Teams)
 - **Name:** `Post_Unassigned_Reminder_Card`
@@ -97,7 +97,7 @@ This branch handles articles waiting for an SME to be assigned.
     - **Channel:** `(kmt_KnowledgeManagementKBReviewChannelId)` (Environment Variable - **MUST be the Channel's GUID**)
     - **Adaptive Card:** (See JSON schema in Appendix A)
 
-##### 3.2.2. Update Modified Timestamp (Unassigned)
+##### 2.2. Update Modified Timestamp (Unassigned)
 
 - **Action:** `Update item` (SharePoint)
 - **Name:** `Update_Timestamp_for_Unassigned`
@@ -108,11 +108,11 @@ This branch handles articles waiting for an SME to be assigned.
 
 ---
 
-### 4.0. Branch B: Assigned SME Reminders
+### Branch B: Assigned SME Reminders
 
 This branch handles articles that are assigned to an SME but have not been actioned.
 
-#### 4.1. Get Stale, Assigned Articles
+#### 1. Get Stale, Assigned Articles
 
 - **Action:** `Get items` (SharePoint)
 - **Name:** `Get_Stale_Assigned_Articles`
@@ -130,7 +130,7 @@ This branch handles articles that are assigned to an SME but have not been actio
         - **Pagination:** Turn the toggle **On**.
         - **Threshold:** Set the limit to `5000`.
 
-#### 4.2. Process Each Assigned Article
+#### 2. Process Each Assigned Article
 
 - **Action:** `Apply to each`
 - **Name:** `For_each_assigned_article`
@@ -138,7 +138,7 @@ This branch handles articles that are assigned to an SME but have not been actio
 - **Configuration:**
     - **Select an output from previous steps:** `value` (from `Get_Stale_Assigned_Articles`)
 
-##### 4.2.1. Post Reminder to Assigned SME
+##### 2.1. Post Reminder to Assigned SME
 
 - **Action:** `Post card in a chat or channel` (Microsoft Teams)
 - **Name:** `Post_Assigned_Reminder_Card_to_SME`
@@ -149,7 +149,7 @@ This branch handles articles that are assigned to an SME but have not been actio
     - **Recipient:** `@items('For_each_assigned_article')?['AssignedSME']['Email']`
     - **Adaptive Card:** (See JSON schema in Appendix B)
 
-##### 4.2.2. Update Modified Timestamp (Assigned)
+##### 2.2. Update Modified Timestamp (Assigned)
 
 - **Action:** `Update item` (SharePoint)
 - **Name:** `Update_Timestamp_for_Assigned`
@@ -160,7 +160,7 @@ This branch handles articles that are assigned to an SME but have not been actio
 
 ---
 
-## 5.0. Appendix
+## Appendix
 
 ### Appendix A: Adaptive Card for Unassigned Reminder
 

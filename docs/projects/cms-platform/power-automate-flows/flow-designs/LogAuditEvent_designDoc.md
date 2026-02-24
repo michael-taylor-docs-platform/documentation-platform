@@ -1,12 +1,12 @@
-# Design Doc: Instant - LogAuditEvent
+# Instant - LogAuditEvent
 
-## 1. Overview
+## Overview
 
 This document provides the complete specification for the `Instant - LogAuditEvent` Power Automate workflow. This is a centralized, reusable flow designed to be called by other backend workflows. Its sole purpose is to receive a standardized payload and write audit records to the two primary Azure Table Storage tables: `ArticleAuditLogs` and `DailyAuditIndex`.
 
 This flow is critical for decoupling the logging mechanism from the business logic flows.
 
-## 2. Process Flow Diagram
+## Process Flow Diagram
 
 ```mermaid
 graph TD
@@ -18,9 +18,9 @@ graph TD
     D -- Fails --> G(Catch Scope - Log Error to SystemActivityLogs);
 ```
 
-## 3. Detailed Implementation Steps
+## Detailed Implementation Steps
 
-### 3.1. Trigger: Manually trigger a flow
+### 1. Trigger: Manually trigger a flow
 
 This trigger is used when a flow is called as a child from a parent flow.
 
@@ -33,7 +33,7 @@ This trigger is used when a flow is called as a child from a parent flow.
     *   `details` (Type: Text)
     *   `contentDiff` (Type: Text)
 
-### 3.2. Add to appConfiguration List
+### 2. Add to appConfiguration List
 
 Before building the flow, add the following configuration items to your `appConfiguration` SharePoint list. This makes the flow more maintainable by avoiding hardcoded values.
 
@@ -43,7 +43,7 @@ Before building the flow, add the following configuration items to your `appConf
 | `AUDIT_TABLE_ARTICLE_LOGS` | `ArticleAuditLogs` |
 | `AUDIT_TABLE_DAILY_INDEX` | `DailyAuditIndex` |
 
-### 3.3. Initialize Variables
+### 3. Initialize Variables
 
 First, initialize all the variables you will need for the flow.
 
@@ -60,7 +60,7 @@ First, initialize all the variables you will need for the flow.
     *   **Type:** `String`
     *   **Value:** `@utcNow('yyyy-MM-dd')`
 
-### 3.4. Get Configuration from SharePoint & Set Variables
+### 4. Get Configuration from SharePoint & Set Variables
 
 1.  **Action: `Get items` (SharePoint)**
     *   **Name:** `Get_Audit_Configuration`
@@ -79,11 +79,11 @@ First, initialize all the variables you will need for the flow.
         *   **Case 3:** `AUDIT_TABLE_DAILY_INDEX`
             *   Add a `Set variable` action for `dailyIndexTableName` with value `@item()?['Value']`.
 
-### 3.5. Try (Scope)
+### 5. Try (Scope)
 
 This scope contains the core logic. If any action inside it fails, the `Catch` block will execute.
 
-#### 3.5.1. Add Entity to `ArticleAuditLogs`
+#### 5.1. Add Entity to `ArticleAuditLogs`
 
 *   **Action:** `Insert Entity` (Azure Table Storage)
 *   **Name:** `Insert_Entity_into_ArticleAuditLogs`
@@ -101,7 +101,7 @@ This scope contains the core logic. If any action inside it fails, the `Catch` b
     "ContentDiff": "@{triggerBody()?['text_4']}"
     }
 
-#### 3.5.2. Add Entity to `DailyAuditIndex`
+#### 5.2. Add Entity to `DailyAuditIndex`
 
 *   **Action:** `Insert Entity` (Azure Table Storage)
 *   **Name:** `Insert_Entity_into_DailyAuditIndex`
@@ -118,7 +118,7 @@ This scope contains the core logic. If any action inside it fails, the `Catch` b
   "ArticleVersion": "@{triggerBody()?['number']}"
 }
 
-### 3.6. Catch (Scope)
+### 6. Catch (Scope)
 
 This scope will only execute if any action inside the `Try` scope fails. Its purpose is to call the `Child Flow - LogSystemEvent` to record the failure, creating a resilient, centralized, and maintainable error-logging pattern.
 
@@ -138,7 +138,7 @@ This scope will only execute if any action inside the `Try` scope fails. Its pur
 
 **Architectural Explanation:** This is the key to our simplified and secure secret management. By using the `Run a Child Flow` action, we are leveraging the parent flow's existing connection context. The secret for the Service Principal is only stored and managed in the single, shared **Connection Reference** for Azure Table Storage. We do not need to re-authenticate or manage a separate secret in an HTTP action, making the system dramatically easier to maintain.
 
-## 3.7. Final Response Action
+### 7. Final Response Action
 
 As this flow is designed to be called as a child flow from a parent that expects a response, it **must** end with a `Respond to a PowerApp or flow` action. This action signals completion back to the parent flow.
 
@@ -147,7 +147,7 @@ As this flow is designed to be called as a child flow from a parent that expects
 *   **Outputs:**
     *   `actionStatus` (Text): Set to the static value `Success`.
 
-## 4. Security Considerations
+## Security Considerations
 
 *   **Connection & Authentication:** This flow authenticates to Azure Table Storage using a **Connection Reference**. That reference points to a **Connection** that is configured to use a **Service Principal** (`SharePoint-KB-Publisher-Action`).
     *   The Service Principal must have the `Storage Table Data Contributor` role on the target storage account.

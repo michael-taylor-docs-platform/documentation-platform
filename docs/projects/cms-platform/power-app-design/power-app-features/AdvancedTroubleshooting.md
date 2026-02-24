@@ -1,12 +1,12 @@
-## Advanced Troubleshooting
+# Advanced Troubleshooting
 
 This section documents critical, non-obvious issues encountered during development and their definitive solutions.
 
-### 12.2. Stale Power Automate Flow Connections
+## Stale Power Automate Flow Connections
 
 This is a severe and difficult-to-diagnose bug within the Power Apps studio.
 
-*   **Developer's Note:** This issue, which requires cloning the flow, is distinct from the more common `InvokerConnectionOverrideFailed` error. For that error, see the guide on [Fixing the InvokerConnectionOverrideFailed Error](./TroubleshootingAndKeyFixes.md#117-fixing-the-invokerconnectionoverridefailed-error).
+*   **Developer's Note:** This issue, which requires cloning the flow, is distinct from the more common `InvokerConnectionOverrideFailed` error. For that error, see the guide on [Fixing the InvokerConnectionOverrideFailed Error](./TroubleshootingAndKeyFixes.md#fixing-the-invokerconnectionoverridefailed-error).
 
 *   **The Symptom:** After modifying the trigger of a Power Automate flow (e.g., adding, removing, or renaming a parameter), the Power App's formula bar will give contradictory error messages.
     *   First, it may show `Invalid argument type (Record). Expecting a Text value instead.` when using comma-separated arguments.
@@ -25,7 +25,7 @@ This is a severe and difficult-to-diagnose bug within the Power Apps studio.
 
 *   **Permissions Side-Effect:** After cloning, the new flow may retain the connection references of the original owner. This can cause a `ConnectionAuthorizationFailed` error. To fix this, the flow owner must edit the flow's **"Run only users"** settings and change the connection from "Provided by run-only user" to the specific, embedded service account connection.
 
-### 12.3. The "Optional" Parameter Bug in Power Automate Triggers
+## The "Optional" Parameter Bug in Power Automate Triggers
 
 This is the final piece of the puzzle for resolving flow connection issues. Even after cloning a flow, the app may still send `null` values for parameters.
 
@@ -42,7 +42,7 @@ This is the final piece of the puzzle for resolving flow connection issues. Even
 
     This simple change solidifies the contract between the app and the flow, removing ambiguity and ensuring that values are passed correctly.
 
-### 12.4. Resolving Relative Image URLs for Display
+## Resolving Relative Image URLs for Display
 
 A common issue is that images processed and stored by the Power Automate flow do not display when an article is loaded in the Power App's Rich Text Editor.
 
@@ -74,7 +74,7 @@ A common issue is that images processed and stored by the Power Automate flow do
         *   It replaces them with the string `src="` followed by the value of `gblSharePointDomain` and a closing `/`.
         *   This transforms the relative URL into an absolute URL that the Rich Text Editor can correctly render.
 
-### 12.5. Setting Default Values for New Items
+## Setting Default Values for New Items
 
 To improve user experience and ensure data consistency, several fields in the form are pre-populated with default values when a user creates a new article.
 
@@ -156,7 +156,7 @@ To improve user experience and ensure data consistency, several fields in the fo
         ```
     *   **Status (`dc_Status`):** The Status field is intentionally left blank on a new form. In the V2 architecture, its default value is set on the backend by the **`Orchestrate-GenerateAltTextAndSaveArticle`** flow. The Power App includes a `saveMode` parameter in the JSON it sends to the flow. If `saveMode` is `"Draft"`, the flow sets the SharePoint item's status to "Draft". This ensures the status is only applied upon a successful save operation and centralizes the core business logic in the backend workflow.
 
-### 12.6. Debugging the `Choices()` Function
+## Debugging the `Choices()` Function
 
 A perplexing issue can arise where a Choice column's dropdown in Power Apps shows values that are not in the column's predefined settings in SharePoint.
 

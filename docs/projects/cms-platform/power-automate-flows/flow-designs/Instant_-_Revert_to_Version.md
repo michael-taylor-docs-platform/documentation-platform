@@ -1,20 +1,20 @@
-# Revert to Version - Architecture and Implementation Plan
+# Revert to Version
 
-## 1. Executive Summary
+## Executive Summary
 
 This document outlines the architecture for a "Revert to Version" feature. This allows users to select a previous, historical version of an article and create a new draft based on that older content. This provides a safe and auditable way to roll back to a known good state without deleting any version history.
 
 The solution follows the established "Create a New Item" architectural principle. It will introduce a new Power Automate flow (`Instant - Revert To Version`) and a new "Revert to this version" button in the Power App's version history dialog.
 
-## 2. Guiding Principles
+## Guiding Principles
 
 - **Non-Destructive:** The revert process is non-destructive. It does not delete or alter the version being reverted *from* (e.g., Version 3 in the user's example). It simply creates a new version (e.g., Version 4) that is a copy of the desired historical version (e.g., Version 2).
 - **Clear Audit Trail:** The version numbers will continue to increment sequentially (V1, V2, V3, V4), ensuring a clear and unbroken history of changes.
 - **Consistency:** The new flow will reuse the core logic from the existing `Instant - Create New Article Version` flow for consistency and reliability.
 
-## 3. Workflow and Process Design
+## Workflow and Process Design
 
-### 3.1. New Flow: `Instant - Revert To Version`
+### 1. New Flow: `Instant - Revert To Version`
 
 This is a new Power Automate flow, called directly from a "Revert to this version" button in the Power App.
 
@@ -24,7 +24,7 @@ This is a new Power Automate flow, called directly from a "Revert to this versio
     - `latestItemID` (Number): The SharePoint `ID` of the current latest version, which needs its `IsLatestVersion` flag set to `No`.
     - `modifiedBy` (Text): The UPN/email of the user performing the action. Passed from `User().Email` in the app.
 
-### 3.2. Detailed Configuration Steps (with Error Handling and Polling)
+### 2. Detailed Configuration Steps (with Error Handling and Polling)
 
 1.  **Initialize All Variables:** Add five `Initialize variable` actions at the start of the flow. This is a best practice to ensure all variables exist at the flow's global scope.
     *   **Action 1 (`responseStatus`):**
@@ -194,8 +194,8 @@ This is a new Power Automate flow, called directly from a "Revert to this versio
         *   `responsemessage` (Text): `variables('responseMessage')`
         *   `canonicalid` (Text): `variables('canonicalID')`
 
-## 4. Calling Document
+## Calling Document
 
 This flow is called by the generic confirmation dialog. For the Power Fx implementation details of the `OnSelect` property that calls this flow, see the following document:
 
-*   [`GenericUIComponents.md`](../../power-app-design/power-app-features/GenericUIComponents.md)
+*   [`Generic UI Components`](../../power-app-design/power-app-features/GenericUIComponents.md)

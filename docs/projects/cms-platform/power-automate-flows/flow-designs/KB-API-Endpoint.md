@@ -1,6 +1,6 @@
 # KB-API-Endpoint
 
-## 1. Executive Summary
+## Executive Summary
 This document outlines the V3 architecture for the KB Article Creation API. This version simplifies the process by removing the translation logic for a more streamlined Proof of Concept (POC) implementation. The architecture maintains the decoupled design from V2, using a main API flow to route requests and a callable child flow for complex ID generation and versioning logic.
 
 The V3 design consists of two Power Automate flows:
@@ -11,7 +11,7 @@ Based on the feedback provided, the responsibility for item creation is now spli
 - **New Articles (`mode: 'new'`)**: The Main API flow will call the child flow to get the next available IDs, then create the item in SharePoint itself.
 - **New Versions (`mode: 'version'`)**: The Main API flow will pass the entire request payload to the child flow, which will handle the demotion of the old version and the creation of the new version item.
 
-## 2. V3 Architectural Diagram
+## V3 Architectural Diagram
 
 ```mermaid
 graph TD
@@ -66,7 +66,7 @@ graph TD
     H -- "Calls" --> L;
 ```
 
-## 3. Detailed Logic: Main API Flow (Router)
+## Detailed Logic: Main API Flow (Router)
 
 This flow acts as the public endpoint and is responsible for routing requests to the child flow.
 
@@ -484,7 +484,7 @@ This flow acts as the public endpoint and is responsible for routing requests to
 | **`Keywords`** | `outputs('Assemble_Final_SharePoint_Payload')?['keywords']` |
 | *... (all other fields)* | `outputs('Assemble_Final_SharePoint_Payload')?['[fieldName]']` |
 
-## 4. Child Flow Responsibilities (`KB-ID-Generator-Child`)
+## Child Flow Responsibilities (`KB-ID-Generator-Child`)
 
 The child flow's logic remains as defined in `KB_ID_Generator_Child_Flow_Design.md`, with the following clear responsibilities for V3:
 
@@ -504,7 +504,7 @@ The child flow's logic remains as defined in `KB_ID_Generator_Child_Flow_Design.
 
 ---
 
-## 5.0. Appendix
+## Appendix
 
 ### Appendix C: Adaptive Card for New Article Notification
 

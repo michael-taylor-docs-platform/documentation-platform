@@ -1,4 +1,4 @@
-### App Startup, Architecture, and UI Logic
+# App Startup, Architecture, and UI Logic
 
 The `App.OnStart` property is configured to handle incoming URL parameters, enabling deep linking directly to a specific article. This is the primary mechanism used by external systems (like Power Automate approval notifications) to direct users to the correct content.
 
@@ -66,32 +66,32 @@ If(!IsBlank(Param("ArticleID")),
 
 ---
 
-## 1.0. Application Architecture & Workflow Integration
+## Application Architecture & Workflow Integration
 
 The V3 architecture represents a fundamental shift from a monolithic, SharePoint-triggered approval system to a decoupled, event-driven model orchestrated directly by the Power App. This change enhances reliability, provides better real-time user feedback, and simplifies the backend logic.
 
 The Power App is now the primary initiator of all key approval and lifecycle events.
 
-### 1.1. Core Approval Workflows
+### Core Approval Workflows
 
 The old, single `KBApprovalProcessWorkflow` has been replaced by a suite of smaller, more focused flows that are called on-demand by the Power App.
 
 *   **Start KB Article Approval (`Instant - Start KB Article Approval`):** When a user clicks "Start Review", the Power App first saves the draft and then explicitly calls this flow. This flow is responsible for setting the article's status to `Waiting for Reviewer` and posting the initial notification to the Teams channel for SME assignment.
-    *   **See detailed design:** [`../../power-automate-flows/flow-designs/Instant_-_Start_KB_Article_Approval.md`](../../power-automate-flows/flow-designs/Instant_-_Start_KB_Article_Approval.md)
+    *   **See detailed design:** [`Instant - Start KB Article Approval`](../../power-automate-flows/flow-designs/Instant_-_Start_KB_Article_Approval.md)
 
 *   **Manage SME Approval (`Instant - Manage SME Approval`):** This flow is triggered when an SME is assigned or re-assigned from the Power App UI. It handles the logic for updating the article's status to `In Review` and sending the approval request directly to the selected SME.
-    *   **See detailed design:** [`../../power-automate-flows/flow-designs/Instant_-_Manage_SME_Approval.md`](../../power-automate-flows/flow-designs/Instant_-_Manage_SME_Approval.md)
+    *   **See detailed design:** [`Instant - Manage SME Approval`](../../power-automate-flows/flow-designs/Instant_-_Manage_SME_Approval.md)
 
-### 1.2. Supporting Workflows
+### Supporting Workflows
 
 *   **Scheduled Article Review Reminder (`Scheduled - Article Review Reminder`):** This is a background process that runs hourly. It is not called by the Power App but is a critical part of the overall approval ecosystem. It queries for articles that are stuck in either `Waiting for Reviewer` or `In Review` status for more than 24 hours and sends appropriate reminder notifications.
-    *   **See detailed design:** [`../../power-automate-flows/flow-designs/Scheduled_-_Unassigned_Article_Reminder.md`](../../power-automate-flows/flow-designs/Scheduled_-_Unassigned_Article_Reminder.md)
+    *   **See detailed design:** [`Scheduled - Article Review Reminder`](../../power-automate-flows/flow-designs/Scheduled_-_Unassigned_Article_Reminder.md)
 
 ---
 
-## 2.0. Screen Breakdown & Logic
+## Screen Breakdown & Logic
 
-### 2.1. Browse Screen (`scr_Article`)
+### Browse Screen (`scr_Article`)
 
 This is the main entry point of the application.
 
@@ -204,7 +204,7 @@ This is the main entry point of the application.
 
 
 
-#### 2.2.1. Last Author & Contributor Logic (V2 Backend)
+#### Last Author & Contributor Logic (V2 Backend)
 
 In the V2 architecture, the complex logic for managing the `LastAuthor` and `Contributors` fields has been moved from the Power App to the `Orchestrate-GenerateAltTextAndSaveArticle` Power Automate workflow.
 
@@ -217,7 +217,7 @@ The Power App is only responsible for sending the *currently selected* contribut
     3.  Compare the incoming `LastAuthor` (the current user) with the previously saved `LastAuthor`.
     4.  If they are different, add the previous `LastAuthor` to the list of contributors before saving.
 
-#### 2.2.2. Form Controls and Data Submission
+#### Form Controls and Data Submission
 
 This section details how the form and various controls interact to manage the app's state, whether creating a new article or editing an existing one.
 
@@ -424,11 +424,11 @@ This section details how the form and various controls interact to manage the ap
             });
 
 
-### 2.3. Archive View Functionality
+### Archive View Functionality
 
 This section details the implementation of the read-only Archive View, which allows users to browse and view the history of archived articles without being able to edit them.
 
-#### 2.3.1. State Management
+#### State Management
 
 The entire feature is controlled by a single context variable, `locIsArchiveView`, which is toggled by an icon in the main action toolbar.
 
@@ -449,7 +449,7 @@ The entire feature is controlled by a single context variable, `locIsArchiveView
         If(locIsArchiveView, "View Active Articles", "View Archived Articles")
         ```
 
-#### 2.3.2. Dynamic UI Elements
+#### Dynamic UI Elements
 
 To provide a clear and consistent user experience, several key UI elements change dynamically based on the `locIsArchiveView` variable.
 
@@ -465,7 +465,7 @@ To provide a clear and consistent user experience, several key UI elements chang
         If(locIsArchiveView, ColorValue("#4a4a4a"), ColorValue("#e31717"))
         ```
 
-#### 2.3.3. Read-Only Form View
+#### Read-Only Form View
 
 To prevent edits in the archive view, the form's data cards are made read-only individually. This is superior to setting the entire form's mode, as it allows specific controls (like the version history button) to remain interactive.
 
@@ -486,7 +486,7 @@ To prevent edits in the archive view, the form's data cards are made read-only i
     )
     ```
 
-#### 2.3.4. Dynamic Action Button Visibility (Spacer Pattern)
+#### Dynamic Action Button Visibility (Spacer Pattern)
 
 To hide action buttons like `+ New` in the archive view without causing the layout of the toolbar to shift, a "spacer" pattern is used.
 
@@ -504,7 +504,7 @@ To hide action buttons like `+ New` in the archive view without causing the layo
         locIsArchiveView
         ```
 
-#### 2.3.5. Dynamic Version History
+#### Dynamic Version History
 
 The version history gallery (`gal_VersionHistory`) is also made dynamic to show the correct history for the selected article, whether it's active or archived.
 

@@ -1,17 +1,17 @@
-# Design Doc: Archived Article Reactivation
+# Archived Article Reactivation
 
-## 1. Overview
+## Overview
 
 This document details the design for the feature that allows a user to restore an article's entire version history from the "Knowledge Base Articles Archive" back to the active "Knowledge Articles" list. The process culminates in the creation of a new, editable draft.
 
-## 2. Feature Requirements
+## Feature Requirements
 
 1.  **Transactional Restoration**: The entire restoration process must be managed as a single operation.
 2.  **Full History Migration**: All versions of an article associated with a given `CanonicalArticleID` must be moved from the archive to the active list.
 3.  **New Draft Creation**: After the move, a new draft version must be created based on the content of the most recent of the restored versions.
 4.  **Integrity**: The `IsLatestVersion` flag must be correctly managed, with the new draft being the only version marked as the latest.
 
-## 3. Triggering Mechanism
+## Triggering Mechanism
 
 This workflow is designed to be triggered from the **Knowledge Base Manager Power App**. The app is responsible for all user interface elements and logic related to initiating the reactivation process.
 
@@ -22,11 +22,11 @@ This workflow is designed to be triggered from the **Knowledge Base Manager Powe
 
 For a comprehensive guide on the front-end implementation, including the UI controls, state variables, and the specific Power Fx formulas used to call this flow, please see the [Archived History Management UI Design Doc](../../power-app-design/power-app-features/ArchivedHistoryManagement.md).
 
-## 4. Power Automate Workflow: `Instant - Reactivate Archived Article`
+## Power Automate Workflow: `Instant - Reactivate Archived Article`
 
 This flow handles the complex, multi-step process of restoring an article and its history. It is designed to be transactional and resilient, providing clear success or failure feedback to the Power App.
 
-### 4.1. High-Level Logic with Error Handling
+### 1. High-Level Logic with Error Handling
 
 The flow is structured using a **Try, Catch, Finally** pattern to ensure that it always responds to the Power App, even if an error occurs.
 
@@ -34,7 +34,7 @@ The flow is structured using a **Try, Catch, Finally** pattern to ensure that it
 *   **Catch**: This block runs only if any action within the Try block fails. Its sole purpose is to capture the failure and set a status variable to "Error".
 *   **Finally**: This block runs regardless of whether the Try or Catch block executed. It contains the final `Respond to a PowerApp` action, sending back the value of the status variable.
 
-### 4.2. Visual Flow Diagram
+### 2. Visual Flow Diagram
 
 ```mermaid
 graph TD
@@ -65,7 +65,7 @@ graph TD
     end
 ```
 
-### 4.3. Detailed Implementation Guide
+### 3. Detailed Implementation Guide
 
 This guide provides a step-by-step walkthrough for building the flow from scratch.
 
@@ -243,7 +243,7 @@ This guide provides a step-by-step walkthrough for building the flow from scratc
             *   **Name**: `message`
             *   **Value**: `variables('statusmessage')`
 
-### 4.4. Field Mapping for Create Item Actions
+### 4. Field Mapping for Create Item Actions
 
 When using the `Create item` action, you must map the fields from the source object (`items('Apply_to_each')` or `variables('varRestoredLatestContent')`) to the new item's columns. For complex SharePoint fields, you must specify which property of the source object to use.
 
@@ -271,7 +271,7 @@ When using the `Create item` action, you must map the fields from the source obj
     *   You cannot map the array directly. You must first use a `Select` action to transform the array into the correct format, containing only the `Value` of each choice.
     *   See the `Select - Re-shape Source field array` action in the main implementation guide for the specific configuration.
 
-## 5. User Scenario: Restoring an Archived Version
+## User Scenario: Restoring an Archived Version
 
 1.  **User Action**: The user, in Archive View, clicks the "Reactivate Article" button on the latest version of an archived article.
 2.  **Power App**: The `OnSelect` property shows a confirmation dialog.

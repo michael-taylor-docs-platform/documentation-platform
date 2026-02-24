@@ -1,50 +1,55 @@
-# Design Document: HTTP - Stripped Character Notification
+# HTTP - Stripped Character Notification
 
 **Version: 3.0**
 
-## 1. Executive Summary
+## Executive Summary
 
 This document outlines the architecture for the **HTTP - Stripped Character Notification** Power Automate flow. This flow operates asynchronously, triggered by the `html-sanitizer` Azure Function. Its primary purpose is to create a continuous improvement feedback loop by notifying administrators when the sanitizer encounters and strips previously unknown characters from knowledge base article content.
 
 The flow is designed for performance and maintainability. It runs decoupled from the main article-saving process to ensure no impact on user experience. Configuration is externalized to a central SharePoint list, allowing administrators to manage notification settings without modifying the flow itself.
 
-## 2. Architectural Diagram
+## Architectural Diagram
 
 ```mermaid
 graph TD
-    subgraph "Azure Function"
-        A[html-sanitizer] -- "Async HTTP POST<br><i>{ strippedChars: [...] }</i>" --> B{HTTP Request URL};
+
+    subgraph Azure_Function
+        A[html-sanitizer] -->|Async HTTP POST - strippedChars array| B{HTTP Request URL}
     end
 
-    subgraph "Power Automate Flow"
-        B -- "Trigger" --> C[SP Get items from 'App Configuration' list];
-        C --> D[Filter for Email Config];
-        C --> E[Filter for Exclusion List Config];
-        D --> F[Initialize varNotificationEmail];
-        E --> G[Initialize varExclusionList];
-        
-        subgraph "Main Processing"
-            F & G --> H[Initialize varCharsToNotify (Array)];
-            H --> I[Apply to each: `triggerBody()?['strippedChars']`];
-            
-            subgraph "For Each Character"
-                I --> J{Condition: Is character in exclusion list?};
-                J -- "No" --> K[Append character to `varCharsToNotify`];
-                J -- "Yes" --> L[Do Nothing];
+    subgraph Power_Automate_Flow
+        B -->|Trigger| C[SP Get items from App Configuration list]
+
+        C --> D[Filter for Email Config]
+        C --> E[Filter for Exclusion List Config]
+
+        D --> F[Initialize varNotificationEmail]
+        E --> G[Initialize varExclusionList]
+
+        subgraph Main_Processing
+            F --> H[Initialize varCharsToNotify Array]
+            G --> H
+
+            H --> I[Apply to each strippedChars]
+
+            subgraph For_Each_Character
+                I --> J{Is character in exclusion list}
+                J -->|No| K[Append character to varCharsToNotify]
+                J -->|Yes| L[Do Nothing]
             end
 
-            K --> M[End Loop];
-            L --> M;
+            K --> M[End Loop]
+            L --> M
 
-            M --> N{Condition: Is `varCharsToNotify` not empty?};
-            N -- "Yes" --> O[Send Email Notification];
-            N -- "No" --> P[End];
-            O --> P;
+            M --> N{Is varCharsToNotify not empty}
+            N -->|Yes| O[Send Email Notification]
+            N -->|No| P[End]
+            O --> P
         end
     end
 ```
 
-## 3. Detailed Flow Logic
+## Detailed Flow Logic
 
 This flow is triggered by an HTTP request and uses a SharePoint list for configuration.
 
@@ -136,7 +141,7 @@ This flow is triggered by an HTTP request and uses a SharePoint list for configu
 
 ---
 
-## 4. Configuration (SharePoint List)
+## Configuration (SharePoint List)
 
 The flow is configured via a SharePoint list named **`App Configuration`**. This list should be hidden from site navigation.
 
@@ -153,9 +158,9 @@ The flow is configured via a SharePoint list named **`App Configuration`**. This
 
 ---
 
-## 5. Appendix
+## Appendix
 
-### Appendix A: Notification Email Body
+### Notification Email Body
 
 ```html
 <div style="font-family: Arial, sans-serif; font-size: 14px;">

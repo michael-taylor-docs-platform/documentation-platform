@@ -1,10 +1,10 @@
-## UI/UX Best Practices
+# UI/UX Best Practices
 
-### 10.1. Consistent Read-Only Visuals
+## Consistent Read-Only Visuals
 
 To provide a clear and consistent user experience, all input fields should visually indicate whether they are editable or read-only. The default appearance for controls in "View" mode is inconsistent. The following pattern standardizes this behavior by applying a light grey background to all read-only fields.
 
-#### The Two-Step Implementation Pattern
+### The Two-Step Implementation Pattern
 
 For every input control within a data card, two properties must be set correctly:
 
@@ -15,7 +15,7 @@ For every input control within a data card, two properties must be set correctly
 
 2.  **`Fill` Property (The Visual Step):** Once the `DisplayMode` is correctly inherited, use a formula on the `Fill` property to create the consistent visual style.
 
-#### Formulas by Control Type
+### Formulas by Control Type
 
 *   **Standard Controls (TextBox, ComboBox, DatePicker, etc.):**
     *   **Control:** The input control itself.
@@ -25,7 +25,7 @@ For every input control within a data card, two properties must be set correctly
         If(Self.DisplayMode = DisplayMode.Edit, Color.White, RGBA(244, 244, 244, 1))
         ```
 
-### 10.2. Handling Blank Dates
+## Handling Blank Dates
 
 To ensure a clean UI, empty date fields should display a placeholder value instead of being blank. The most efficient way to achieve this is by using the `InputTextPlaceholder` property of the Date Picker control.
 
@@ -57,7 +57,7 @@ This property automatically displays the placeholder text whenever the control's
         )
         ```
 
-### 10.3. Spacing Items in Modern Containers
+## Spacing Items in Modern Containers
 
 To create consistent spacing between controls inside a modern **Horizontal** or **Vertical container** (e.g., adding a gap between buttons), the container's `Gap` property should be used.
 
@@ -67,7 +67,7 @@ To create consistent spacing between controls inside a modern **Horizontal** or 
 
 This is the recommended best practice as it keeps layout logic on the parent container and automatically adjusts as controls are added or removed.
 
-### 10.4. Selective Read-Only Data Cards
+## Selective Read-Only Data Cards
 
 When a form needs to be mostly read-only but still allow interaction with specific controls (e.g., a button within a single data card), setting the entire form's mode to `View` is not suitable, as it disables all child controls.
 
@@ -99,7 +99,7 @@ By applying this pattern to all data cards except the one containing the interac
 
 *   **Flow Context:** The `locIsArchiveView` variable is set to `true` when the user navigates to the "Archived History" view for an article. The gallery in this view is populated by the results of the **`GetArchivedVersionHistory`** flow, which specifically retrieves items from the secondary `Archived Knowledge Base Articles` SharePoint list. This is why a master switch is required to enforce a read-only state, as the form's standard logic is designed for the primary `Knowledge Base Articles` list.
 
-### 10.5. Preserving Layout When Hiding Controls
+## Preserving Layout When Hiding Controls
 
 When an item inside a horizontal or vertical layout container has its `Visible` property set to `false`, the container collapses the space, causing other controls in the container to shift their position. This is often undesirable, especially in a toolbar.
 
@@ -126,7 +126,7 @@ The best practice to avoid this is the **"Spacer" pattern**. Instead of making t
 
 This pattern ensures that one of the two controls is always visible but invisible, perfectly preserving the layout at all times.
 
-### 10.6. Indicating a Processing State for Flow-Driven Actions
+## Indicating a Processing State for Flow-Driven Actions
 
 When a user clicks a button that triggers a Power Automate flow (e.g., "Revert," "Discard Draft," "Expire"), the app must provide clear visual feedback that a background process has been initiated. This prevents the user from clicking the button multiple times and makes the app feel more responsive.
 
@@ -139,4 +139,4 @@ The standard pattern for this is to use a context variable (e.g., `isProcessingA
 2.  **Execute Flow:** Call the Power Automate flow using the `.Run()` method.
 3.  **Reset State:** After the flow returns and all subsequent UI logic (like `Refresh()` and `ResetForm()`) is complete, set `isProcessingAction` back to `false` and hide the dialog.
 
-*   **Canonical Example:** This pattern is implemented in the **[Reusable Confirmation Dialog](./GenericUIComponents.md)**. The `OnSelect` property of the `btn_dialogConfirm` button demonstrates the exact Power Fx code for setting the state, executing the flow based on action-specific flags (`isRevertAction`, `isDiscardAction`, etc.), and resetting the state upon completion.
+*   **Canonical Example:** This pattern is implemented in the [Reusable Confirmation Dialog](./GenericUIComponents.md)**. The `OnSelect` property of the `btn_dialogConfirm` button demonstrates the exact Power Fx code for setting the state, executing the flow based on action-specific flags (`isRevertAction`, `isDiscardAction`, etc.), and resetting the state upon completion.

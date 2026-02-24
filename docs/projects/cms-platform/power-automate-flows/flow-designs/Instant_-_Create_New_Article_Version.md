@@ -1,12 +1,12 @@
-# Design Doc: Instant - Create New Article Version
+# Instant - Create New Article Version
 
-## 1. Overview
+## Overview
 
 This document details the design for the `Instant - Create New Article Version` Power Automate flow. This flow is responsible for creating a new, editable draft version of a published article. It is a key component of the article versioning system.
 
 This flow is designed to be called from a Power App and leverages a centralized child flow ([`KB-ID-Generator-Child`](./KB_ID_Generator_Child.md)) to handle the core logic of creating the new list item and generating the appropriate version numbers and IDs.
 
-## 2. Workflow and Process Design (V2 - Standardized Logging)
+## Workflow and Process Design (V2 - Standardized Logging)
 
 This V2 design refactors the workflow to align with the system's standardized logging and error handling architecture. It introduces a `Try/Catch` block, standardized response variables, and explicit calls to the centralized logging child flows.
 
@@ -34,14 +34,14 @@ graph TD
     RESPOND --> E[End];
 ```
 
-### 2.1. Trigger: PowerApps (V2)
+### Trigger: PowerApps (V2)
 
 *   **Purpose:** To allow the Power App to initiate this workflow directly and pass all required information.
 *   **Inputs:**
     *   `parentItemID` (Number, Required): The SharePoint `ID` of the published article to be versioned.
     *   `modifiedBy` (Text, Required): The UPN/email of the user creating the new version. This is critical for ensuring the user audit log accurately reflects who performed the action.
 
-### 2.2. Initialize Variables
+### Initialize Variables
 
 *   **Purpose:** To establish a standardized response structure and default to a failure state. This is a security best practice; the flow must explicitly succeed to change these values.
 *   **Action 1: Initialize `responseStatus`**
@@ -54,7 +54,7 @@ graph TD
     *   **Type:** `String`
     *   **Value:** (leave blank)
 
-### 2.3. Try (Scope)
+### Try (Scope)
 
 *   **Purpose:** This scope contains all the core business logic. If any action within it fails, execution immediately stops and is transferred to the `Catch` block.
 
@@ -100,7 +100,7 @@ graph TD
         *   `Set variable` (`responseMessage` to `New draft created successfully.`)
         *   `Set variable` (`newDraftURL` to `body('Call_Versioning_Engine_Child_Flow')?['newitemurl']`)
 
-### 2.4. Catch (Scope)
+### Catch (Scope)
 
 *   **Purpose:** This scope acts as a centralized error handler. It only runs if any action in the `Try` scope fails.
 *   **Configure run after:** Must be configured to run only when the `Try` scope `has failed`.
@@ -126,7 +126,7 @@ graph TD
                 }
                 ```
 
-### 2.5. Respond to Power App
+### Respond to Power App
 
 *   **Purpose:** This single, final action sends a standardized response back to the calling Power App. Its configuration ensures it runs regardless of whether the `Try` block succeeded or the `Catch` block was executed.
 *   **Configure run after:** Must be configured to run after the `Catch` scope `is successful` OR `is skipped`.

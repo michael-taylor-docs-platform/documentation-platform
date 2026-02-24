@@ -1,12 +1,12 @@
-# Design Doc: Article Archive Feature
+# Article Archive Feature
 
-## 1. Overview
+## Overview
 
 This document is the definitive technical guide for the **Instant Article Expiration** feature. It details the architecture and step-by-step implementation of the Power Automate workflow responsible for archiving articles on demand, including its robust error handling and reporting capabilities.
 
 This feature provides users with an "Expire Now" button within the main Power App. When triggered, this button initiates a workflow that moves an article and its entire version history from the active SharePoint list to the archive list.
 
-## 2. High-Level Power App Integration
+## High-Level Power App Integration
 
 The expiration process is initiated from the "Knowledge Base Manager" Power App. A user with appropriate permissions can select a published article and click the "Expire Now" button.
 
@@ -14,11 +14,11 @@ The button's logic does not call the workflow directly. Instead, it uses the app
 
 This pattern provides a safe and consistent user experience for all destructive or significant actions within the application. For the specific Power Fx formulas and implementation details of the button and confirmation dialog within the app, please refer to the **`PowerApp_Standalone_DesignDoc.md`**.
 
-## 3. Power Automate Workflow: `Instant - Expire Single KB Article`
+## Power Automate Workflow: `Instant - Expire Single KB Article`
 
 This workflow is the engine of the instant expiration feature. It is designed to be robust, reliable, and provide clear feedback to the calling application in the event of either success or failure.
 
-### 3.1. Workflow Architecture: Try/Catch
+### Workflow Architecture: Try/Catch
 
 To ensure robust error handling, the workflow is built using a `Try/Catch` pattern implemented with **Scope** controls. This is a more streamlined and efficient approach than a traditional three-scope `Try/Catch/Finally` block.
 
@@ -49,7 +49,7 @@ graph TD
     RESPOND --> E[End];
 ```
 
-### 3.2. Detailed Implementation Steps
+### Detailed Implementation Steps
 
 #### Step 1: Trigger
 
@@ -186,7 +186,7 @@ This is the final and most critical action. It must be placed *after* the `Catch
         2.  **Name:** `responseMessage`
             *   **Value:** Select the `vResponseMessage` variable from dynamic content.
 
-## 4. Power App Response Handling
+## Power App Response Handling
 
 With the workflow updated, the Power App must be configured to interpret the structured response. The `OnSelect` formula for the confirmation dialog's "Confirm" button should call the flow and then use an `If` statement to check the `responseStatus` field of the returned record.
 

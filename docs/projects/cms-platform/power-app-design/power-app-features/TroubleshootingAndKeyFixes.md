@@ -1,8 +1,8 @@
-## Troubleshooting & Key Fixes (Direct SharePoint Connection)
+# Troubleshooting & Key Fixes (Direct SharePoint Connection)
 
 This section documents critical fixes required for the direct SharePoint connection.
 
-### 11.1. Gallery `Items` Formula (`scr_Browse`)
+## Gallery `Items` Formula (`scr_Browse`)
 
 The formula for the main articles gallery (`gal_Articles`) must use SharePoint column names and be delegable.
 
@@ -25,7 +25,7 @@ The formula for the main articles gallery (`gal_Articles`) must use SharePoint c
     *   It sorts by the SharePoint `Modified` column.
     *   `StartsWith` is a delegable function for SharePoint, ensuring the search runs on the server.
 
-### 11.2. Data Card `Default` Property for Choice Columns
+## Data Card `Default` Property for Choice Columns
 
 When using a direct SharePoint connection, setting the default value for a Choice column is simpler. You can directly reference the Choice record from the item.
 
@@ -35,7 +35,7 @@ When using a direct SharePoint connection, setting the default value for a Choic
     ```
 *   **Explanation:** Unlike with virtual tables, there is no need for a complex `LookUp` against the `Choices()` function. The direct reference `ThisItem.Language` provides the correct record that the dropdown/combo box control expects.
 
-### 11.3. Data Card `DisplayMode` Logic
+## Data Card `DisplayMode` Logic
 
 The logic to make fields read-only must reference SharePoint column names.
 
@@ -54,11 +54,11 @@ The logic to make fields read-only must reference SharePoint column names.
 
 *   **Developer's Note on Logical Names:** Using logical field names (`field_1`, `field_4`, etc.) is a best practice in this app to prevent formulas from breaking if the underlying SharePoint list is ever replaced or its column display names are changed. While less readable, it provides crucial long-term stability.
 
-### 11.4. Field Display Modes
+## Field Display Modes
 
 To control which fields are editable, we use the `DisplayMode` property on each data card. There are three primary strategies used in this app.
 
-#### 1. Always Read-Only
+### 1. Always Read-Only
 For fields that are system-generated and should never be edited by the user (e.g., Created By, Modified Date), the `DisplayMode` property of the data card is set to a static value.
 
 *   **Property:** `DisplayMode`
@@ -67,7 +67,7 @@ For fields that are system-generated and should never be edited by the user (e.g
     DisplayMode.View
     ```
 
-#### 2. Editable for New or Draft Articles
+### 2. Editable for New or Draft Articles
 For most authorable fields, the logic allows editing only if the article is brand new or is an existing draft. Once it has been submitted for review, the fields become read-only to preserve the integrity of the version being reviewed.
 
 *   **Property:** `DisplayMode`
@@ -81,7 +81,7 @@ For most authorable fields, the logic allows editing only if the article is bran
     )
     ```
 
-#### 3. Conditional Editability Based on Status
+### 3. Conditional Editability Based on Status
 For specific fields that are part of the review process, such as 'Assigned SME', editing is only allowed during specific review statuses.
 
 *   **Property:** `DisplayMode`
@@ -95,7 +95,7 @@ For specific fields that are part of the review process, such as 'Assigned SME',
     )
     ```
 
-### 11.5. Data Card for Person (Multi-Select) Columns
+## Data Card for Person (Multi-Select) Columns
 
 Configuring a field that allows multiple Person/Group selections (like the `Contributors` field) requires specific steps if the default control is incorrect. If Power Apps generates a text box instead of a combo box, it must be manually replaced and configured.
 
@@ -126,7 +126,7 @@ Configuring a field that allows multiple Person/Group selections (like the `Cont
             ComboBox1.SelectedItems
             ```
 
-### 11.5. Initial Data Loading and State Management
+## Initial Data Loading and State Management
 
 A primary challenge in this single-screen application was ensuring data loads correctly on startup without interfering with subsequent user selections. The final, robust solution avoids timing-related "race conditions" by using a declarative pattern.
 
@@ -147,7 +147,7 @@ A primary challenge in this single-screen application was ensuring data loads co
 
 This separation of concerns—letting the controls' properties handle data state and letting screen events handle UI state—is a best practice for creating reliable and maintainable Power Apps.
 
-### 11.6. Manual Data Refresh
+## Manual Data Refresh
 
 A manual refresh mechanism is implemented to address the inherent data caching behavior of Power Apps, which can cause the app to display stale data after a backend process (like a Power Automate flow) modifies an item.
 
@@ -172,7 +172,7 @@ A manual refresh mechanism is implemented to address the inherent data caching b
         ```
     *   **How it Works:** `Refresh()` updates the gallery's data source. `Set(gblSelectedItem, LookUp(...))` then updates the variable that the main form is bound to, ensuring both the gallery and the form display the latest data.
 
-### 11.7. Fixing the `InvokerConnectionOverrideFailed` Error
+## Fixing the `InvokerConnectionOverrideFailed` Error
 
 This is a critical error that can occur when a Power Automate flow's connection to the Power App is broken. It is not an error in the Power Fx code, but rather a problem with the flow's underlying connection reference.
 

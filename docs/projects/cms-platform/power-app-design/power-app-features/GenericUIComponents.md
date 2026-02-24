@@ -1,6 +1,6 @@
-## Generic UI Components
+# Generic UI Components
 
-### 1.1. Reusable Confirmation Dialog
+## Reusable Confirmation Dialog
 
 To provide a consistent user experience for significant actions, a reusable confirmation dialog has been implemented.
 
@@ -29,7 +29,7 @@ To provide a consistent user experience for significant actions, a reusable conf
         *   `Max(130, ...)`: Enforces a minimum width of 130px, allowing the button to grow if the text requires more space, but preventing it from becoming too small for short text like "OK".
 *   **`Visible` Property:** The `Visible` property of the parent container (`con_confirmationDialog`) and a background overlay rectangle is bound to a single context variable: `showConfirmationDialog`.
 
-#### Context Variables
+### Context Variables
 
 The dialog is controlled by a set of context variables that must be set before showing it:
 
@@ -47,7 +47,7 @@ The dialog is controlled by a set of context variables that must be set before s
 *   `isSMEAssignAction` (Boolean): A flag to indicate that the confirmation action is to assign or re-assign an SME.
 *   `locLatestVersionItem` (Record): A record variable that holds the full item of the version to be made the new latest version. This is set by the button that triggers the revert action.
 
-#### Control Properties
+### Control Properties
 
 *   **Title Label (`lbl_dialogTitle`):**
     *   `Text` Property: `dialogTitle`
@@ -235,9 +235,9 @@ The dialog is controlled by a set of context variables that must be set before s
             *   [Instant - Expire Single KB Article v2](../../power-automate-flows/flow-designs/Instant_-_Expire_Single_KB_Article_v2.md)
             *   [Instant - Reactivate Archived Article](../../power-automate-flows/flow-designs/Instant_-_Reactivate_Archived_Article.md)
 
-## 10. Component Usage
+## Component Usage
 
 The components and logic described in this document are referenced and used in the following parts of the application:
 
-*   **Screen & Form Logic:** For details on how these components are integrated into the main edit screen, see the [`ScreenBreakdownAndLogic.md`](./ScreenBreakdownAndLogic.md) document.
-*   **Article Versioning:** The confirmation dialog is triggered by buttons described in the [`ArticleVersioningFeature.md`](./ArticleVersioningFeature.md) document.
+*   **Screen & Form Logic:** For details on how these components are integrated into the main edit screen, see the [`App Startup, Architecture, and UI Logic`](./ScreenBreakdownAndLogic.md) document.
+*   **Article Versioning:** The confirmation dialog is triggered by buttons described in the [`Article Versioning`](./ArticleVersioningFeature.md) document.

@@ -1,6 +1,6 @@
-# Design Document: Discard Draft Feature (Revised Architecture)
+# Discard Draft Feature (Revised Architecture)
 
-## 1. Executive Summary
+## Executive Summary
 
 This document outlines the final, robust architecture for the "Discard Draft" feature. This feature allows an author or administrator to delete an unwanted draft version of an article, which automatically promotes the preceding version to become the new "latest" version.
 
@@ -10,7 +10,7 @@ The definitive solution moves the state-confirmation logic to the backend. The P
 
 Furthermore, the UI has been enhanced to provide clear feedback during this process. When a user confirms the action, the dialog remains open, displays a "Processing..." message, and disables its buttons until the entire backend and frontend refresh operation is complete.
 
-## 2. The Core Problem: SharePoint Replication Delay
+## The Core Problem: SharePoint Replication Delay
 
 A fundamental challenge when interacting with SharePoint from Power Platform is that some operations, particularly deletions, are not truly instantaneous. There is a small but critical window of time between when SharePoint's API reports "Success" to the calling flow and when that change is fully replicated and visible across all subsequent API queries.
 
@@ -23,7 +23,7 @@ This creates a classic **race condition**:
 5.  **The Race:** The `Refresh` command is often so fast that it queries SharePoint *before* the deletion has finished propagating. SharePoint, in its temporarily inconsistent state, returns a data set that still includes the "deleted" item.
 6.  **The Failure:** The Power App's subsequent logic (`LookUp`, `Set gblSelectedItem`) runs against this stale data, fails to find the newly promoted version, and the UI remains stuck on the old, now-deleted draft.
 
-## 3. Final Architecture: Backend State Confirmation & Frontend Feedback
+## Final Architecture: Backend State Confirmation & Frontend Feedback
 
 The final architecture uses a **backend polling pattern** combined with a **frontend processing state**.
 
@@ -32,43 +32,47 @@ The final architecture uses a **backend polling pattern** combined with a **fron
 
 ```mermaid
 graph TD
-    subgraph Power App
-        A[User clicks "Discard Draft"] --> B[Show Confirmation Dialog];
-        B --Confirm--> C[Set 'isProcessing' state: Show "Processing...", disable buttons];
-        C --> D[Call Intelligent Flow];
-        D --Waits for Response--> E{Response Received};
-        E --Success--> F[Refresh Data Source];
-        E --Failure--> F_Fail[Show Error Message];
-        F --> G[LookUp newly promoted version];
-        G --> H[Set gblSelectedItem to new version];
-        H --> I[Reset Form to display new item];
-        I --> J[Reset 'isProcessing' state & Hide Dialog];
+
+    subgraph Power_App
+        A[User clicks Discard Draft] --> B[Show Confirmation Dialog]
+        B -->|Confirm| C[Set isProcessing state - show Processing and disable buttons]
+        C --> D[Call Intelligent Flow]
+        D -->|Wait for Response| E{Response Received}
+        E -->|Success| F[Refresh Data Source]
+        E -->|Failure| F_Fail[Show Error Message]
+        F --> G[LookUp newly promoted version]
+        G --> H[Set gblSelectedItem to new version]
+        H --> I[Reset Form to display new item]
+        I --> J[Reset isProcessing state and hide dialog]
     end
 
-    subgraph Power Automate
-        D --> K[Flow: Instant - Discard Article Draft];
-        K --> L(Try Scope);
-        L -- on failure --> Catch(Catch Scope);
-        Catch --> LogError[Log System Error];
-        LogError --> Resp_Fail[Respond with Failure];
-        Resp_Fail --> E;
+    subgraph Power_Automate
+        D --> K[Flow Instant - Discard Article Draft]
+        K --> L[Try Scope]
 
-        L -- on success --> M[1. Find & Update Previous Version];
-        M --> N[2. Delete Current Draft];
-        N --> O["3. Do Until 'IsDeletionConfirmed' is true"];
-        O --Loop--> P[Get Items: Poll for deleted draft];
-        P --> Q{Is item count 0?};
-        Q --No--> R[Delay 2 seconds];
-        R --> O;
-        Q --Yes--> S[Set 'IsDeletionConfirmed' to true];
-        S --> T[Exit Loop];
-        T --> LogAudit[4. Log Audit Event: Draft Discarded];
-        LogAudit --> Resp_Success[5. Respond with Success];
-        Resp_Success --> E;
+        L -->|On Failure| Catch[Catch Scope]
+        Catch --> LogError[Log System Error]
+        LogError --> Resp_Fail[Respond with Failure]
+        Resp_Fail --> E
+
+        L -->|On Success| M[Find and Update Previous Version]
+        M --> N[Delete Current Draft]
+        N --> O[Do Until IsDeletionConfirmed is true]
+
+        O -->|Loop| P[Get Items - Poll for deleted draft]
+        P --> Q{Is item count 0}
+        Q -->|No| R[Delay 2 seconds]
+        R --> O
+        Q -->|Yes| S[Set IsDeletionConfirmed to true]
+
+        S --> T[Exit Loop]
+        T --> LogAudit[Log Audit Event - Draft Discarded]
+        LogAudit --> Resp_Success[Respond with Success]
+        Resp_Success --> E
     end
 ```
 
-## 4. Power Automate Implementation: The Intelligent Flow
+## Power Automate Implementation: The Intelligent Flow
 
 The `Instant - Discard Article Draft` flow must be modified to include the polling loop.
 
@@ -180,6 +184,6 @@ The `Instant - Discard Article Draft` flow must be modified to include the polli
         *   `status` (Text): `variables('responseStatus')`
         *   `message` (Text): `variables('responseMessage')`
 
-## 5. Power App Implementation
+## Power App Implementation
 
 For details on the Power App UI, context variables, and the `OnSelect` formula that calls this flow, please see the central **[Reusable Confirmation Dialog documentation](../../power-app-design/power-app-features/GenericUIComponents.md)**.
