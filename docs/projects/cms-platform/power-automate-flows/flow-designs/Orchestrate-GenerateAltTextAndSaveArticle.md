@@ -1,14 +1,14 @@
-# AI-Powered Alt Text & Article Save Workflow
+# Design Document: AI-Powered Alt Text & Article Save Workflow
 
 **Version: 2.0**
 
-## Overview & Architectural Shift
+## 1. Overview & Architectural Shift
 
 This document outlines the architecture for the `Orchestrate-GenerateAltTextAndSaveArticle` Power Automate flow. This flow represents a significant architectural shift. It is no longer just an `alt` text generator; it is now the **central orchestrator for all article save and submit operations**, completely replacing the `Patch()` logic previously located in the Power App.
 
 This change was made to accommodate the complex, multi-step server-side processing required for AI `alt` text generation, while also centralizing all critical business logic in a single, secure, and maintainable location.
 
-## Purpose & Core Responsibilities
+## 2. Purpose & Core Responsibilities
 
 *   **Centralized Business Logic:** Consolidate all business rules for creating and updating articles, including author/contributor management, ID generation, and status changes.
 *   **AI `alt` Text Generation:** (Phased Approach) Parse embedded images from article HTML, call an external AI service to generate descriptions, and inject the results into the `alt` attribute of `<img>` tags.
@@ -16,7 +16,7 @@ This change was made to accommodate the complex, multi-step server-side processi
 *   **Security:** Securely manage the Bearer Token for the AI service, ensuring it is never exposed to the client-side Power App.
 *   **Transactional Integrity:** Ensure that the article is saved only after all processing steps are complete.
 
-## User Auditing Strategy
+## 3. User Auditing Strategy
 
 Since this workflow runs under a service account context, the default SharePoint `Created By` and `Modified By` columns will always reflect the service account, not the end-user. To ensure a clear and accurate audit trail of user actions, the following fields are used:
 
@@ -26,15 +26,15 @@ Since this workflow runs under a service account context, the default SharePoint
 
 This strategy ensures that even though the system uses a service account for operations, all user-driven modifications are accurately tracked and attributed to the correct individuals directly within the list item.
 
-## Detailed Architecture
+## 4. Detailed Architecture
 
-### 1. Power App: The Trigger
+### 4.1. Power App: The Trigger
 
 The Power App's role is now simplified to data collection and triggering the workflow. The `OnSelect` properties of `btn_SaveDraft` and `btn_StartReview` will be completely replaced. The specific implementation for this is detailed in the following document:
 
-*   **Calling Document:** [`App Startup, Architecture, and UI Logic`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
+*   **Calling Document:** [`ScreenBreakdownAndLogic.md`](../PowerApp_Standalone_DesignDoc/ScreenBreakdownAndLogic.md)
 
-#### 1.1. Capturing the Load Timestamp (Concurrency Control)
+#### 4.1.1. Capturing the Load Timestamp (Concurrency Control)
 
 To implement the timestamp-based concurrency check, a context variable `locLoadTimestamp` must be set whenever an article is loaded for viewing or editing.
 
@@ -55,22 +55,22 @@ To implement the timestamp-based concurrency check, a context variable `locLoadT
 
 This ensures that the `locLoadTimestamp` variable always holds the time the user *started* their session, which is crucial for the concurrency check.
 
-#### 1.2. `OnSelect` Logic
+#### 4.1.2. `OnSelect` Logic
 
 The complete Power Fx formula and implementation details for the `OnSelect` property of the save buttons are maintained in the Power App's design document to ensure a single source of truth.
 
-*   **Canonical Source:** [`App Startup, Architecture, and UI Logic`](../../power-app-design/power-app-features/ScreenBreakdownAndLogic.md)
+*   **Canonical Source:** [`ScreenBreakdownAndLogic.md`](../PowerApp_Standalone_DesignDoc/ScreenBreakdownAndLogic.md)
 
-### 2. Power Automate Flow: `Orchestrate-GenerateAltTextAndSaveArticle`
+### 4.2. Power Automate Flow: `Orchestrate-GenerateAltTextAndSaveArticle`
 
 This flow is the new heart of the save process.
 
 *   **Trigger:** PowerApps (V2)
     *   **Input:** `jsonData` (Text) - Receives the single JSON string from the Power App.
 
-*   **Execution Steps:**
+**Execution Steps:**
 
-    1.  **Parse Input Data (`Parse JSON` action):**
+1.  **Parse Input Data (`Parse JSON` action):**
         *   **Purpose:** This is the first and most critical step. It takes the single JSON text string from the Power App and converts it into a strongly-typed object with properties that can be used as dynamic content throughout the flow.
         *   **Content:** `triggerBody()['text']`
         *   **Schema:** This schema must match the JSON object being passed from the Power App. It has been updated to include the existing article identifiers for update scenarios.
@@ -120,7 +120,7 @@ This flow is the new heart of the save process.
             }
             ```
 
-    2.  **Process Nested JSON from Power App (Scope):**
+2.  **Process Nested JSON from Power App (Scope):**
         *   **Purpose:** This scope isolates the logic required to parse the complex data types (arrays/objects) that the Power App stringifies before sending.
         *   **2.1. Parse `contributors` (`Parse JSON` action):**
             *   **Purpose:** To convert the stringified array of contributor user objects into a usable array of objects.
@@ -174,7 +174,7 @@ This flow is the new heart of the save process.
                 }
                 ```
 
-    3. **Get Configuration from SharePoint (Scope):**
+3.  **Get Configuration from SharePoint (Scope):**
         *   **Purpose:** To retrieve dynamic configuration values, such as external endpoint URLs, from the `appConfiguration` SharePoint list. This avoids hardcoding values within the flow, making it more maintainable.
         *   **Action: `Get items` from SharePoint**
             *   **List Name:** `appConfiguration`
@@ -182,7 +182,7 @@ This flow is the new heart of the save process.
             *   **Top Count:** `1`
             *   **Note:** This action should be renamed to `Get_HTML_Sanitizer_URL_Config` for clarity.
 
-    4. **Sanitize HTML Inputs (Scope):**
+4.  **Sanitize HTML Inputs (Scope):**
         *   **Purpose:** This scope calls the `html-sanitizer` Azure Function for each of the three rich text fields (`articleHTML`, `overviewHTML`, `internalNotesHTML`). This is a critical security and data integrity step that solves several complex issues simultaneously:
             1.  **Strips Invalid Characters:** Removes invisible XML control characters that break the downstream DITA conversion process.
             2.  **Removes Wrapper Tags:** Strips the extraneous `<div class=\"ExternalClass...\">` and `<p class=\"editor-paragraph\">` tags added by SharePoint and the Power Apps Rich Text Editor. This prevents the infinite nesting of tags with each save.
@@ -190,7 +190,7 @@ This flow is the new heart of the save process.
             4.  **Preserves Author Intent:** Intentionally preserves paragraph tags containing only a non-breaking space (`<p>&nbsp;</p>`), which is the standard way authors create blank lines in the editor.
         *   **Implementation Note:** The logic for items 2, 3, and 4 is handled entirely within the Node.js code of the Azure Function. The function relies on the default behavior of the `sanitize-html` library to strip un-allowed tags (like `div`) while keeping their content, and then uses a regular expression to clean up empty paragraph artifacts. No special configuration is needed in the HTTP actions below.
         *   **Configuration:** The actions inside this scope should be configured to run in parallel for efficiency.
-        *   **2.5.1. Sanitize `articleHTML` (`HTTP` action):**
+        *   **4.1. Sanitize `articleHTML` (`HTTP` action):**
             *   **Method:** `POST`
             *   **URI:** `body('Get_HTML_Sanitizer_URL_Config')?['value']?[0]?['Value']`
             *   **Headers:** `Content-Type: application/json`
@@ -201,7 +201,7 @@ This flow is the new heart of the save process.
                 }
                 ```
             *   **Note:** This action should be renamed to `HTTP_-_Sanitize_articleHTML` for clarity.
-        *   **2.5.2. Sanitize `overviewHTML` (`HTTP` action):**
+        *   **4.2. Sanitize `overviewHTML` (`HTTP` action):**
             *   **Method:** `POST`
             *   **URI:** `body('Get_HTML_Sanitizer_URL_Config')?['value']?[0]?['Value']`
             *   **Headers:** `Content-Type: application/json`
@@ -212,7 +212,7 @@ This flow is the new heart of the save process.
                 }
                 ```
             *   **Note:** This action should be renamed to `HTTP_-_Sanitize_overviewHTML` for clarity.
-        *   **2.5.3. Sanitize `internalNotesHTML` (`HTTP` action):**
+        *   **4.3. Sanitize `internalNotesHTML` (`HTTP` action):**
             *   **Method:** `POST`
             *   **URI:** `body('Get_HTML_Sanitizer_URL_Config')?['value']?[0]?['Value']`
             *   **Headers:** `Content-Type: application/json`
@@ -223,29 +223,29 @@ This flow is the new heart of the save process.
                 }
                 ```
             *   **Note:** This action should be renamed to `HTTP_-_Sanitize_internalNotesHTML` for clarity.
-        *   **2.5.4. Parse Sanitized `articleHTML` (`Parse JSON` action):**
+        *   **4.4. Parse Sanitized `articleHTML` (`Parse JSON` action):**
             *   **Purpose:** To access the `cleanHtml` property from the sanitizer's response.
             *   **Content:** `body('HTTP_-_Sanitize_articleHTML')`
             *   **Schema:**
                 ```json
                 { "type": "object", "properties": { "cleanHtml": { "type": "string" } } }
                 ```
-        *   **2.5.5. Parse Sanitized `overviewHTML` (`Parse JSON` action):**
+        *   **4.5. Parse Sanitized `overviewHTML` (`Parse JSON` action):**
             *   **Purpose:** To access the `cleanHtml` property from the sanitizer's response.
             *   **Content:** `body('HTTP_-_Sanitize_overviewHTML')`
             *   **Schema:** (Same as above)
-        *   **2.5.6. Parse Sanitized `internalNotesHTML` (`Parse JSON` action):**
+        *   **4.6. Parse Sanitized `internalNotesHTML` (`Parse JSON` action):**
             *   **Purpose:** To access the `cleanHtml` property from the sanitizer's response.
             *   **Content:** `body('HTTP_-_Sanitize_internalNotesHTML')`
             *   **Schema:** (Same as above)
 
-    3.  **Select contributor emails (`Select` action):**
+5.  **Select contributor emails (`Select` action):**
         *   **Purpose:** To efficiently transform the array of contributor objects (from step 2.1) into a simple array of just their email addresses. This simplifies the logic for checking duplicates and constructing claims.
         *   **From:** `coalesce(body('Parse_contributors'), json('[]'))`
         *   **Note:** The `coalesce` function is critical here. It ensures that if the `Parse_contributors` step outputs `null` (because the input was empty), this step will receive an empty array `[]` instead of `null`, preventing a "BadRequest" error.
         *   **Map (Text Mode):** `item()?['Email']`
 
-    4.  **Initialize Variables:**
+6.  **Initialize Variables:**
         *   **Purpose:** All variables used in the flow are initialized here for clarity and maintainability.
         *   `varFinalHTML` (String): `body('Parse_Sanitized_articleHTML')?['cleanHtml']`
         *   `varBase64Images` (Array): Leave empty.
@@ -259,12 +259,12 @@ This flow is the new heart of the save process.
         *   `responseItemID` (Integer): Initialize with the `itemID` from the `Parse_Input_Data` action. This ensures the ID is preserved even if the flow fails before it can be set.
         *   `isSaveConfirmed` (Boolean): Initialize to `false`. **Critical:** This variable controls the state confirmation polling loop. The flow will not proceed until this variable is explicitly set to `true`, guaranteeing that the SharePoint save operation has fully replicated before responding to the Power App.
 
-    5.  **Business Logic: Handle Author and Contributors (Scope):**
+7.  **Business Logic: Handle Author and Contributors (Scope):**
         *   **Purpose:** This scope manages the logic for accurately tracking all users who have edited an article. It uses a `Compose` action to safely handle potentially null input for the `previousLastAuthorEmail`.
-        *   **5.1. Coalesce Previous Author Email (`Compose` action):**
+        *   **7.1. Coalesce Previous Author Email (`Compose` action):**
             *   **Purpose:** This action takes the `previousLastAuthorEmail` (which can be `null` for new articles) and converts it into a guaranteed non-null value (an empty string `''`). This prevents downstream actions from failing.
             *   **Inputs:** `@coalesce(body('Parse_Input_Data')?['previousLastAuthorEmail'], '')`
-        *   **5.2. Condition: Check if Previous Author should be added**
+        *   **7.2. Condition: Check if Previous Author should be added**
             *   **Condition:** This condition now safely checks if the coalesced email is not an empty string and is different from the current user.
             *   **Row 1:** `outputs('Coalesce_Previous_Author_Email')` | `is not equal to` | `''`
             *   **Row 2 (AND):** `outputs('Coalesce_Previous_Author_Email')` | `is not equal to` | `body('Parse_Input_Data')?['currentUserEmail']`
@@ -272,20 +272,20 @@ This flow is the new heart of the save process.
             *   **Condition:** Check if `varContributorEmails` array `contains` the output from the `Coalesce_Previous_Author_Email` action.
             *   **If No (Append previousLastAuthorEmail to Contributors):** Use the `Append to array variable` action to add the output from `Coalesce_Previous_Author_Email` to the `varContributorEmails` array.
 
-    6.  **Business Logic: Clean and Construct Final Contributor Objects (Scope):**
+8.  **Business Logic: Clean and Construct Final Contributor Objects (Scope):**
         *   **Purpose:** To create a clean, valid array of claims objects, ensuring no empty values are processed.
-        *   **6.1. Filter out empty emails (`Filter array` action):**
+        *   **8.1. Filter out empty emails (`Filter array` action):**
             *   **Purpose:** This crucial step removes any blank or `null` entries from the `varContributorEmails` array. As observed, a simple check for an empty string (`''`) is not sufficient.
             *   **From:** `variables('varContributorEmails')`
             *   **Condition (Advanced Mode):** You must switch to "advanced mode" for the filter query and use the following expression. This correctly handles both empty strings and `null` values.
             *   **Expression:** `@not(empty(item()))`
-        *   **6.2. Loop (`Apply to each`):** **This is a critical step.** The loop must iterate over the **output body** of the `Filter out empty emails` action from the previous step. Do **not** use the original `varContributorEmails` variable here, as that would re-introduce the empty values that were just filtered out.
+        *   **8.2. Loop (`Apply to each`):** **This is a critical step.** The loop must iterate over the **output body** of the `Filter out empty emails` action from the previous step. Do **not** use the original `varContributorEmails` variable here, as that would re-introduce the empty values that were just filtered out.
         *   **Inside loop (Finalize contributors claims):** Use `Append to array variable` to add an object to `varFinalContributors`. The expression should use `item()` to refer to the current item in the loop.
             ```json
             { "Claims": "i:0#.f|membership|@{item()}" }
             ```
 
-    7.  **Business Logic: Handle New Item ID Generation (Scope):**
+9.  **Business Logic: Handle New Item ID Generation (Scope):**
         *   **Purpose:** This scope runs the child flow to generate a new Article ID, but only for new articles.
         *   **Architectural Note:** This step has been refactored to call the `KB_ID_Generator_Child` flow directly, removing the redundant `Instant-GenerateNextArticleID` wrapper flow.
         *   **Condition:** Check if `isNewMode` from `Parse_Input_Data` is `true`.
@@ -304,14 +304,14 @@ This flow is the new heart of the save process.
             *   **Action:** `Set variable` for `newcanonicalarticleid` with the `newcanonicalarticleid` output from the `KB_ID_Generator_Child` step.
             *   **Action:** `Set variable` for `newarticleversion` with the `newarticleversion` output from the `KB_ID_Generator_Child` step.
 
-    8.  **Image Processing & `alt` Text Generation (Placeholder):**
+10. **Image Processing & `alt` Text Generation (Placeholder):**
         *   **Purpose:** This section is reserved for future AI image analysis.
         *   **Action:** This step must be **removed or disabled**. You correctly identified that this placeholder logic was overwriting the `varFinalHTML` variable, causing the article content to be blank.
 
-    9.  **Error Handling and Response (`Try`, `Success`, `Catch` Scopes):**
+11. **Error Handling and Response (`Try`, `Success`, `Catch` Scopes):**
         *   **Architectural Note:** This new structure, designed by you, is the most robust solution. It separates the success and failure logic into distinct, parallel scopes and uses a final response action configured to run after either path completes. This completely avoids all race conditions and ensures a reliable response.
 
-        *   **9.1. Try (Scope):**
+        *   **11.1. Try (Scope):**
             *   **Purpose:** This scope contains only the core data persistence logic. If any action within it fails, execution immediately stops and moves to the `Catch` block.
             *   **Inside the Try Scope:**
                 1.  **Condition: Check if `isNewMode` is `true`**
@@ -557,7 +557,7 @@ This flow is the new heart of the save process.
                                     *   `details`: `User saved changes to an existing article draft.`
                                     *   `contentDiff`: `''`
 
-        *   **9.2. Catch (Scope):**
+        *   **11.2. Catch (Scope):**
             *   **Purpose:** This scope runs only when an unexpected system error occurs inside the `Try` block (e.g., SharePoint is down). It will not run for handled business logic failures like a save conflict, as those paths now set their own response variables.
             *   **Configuration:** Configure the `Run after` for this scope to only execute if the `Try` scope `has failed`.
             *   **Inside the Catch Scope:**
@@ -584,7 +584,7 @@ This flow is the new heart of the save process.
                             }
                             ```
 
-        *   **9.3. Final Response (Guaranteed Execution):**
+        *   **11.3. Final Response (Guaranteed Execution):**
             *   **Purpose:** This single action, placed after the `Try` and `Catch` scopes, sends the final response back to the Power App.
             *   **Action:** `Respond to a PowerApp or flow`.
             *   **Configuration:** This is the most critical configuration. The `Respond` action must run after the `Catch` block, regardless of whether it was skipped (because `Try` succeeded) or ran successfully (because `Try` failed). This guarantees the `Respond` action always runs.
@@ -597,7 +597,7 @@ This flow is the new heart of the save process.
                 *   `message` (Text): `variables('responseMessage')`
                 *   `itemID` (Number): `variables('responseItemID')`
 
-## Phased Implementation Plan
+## 5. Phased Implementation Plan
 
 1.  **Phase 1 (Current):**
     *   Implement the full Power App and Power Automate changes as described above, but with the **placeholder** `alt` text logic.
