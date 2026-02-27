@@ -59,6 +59,7 @@ If(!IsBlank(Param("ArticleID")),
 ```
 
 **How It Works:**
+
 1.  **`Param("ArticleID")`**: On app load, this function checks if an `ArticleID` parameter was included in the launch URL (e.g., `...&ArticleID=KA-00123`).
 2.  **`LookUp(...)`**: If the parameter exists, a `LookUp` is performed against the `'Knowledge Base Articles'` data source to find the single record that matches the provided `ArticleID` (`field_3`) and is also marked as the latest version (`IsLatestVersion = true`).
 3.  **`Set(gblSelectedItem, ...)`**: The found record is loaded into the `gblSelectedItem` global variable. The app's UI, particularly the main form, is already configured to automatically display the record stored in this variable.
