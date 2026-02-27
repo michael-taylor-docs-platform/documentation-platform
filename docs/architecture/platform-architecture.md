@@ -1,4 +1,4 @@
-# Portfolio Platform Architecture
+# Portfolio Architecture
 
 ## 1. Overview
 
@@ -11,7 +11,7 @@ It demonstrates:
 - Controlled publishing workflow (manual release trigger)
 - Static site generation (MkDocs + Material)
 - CI/CD automation via GitHub Actions
-- Planned AI-assisted restructuring layer
+- AI-assisted restructuring layer
 
 The platform separates content processing from publishing, mirroring enterprise documentation governance models.
 

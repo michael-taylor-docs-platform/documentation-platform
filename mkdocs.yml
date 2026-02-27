@@ -1,4 +1,4 @@
-site_name: Michael Taylor – Documentation Platform
+site_name: Michael Taylor – Documentation Systems Portfolio
 site_description: Documentation as Platform Architecture Demo
 site_author: Michael Taylor
 
@@ -24,16 +24,16 @@ site_dir: site
 nav:
   - Home: index.md
 
-  - Architecture:
-      - Platform Architecture: architecture/platform-architecture.md
+  - Portfolio Architecture:
+      - Overview: architecture/platform-architecture.md
 
-  - Projects:
+  - Engineering Projects:
       - CMS Platform:
 
           - Overview: projects/cms-platform/index.md
 
           - Power App Architecture:
-              - Standalone Design Doc: projects/cms-platform/power-app-design/PowerApp_Standalone_DesignDoc.md
+              - Knowledge Manager Overview: projects/cms-platform/power-app-design/PowerApp_Standalone_DesignDoc.md
               - Feature Modules:
                   - App Startup, Architecture, and UI Logic: projects/cms-platform/power-app-design/power-app-features/ScreenBreakdownAndLogic.md
                   - Delegable Filtering & Searching: projects/cms-platform/power-app-design/power-app-features/DelegableFilteringAndSearching.md
@@ -44,7 +44,7 @@ nav:
                   - Troubleshooting & Key Fixes: projects/cms-platform/power-app-design/power-app-features/TroubleshootingAndKeyFixes.md
                   - Advanced Troubleshooting: projects/cms-platform/power-app-design/power-app-features/AdvancedTroubleshooting.md
 
-          - Power Automate Orchestration:
+          - Power Automate Flows:
               - Create New Article Version: projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Create_New_Article_Version.md
               - Discard Draft: projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Discard_Article_Draft.md
               - Article Archive Feature: projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Expire_Single_KB_Article_v2.md
@@ -59,4 +59,26 @@ nav:
               - Notify Stripped Character: projects/cms-platform/power-automate-flows/flow-designs/Notify-StrippedCharacter.md
               - Orchestrate Generate Alt Text: projects/cms-platform/power-automate-flows/flow-designs/Orchestrate-GenerateAltTextAndSaveArticle.md
               - Scheduled Unassigned Reminder: projects/cms-platform/power-automate-flows/flow-designs/Scheduled_-_Unassigned_Article_Reminder.md
+
+          - GitHub Publishing:
+              - GitHub KB Article Publishing Workflow: projects/cms-platform/github-pipeline/github-architecture.md
+              - Pipeline Design:
+                 - Main Dispatcher Workflow: projects/cms-platform/github-pipeline/elixir-kbarticle-dispatcher.md
+                 - Reusable Repository Processing: projects/cms-platform/github-pipeline/process-kb-repo.md
+                 - Reusable Publication Worker: projects/cms-platform/github-pipeline/elixir-kbarticle-publish-worker.md
+                 - Reusable Summary & Sync: projects/cms-platform/github-pipeline/reusable-summarize-and-sync.md
+                 - AI Ingestion - MET File Generation: projects/cms-platform/github-pipeline/create-kb-met.md
+
+  - Documentation Pipelines:
+     - Pipeline Overview: pipelines\pipeline-overview.md
+     - CI/CD Workflows:
+        - Automatic File Validation: pipelines/automatic-validation/elixir-automatic-file-validation.md
+        - Scheduled External Link Validator: pipelines/external-link-validation/external-link-check.md
+        - Automatic Workflow Sync Across Organization: pipelines/automatic-workflow-sync/sync-workflows.md
+     - Automation Scripts:
+        - File Content and Metadata Validator: pipelines/automatic-validation/file-validator.md
+        - HTML File Renaming: pipelines/automatic-validation/file-rename.md
+        - Create Metadata Files: pipelines/create-metadata-files/create-met-go.md
+        - Create RSS Feed: pipelines/create-rss/create-rss.md
+        - Standalone Guide Generator: pipelines/standalone-guide-generator/standalone-guide-reference-processor.md
 
