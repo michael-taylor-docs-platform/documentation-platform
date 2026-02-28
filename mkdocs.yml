@@ -28,6 +28,8 @@ nav:
       - Overview: architecture/platform-architecture.md
 
   - Engineering Projects:
+      - Documentation Conversion:
+          - Unstructured FrameMaker to DITA Adoption: unstructured-framemaker-to-dita.md
       - CMS Platform:
 
           - Overview: projects/cms-platform/index.md
@@ -70,7 +72,7 @@ nav:
                  - AI Ingestion - MET File Generation: projects/cms-platform/github-pipeline/create-kb-met.md
 
   - Documentation Pipelines:
-     - Pipeline Overview: pipelines\pipeline-overview.md
+     - Pipeline Overview: pipelines/pipeline-overview.md
      - CI/CD Workflows:
         - Automatic File Validation: pipelines/automatic-validation/elixir-automatic-file-validation.md
         - Scheduled External Link Validator: pipelines/external-link-validation/external-link-check.md
