@@ -29,7 +29,7 @@ nav:
 
   - Engineering Projects:
       - Documentation Conversion:
-          - Unstructured FrameMaker to DITA Adoption: unstructured-framemaker-to-dita.md
+          - Unstructured FrameMaker to DITA Adoption: dita/unstructured-framemaker-to-dita.md
       - CMS Platform:
 
           - Overview: projects/cms-platform/index.md
