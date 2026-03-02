@@ -1,30 +1,30 @@
-# Knowledge Base Modernization Plan (As-Built)
+---
+title: Enterprise Knowledge Lifecycle Platform – System Architecture
+category: architecture
+audience:
+  - engineering-leaders
+  - content-architects
+  - devops-engineers
+tags:
+  - sharepoint
+  - power-automate
+  - power-apps
+  - enterprise-architecture
+  - content-governance
+  - workflow-orchestration
+  - metadata-modeling
+  - migration-strategy
+  - archival-architecture
+  - structured-content
+project: enterprise-knowledge-lifecycle-platform
+layer: platform
+status: published
+summary: Detailed technical architecture of the Enterprise Knowledge Lifecycle Platform, including SharePoint schema design, workflow orchestration, metadata governance, migration logic, and archival strategy.
+---
 
-## 1. Executive Overview
+# Enterprise Knowledge Lifecycle Platform – System Architecture
 
-The Knowledge Management CMS was designed to modernize and govern large-scale documentation workflows across distributed teams.
-
-### Business Drivers
-
-- Inconsistent article lifecycle governance
-- Manual version management
-- Limited audit visibility
-- Lack of structured archival process
-- Need for deterministic approval workflows
-- Requirement for scalable metadata and AI-ready content
-
-### Architectural Goals
-
-- Centralized version control with canonical identifiers
-- Deterministic workflow orchestration via Power Automate
-- Structured UI logic within Power Apps
-- Full audit logging and error reporting
-- Safe archival with complete version history preservation
-- Governance-first design suitable for enterprise scale
-
-This system replaced fragmented manual processes with a structured, traceable, and automation-driven knowledge lifecycle platform.
-
-This document outlines the final architecture and workflows for the new knowledge base system built on SharePoint and Power Platform, reflecting the completed project.
+This document describes the as-built technical architecture of the Enterprise Knowledge Lifecycle Platform, including SharePoint schema design, workflow orchestration, publishing integration, and migration strategy.
 
 ## 2. SharePoint Site Structure
 

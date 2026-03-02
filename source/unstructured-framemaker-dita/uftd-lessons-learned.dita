@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_nyf_dfg_l3c">
+    <title>Lessons Learned</title>
+    <conbody>
+        <ol id="ol_dck_vpf_l3c">
+            <li>
+                <p>Reuse modeling must be intentional from the beginning</p>
+            </li>
+            <li>
+                <p>Conkeyref design requires early taxonomy planning</p>
+            </li>
+            <li>
+                <p>Executive sponsorship accelerates modernization initiatives</p>
+            </li>
+            <li>
+                <p>Content migration is both technical and behavioral</p>
+            </li>
+            <li>
+                <p>Structured authoring success depends on governance, not just tooling</p>
+            </li>
+        </ol>
+    </conbody>
+</concept>

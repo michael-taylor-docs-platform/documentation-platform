@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ijn_kpf_l3c">
+    <title>Unstructured FrameMaker → DITA XML Pilot</title>
+    <prolog>
+        <metadata>
+            <data name="tags" value="DITA, XML, Content Engineering"/>
+            <data name="category" value="Modernization"/>
+            <data name="audience" value="Hiring Managers"/>
+        </metadata>
+    </prolog>
+</concept>

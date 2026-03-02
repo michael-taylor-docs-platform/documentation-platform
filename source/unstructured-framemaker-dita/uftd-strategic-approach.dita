@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_bls_52g_l3c">
+    <title>Strategic Approach</title>
+    <conbody>
+        <section id="section_mrc_spf_l3c">
+            <title>Technical Strategy</title>
+            <ol id="ol_nrc_spf_l3c">
+                <li>
+                    <p>Designed a DITA topic-based information architecture</p>
+                </li>
+                <li>
+                    <p>Established map hierarchy structure for each content source (40 supporting
+                        maps)</p>
+                </li>
+                <li>
+                    <p>Researched and implemented:</p>
+                    <ul id="ul_orc_spf_l3c">
+                        <li>
+                            <p>DITA conrefs</p>
+                        </li>
+                        <li>
+                            <p>DITA conkeyrefs</p>
+                        </li>
+                        <li>
+                            <p>Reusable content modules</p>
+                        </li>
+                        <li>
+                            <p>Boilerplate repositories</p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p>Defined reuse patterns for:</p>
+                    <ul id="ul_prc_spf_l3c">
+                        <li>
+                            <p>Common procedures</p>
+                        </li>
+                        <li>
+                            <p>Shared configuration content</p>
+                        </li>
+                        <li>
+                            <p>Repeated warning and compliance blocks</p>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+            <p>The most technically demanding aspect was researching and implementing <b>conref and
+                    conkeyref structures</b> that allowed:</p>
+            <ul id="ul_qrc_spf_l3c">
+                <li>
+                    <p>Centralized reusable content</p>
+                </li>
+                <li>
+                    <p>Contextual content insertion</p>
+                </li>
+                <li>
+                    <p>Controlled variable substitution</p>
+                </li>
+                <li>
+                    <p>Reduced duplication across product variants</p>
+                </li>
+            </ul>
+            <p>This required deep study of DITA linking and key-based reuse models.</p>
+        </section>
+        <section id="section_qwx_tpf_l3c">
+            <title>Operational Strategy</title>
+            <ul id="ul_rwx_tpf_l3c">
+                <li>
+                    <p>Scoped pilot around flagship product for maximum visibility</p>
+                </li>
+                <li>
+                    <p>Structured pilot duration to 4 months for measurable evaluation</p>
+                </li>
+                <li>
+                    <p>Documented architecture decisions for stakeholder transparency</p>
+                </li>
+                <li>
+                    <p>Maintained parallel legacy stability during transition</p>
+                </li>
+                <li>
+                    <p>Created internal documentation to support future team adoption</p>
+                </li>
+            </ul>
+            <p>Because the initiative was executive-driven, the pilot had to demonstrate:</p>
+            <ul id="ul_swx_tpf_l3c">
+                <li>
+                    <p>Technical feasibility</p>
+                </li>
+                <li>
+                    <p>Scalability</p>
+                </li>
+                <li>
+                    <p>Content maintainability</p>
+                </li>
+                <li>
+                    <p>Authoring efficiency gains</p>
+                </li>
+                <li>
+                    <p>Translation cost reduction</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>
