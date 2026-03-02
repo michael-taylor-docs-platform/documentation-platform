@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+    <title>Portfolio</title>
+    <topicref href="unstructured-framemaker-to-dita.dita" chunk="to-content">
+        <topicref href="uftd-executive-summary.dita"/>
+        <topicref href="uftd-context.dita"/>
+        <topicref href="uftd-problem.dita"/>
+        <topicref href="uftd-strategic-approach.dita"/>
+        <topicref href="uftd-implementation.dita"/>
+        <topicref href="uftd-outcomes.dita"/>
+        <topicref href="uftd-lessons-learned.dita"/>
+    </topicref>
+</map>

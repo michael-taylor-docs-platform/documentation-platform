@@ -1,0 +1,636 @@
+---
+title: Generic UI Components and Confirmation Dialog Architecture
+category: architecture
+audience:
+  - engineering-leaders
+  - solution-architects
+  - developers
+tags:
+  - power-apps
+  - canvas-app
+  - state-management
+  - workflow-orchestration
+  - power-automate-integration
+  - reusable-components
+  - dialog-pattern
+  - transactional-pattern
+  - response-handling
+  - centralized-logic
+project: knowledge-base-manager
+layer: application
+status: published
+summary: Architectural specification of reusable UI components, including a centralized confirmation dialog pattern, state flag orchestration, and standardized Power Automate response handling within the Power App.
+---
+
+---
+title: Article Versioning
+category: architecture
+audience:
+  - engineering-leaders
+  - solution-architects
+  - developers
+tags:
+  - power-apps
+  - canvas-app
+  - sharepoint
+  - workflow-orchestration
+  - state-management
+  - versioning
+  - lifecycle-management
+  - confirmation-pattern
+  - power-automate-integration
+project: knowledge-base-manager
+layer: application
+status: published
+summary: UI and workflow implementation of article versioning, including version history browsing, draft creation, revert logic, and lifecycle state transitions integrated with Power Automate flows.
+---
+
+---
+title: App Startup, Architecture, and UI Logic
+category: architecture
+audience:
+  - engineering-leaders
+  - content-architects
+  - solution-architects
+tags:
+  - power-apps
+  - canvas-app
+  - sharepoint
+  - structured-content
+  - ui-logic
+  - state-management
+  - initialization-pattern
+  - component-architecture
+project: knowledge-base-manager
+layer: application
+status: published
+summary: Detailed design of application startup behavior, architectural structure, and UI logic patterns within the Knowledge Base Manager Power App.
+---
+
+---
+title: Knowledge Base Manager – Power App Architecture
+category: architecture
+audience:
+  - engineering-leaders
+  - content-architects
+  - devops-engineers
+tags:
+  - power-apps
+  - sharepoint
+  - power-automate
+  - enterprise-architecture
+  - workflow-orchestration
+  - structured-content
+  - metadata-modeling
+  - concurrency-control
+  - polling-pattern
+  - canvas-app
+project: knowledge-base-manager
+layer: application
+status: published
+summary: Architectural specification of the Knowledge Base Manager Power App, including V2 centralized workflow design, concurrency control, backend polling patterns, and SharePoint integration strategy.
+---
+
+---
+title: Enterprise Knowledge Lifecycle Platform – System Architecture
+category: architecture
+audience:
+  - engineering-leaders
+  - content-architects
+  - devops-engineers
+tags:
+  - sharepoint
+  - power-automate
+  - power-apps
+  - enterprise-architecture
+  - content-governance
+  - workflow-orchestration
+  - metadata-modeling
+  - migration-strategy
+  - archival-architecture
+  - structured-content
+project: enterprise-knowledge-lifecycle-platform
+layer: platform
+status: published
+summary: Detailed technical architecture of the Enterprise Knowledge Lifecycle Platform, including SharePoint schema design, workflow orchestration, metadata governance, migration logic, and archival strategy.
+---
+
+---
+title: Enterprise Knowledge Lifecycle Platform Overview
+category: architecture
+audience:
+  - hiring-managers
+  - engineering-leaders
+  - content-architects
+tags:
+  - sharepoint
+  - power-automate
+  - power-apps
+  - enterprise-architecture
+  - content-governance
+  - workflow-orchestration
+  - dita
+  - ci-cd
+  - metadata-modeling
+  - knowledge-management
+  - ai-integration
+project: enterprise-knowledge-lifecycle-platform
+layer: platform
+status: published
+summary: Enterprise knowledge lifecycle platform built with SharePoint, Power Platform, and CI publishing to enforce deterministic governance, structured metadata, and scalable archival architecture.
+---
+
+---
+title: Delegable Filtering and Searching
+category: architecture
+audience:
+  - developers
+  - solution-architects
+tags:
+  - power-apps
+  - sharepoint
+  - delegation
+  - data-modeling
+  - helper-column-pattern
+  - filtering
+  - power-automate-integration
+project: knowledge-base-manager
+layer: application
+status: published
+summary: Architectural pattern for implementing fully delegable filtering in Power Apps using SharePoint helper columns, synchronized via Power Automate, and optimized using a Switch() delegation-safe filtering structure.
+---
+
+---
+title: Advanced Troubleshooting and Integration Failure Modes
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-apps
+  - canvas-app
+  - power-automate
+  - sharepoint
+  - workflow-orchestration
+  - response-handling
+  - form-validation
+  - data-modeling
+  - power-automate-integration
+project: knowledge-base-manager
+layer: application
+status: published
+summary: Documentation of critical Power Platform failure modes encountered during development, including stale flow connections, optional parameter contract issues, relative URL rendering failures, default value binding errors, and SharePoint choice column data pollution.
+---
+
+---
+title: Troubleshooting & Key Fixes (Direct SharePoint Connection)
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-apps
+  - canvas-app
+  - sharepoint
+  - power-automate
+  - power-automate-integration
+  - delegation
+  - filtering
+  - state-management
+  - workflow-orchestration
+  - data-modeling
+project: knowledge-base-manager
+layer: application
+status: published
+summary: Implementation-level architectural patterns and critical fixes for the direct SharePoint-connected Power Apps CMS, including delegable gallery filtering, DisplayMode gating logic, multi-select person configuration, declarative state management using Coalesce, manual refresh patterns, and Power Automate connection repair.
+---
+
+---
+title: Archive History Management
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-apps
+  - canvas-app
+  - power-automate
+  - power-automate-integration
+  - sharepoint
+  - state-management
+  - workflow-orchestration
+  - data-modeling
+project: knowledge-base-manager
+layer: application
+status: published
+summary: Feature-level application architecture for archive viewing and article reactivation in the CMS Power App, including toggle-driven data source switching, confirmation dialog orchestration, transactional Power Automate integration, CanonicalArticleID-based version management, and service-account execution context.
+---
+
+---
+title: Instant - Create New Article Version
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - lifecycle-management
+  - transactional-pattern
+  - response-handling
+  - state-management
+  - concurrency-control
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Transactional Power Automate workflow for creating a new draft version of an article, implementing standardized Try/Catch error handling, centralized child-flow version generation, audit logging, system error logging, and structured response contracts to the calling Power App.
+---
+
+---
+title: Instant - Discard Article Draft
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - lifecycle-management
+  - transactional-pattern
+  - state-management
+  - concurrency-control
+  - response-handling
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Transaction-safe Power Automate workflow for discarding a draft article version, promoting the previous version, mitigating SharePoint replication delay through backend polling, implementing structured Try/Catch error handling, and enforcing a standardized response contract to the calling Power App.
+---
+
+---
+title: Instant - Expire Single KB Article
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - lifecycle-management
+  - transactional-pattern
+  - state-management
+  - response-handling
+  - data-modeling
+  - helper-column-pattern
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Transactional Power Automate workflow for archiving an article and its complete version history by migrating all related records to an archive list, implementing structured Try/Catch error handling, complex column normalization using Select patterns, centralized audit/system logging, and a standardized response contract to the calling Power App.
+---
+
+---
+title: Instant - Manage SME Approval (V2 - Decoupled Response)
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - lifecycle-management
+  - transactional-pattern
+  - state-management
+  - concurrency-control
+  - response-handling
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Decoupled Power Automate workflow for managing SME approval lifecycle, implementing synchronous assignment with immediate structured response to the Power App, asynchronous approval processing, workflow run cancellation for re-assignment scenarios, dual Try/Catch error handling, and deterministic state transition management.
+---
+
+---
+title: Reactivate Archived Article Workflow
+category: architecture
+audience:
+  - solution-architects
+  - developers
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - lifecycle-management
+  - state-management
+  - transactional-pattern
+  - response-handling
+project: knowledge-base-manager
+layer: workflow
+status: published
+---
+
+---
+title: Instant - Revert to Version
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - lifecycle-management
+  - transactional-pattern
+  - state-management
+  - response-handling
+  - polling-pattern
+  - audit-logging
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Transactional Power Automate workflow for non-destructive version rollback, implementing backend polling for replication consistency, sequential version incrementation, structured Try/Catch error handling, centralized audit logging, and standardized response contracts to the calling Power App.
+---
+
+---
+title: Instant - Start KB Article Approval (V2 - Decoupled Response)
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - lifecycle-management
+  - transactional-pattern
+  - state-management
+  - concurrency-control
+  - response-handling
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Decoupled Power Automate workflow for initiating KB article review, implementing synchronous locking and structured response handling to the Power App, conditional regional routing, asynchronous approval processing, audit logging, and deterministic lifecycle state management.
+---
+
+---
+title: Instant - LogAuditEvent
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - response-handling
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Centralized reusable Power Automate child workflow for writing standardized audit records to Azure Table Storage, implementing configuration-driven storage resolution, structured Try/Catch error handling, service principal authentication via connection reference, and deterministic response signaling to parent workflows.
+---
+
+---
+title: Child Flow - LogSystemEvent
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - response-handling
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Centralized Power Automate child workflow for recording system-level events to Azure Table Storage using configuration-driven storage resolution, reverse-chronological key generation, structured Try/Catch failure handling, and deterministic parent flow response signaling.
+---
+
+---
+title: Scheduled - Article Review Reminder
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - lifecycle-management
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Scheduled Power Automate workflow that enforces review SLAs by identifying stale unassigned and assigned knowledge base articles, issuing Microsoft Teams reminders via Adaptive Cards, and refreshing reminder timestamps to prevent notification flooding.
+---
+
+---
+title: KB ID Generator Child Flow
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - lifecycle-management
+  - response-handling
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Reusable Power Automate child workflow that centralizes CanonicalArticleID generation, version incrementing, translation validation, and controlled SharePoint item creation using a command-driven mode parameter and deterministic parent response contract.
+---
+
+---
+title: KB API Endpoint
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - lifecycle-management
+  - response-handling
+  - ai-integration
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Externally callable Power Automate workflow that exposes the Knowledge Base Manager as an API endpoint, enabling AI-powered systems to automatically generate and create new articles through a structured, governed integration contract.
+---
+
+---
+title: Orchestrate Generate Alt Text and Save Article
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - workflow-orchestration
+  - lifecycle-management
+  - response-handling
+  - ai-integration
+  - concurrency-control
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Central orchestration workflow that replaces all client-side Patch logic by handling article creation, update, HTML sanitization, AI-powered alt text generation, lifecycle transitions, concurrency validation, SharePoint state confirmation polling, and structured response handling for the Knowledge Base Manager.
+---
+
+---
+title: HTTP - Stripped Character Notification
+category: architecture
+audience:
+  - developers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - power-automate
+  - power-automate-integration
+  - content-governance
+project: knowledge-base-manager
+layer: workflow
+status: published
+summary: Asynchronous Power Automate workflow triggered by the html-sanitizer Azure Function that evaluates stripped character data against a centrally managed exclusion list and sends governance notifications when previously unknown characters are detected, enabling controlled content hygiene feedback without impacting the primary article save transaction.
+---
+
+---
+title: GitHub KB Article Publishing Workflow
+category: pipeline
+audience:
+  - engineering-leaders
+  - devops-engineers
+  - solution-architects
+tags:
+  - ci-cd
+  - github-actions
+  - workflow-orchestration
+  - dispatcher-worker-pattern
+  - automation-scripts
+  - dita
+  - reference-processing
+  - sharepoint
+project: enterprise-knowledge-lifecycle-platform
+layer: platform
+status: published
+summary: Platform-level CI/CD publishing engine implemented with GitHub Actions using a parallel dispatcher-worker architecture to process SharePoint-managed knowledge base content, generate DITA-based publication artifacts, and synchronize status back to the CMS and Online Help Center.
+---
+
+---
+title: GitHub Workflow - KB Article Dispatcher
+category: pipeline
+audience:
+  - engineering-leaders
+  - devops-engineers
+  - solution-architects
+tags:
+  - ci-cd
+  - github-actions
+  - workflow-orchestration
+  - dispatcher-worker-pattern
+  - automation-scripts
+  - sharepoint
+project: enterprise-knowledge-lifecycle-platform
+layer: platform
+status: published
+summary: Central GitHub Actions dispatcher workflow that identifies approved and archived SharePoint articles, prevents race conditions via immediate status updates, dynamically constructs publication matrices, orchestrates parallel worker executions, aggregates results, and synchronizes final publishing outcomes back to the CMS.
+---
+
+---
+title: GitHub Workflow - Elixir KB Article Publish Worker
+category: pipeline
+audience:
+  - devops-engineers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - ci-cd
+  - github-actions
+  - dispatcher-worker-pattern
+  - dita
+  - reference-processing
+  - static-site
+  - azure-blob-storage
+  - api-integration
+  - automation-scripts
+project: enterprise-knowledge-lifecycle-platform
+layer: platform
+status: published
+summary: Reusable GitHub Actions worker workflow that builds DITA documentation from a specific repository commit, performs differential blob deployment to Azure Storage, orchestrates asynchronous OHC API imports, and reports publication status back to the central dispatcher.
+---
+
+---
+title: GitHub Workflow - Process KB Repository
+category: pipeline
+audience:
+  - devops-engineers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - ci-cd
+  - github-actions
+  - reference-processing
+  - dita
+  - api-integration
+  - automation-scripts
+project: enterprise-knowledge-lifecycle-platform
+layer: platform
+status: published
+summary: Reusable GitHub Actions workflow that processes Knowledge Base repository changes for a specific audience, transforms article content via DITA conversion services, commits repository updates, and produces structured processing results for downstream publication stages.
+---
+
+---
+title: GitHub Workflow - Summarize and Sync Publication State
+category: pipeline
+audience:
+  - devops-engineers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - ci-cd
+  - github-actions
+  - static-site
+  - azure-blob-storage
+  - api-integration
+  - automation-scripts
+project: enterprise-knowledge-lifecycle-platform
+layer: platform
+status: published
+summary: Reusable GitHub Actions workflow that reconciles final publication state in Azure Blob Storage, processes archived and updated artifacts, converts HTML to Markdown, finalizes MET metadata files, synchronizes the authoritative static documentation structure, and signals downstream systems via Azure Service Bus.
+---
+
+---
+title: Go Utility - create-kb-met
+category: utility
+audience:
+  - devops-engineers
+  - solution-architects
+  - platform-engineers
+tags:
+  - dita
+  - reference-processing
+project: enterprise-knowledge-lifecycle-platform
+layer: platform
+status: published
+summary: Go-based command-line utility that transforms SharePoint list item JSON into structured .MET metadata files required by the DITA-OT publishing pipeline, performing schema mapping, normalization, language resolution, visibility determination, and internal link extraction.
+---
+
+

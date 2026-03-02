@@ -1,0 +1,95 @@
+version: 2.1
+
+categories:
+  - architecture
+  - automation
+  - pipeline
+  - migration
+  - governance
+  - case-study
+  - portfolio
+  - process
+  - utility
+
+audience:
+  - hiring-managers
+  - engineering-leaders
+  - solution-architects
+  - developers
+  - content-architects
+  - devops-engineers
+  - technical-writers
+  - documentation-teams
+
+status:
+  - draft
+  - published
+  - evolving
+  - archived
+
+projects:
+  - knowledge-base-manager
+  - enterprise-knowledge-lifecycle-platform
+  - dita-validation-pipeline
+  - standalone-guide-processor
+
+layers:
+  - platform
+  - application
+  - workflow
+  - data
+  - integration
+
+tags:
+  # Core Platforms
+  - sharepoint
+  - power-automate
+  - power-apps
+  - mkdocs
+  - dita
+  - xml
+  - markdown
+  - canvas-app
+ 
+  # Architecture & Systems
+  - enterprise-architecture
+  - content-governance
+  - metadata-modeling
+  - structured-content
+  - knowledge-management
+  - archival-architecture
+  - migration-strategy
+  - component-architecture
+  - state-management
+  - ui-logic
+  - screen-design
+  - form-validation
+  - initialization-pattern
+  - centralized-logic
+  - reusable-components
+  - dialog-pattern
+  - transactional-pattern
+  - response-handling
+  - delegation
+  - data-modeling
+  - helper-column-pattern
+  - filtering
+
+  # Lifecycle & Feature Patterns
+  - versioning
+  - lifecycle-management
+  - confirmation-pattern
+
+  # Automation & Pipelines
+  - ci-cd
+  - workflow-orchestration
+  - automation-scripts
+  - file-validation
+  - reference-processing
+  - static-site
+  - concurrency-control
+  - polling-pattern
+  - power-automate-integration
+  - ai-integration
+  - github-actions
+  - dispatcher-worker-pattern

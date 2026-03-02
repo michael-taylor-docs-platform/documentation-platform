@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ehb_p2g_l3c">
+    <title>The Problem</title>
+    <conbody>
+        <section id="section_pnh_ppf_l3c">
+            <title>Technical Constraints</title>
+            <ul id="ul_pjf_qpf_l3c">
+                <li>
+                    <p>Content locked in unstructured FrameMaker format</p>
+                </li>
+                <li>
+                    <p>Limited reuse capability</p>
+                </li>
+                <li>
+                    <p>Manual duplication of shared content</p>
+                </li>
+                <li>
+                    <p>Inconsistent information architecture</p>
+                </li>
+                <li>
+                    <p>No scalable conditional publishing model</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_cbf_s2g_l3c">
+            <title>Operational Constraints</title>
+            <ul id="ul_qjf_qpf_l3c">
+                <li>
+                    <p>High visibility (flagship product)</p>
+                </li>
+                <li>
+                    <p>Executive expectations for modernization</p>
+                </li>
+                <li>
+                    <p>No existing internal DITA expertise</p>
+                </li>
+                <li>
+                    <p>Pilot needed to prove ROI before broader adoption</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

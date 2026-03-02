@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_tb4_h2g_l3c">
+    <title>Executive Summary</title>
+    <conbody>
+        <p>Led a 4-month executive-sponsored pilot to modernize legacy unstructured FrameMaker
+            documentation into structured DITA XML for Trend Micro’s flagship product, Trend Micro
+                <b>OfficeScan</b>. Converted approximately 3,000 XML topic files and 40 DITA maps
+            across 4 user guides while independently researching and implementing advanced reuse
+            strategies using conrefs and conkeyrefs.</p>
+        <p>Delivered a scalable structured content model and reuse framework that demonstrated
+            viability for broader organizational adoption</p>
+    </conbody>
+</concept>
