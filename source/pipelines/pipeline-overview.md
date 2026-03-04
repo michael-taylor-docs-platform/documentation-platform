@@ -1,3 +1,23 @@
+---
+title: Pipeline Overview
+category: architecture
+audience:
+  - hiring-managers
+  - content-architects
+  - devops-engineers
+  - engineering-leaders
+tags:
+  - ci-cd
+  - content-pipeline
+  - content-governance
+  - workflow-orchestration
+  - automation-scripts
+project: portfolio-platform
+layer: platform
+status: published
+summary: Architectural overview of CI/CD documentation pipelines and supporting automation utilities, describing governance enforcement, validation strategy, operational safeguards, and modular automation design principles used to maintain deterministic publishing behavior across repositories.
+---
+
 # Pipeline Overview
 
 ## Overview

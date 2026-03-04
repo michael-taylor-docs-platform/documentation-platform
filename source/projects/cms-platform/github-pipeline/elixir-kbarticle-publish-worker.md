@@ -12,7 +12,6 @@ tags:
   - dita
   - reference-processing
   - static-site
-  - azure-blob-storage
   - api-integration
   - automation-scripts
 project: enterprise-knowledge-lifecycle-platform

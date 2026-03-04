@@ -26,12 +26,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install mkdocs mkdocs-material
 
-      - name: Run transformation
-        run: python scripts/transform.py
+      # 1️⃣ Deterministic normalization + validation
+      - name: Run content normalization and validation
+        run: python scripts/content_build.py
 
-      - name: Build site
-        run: mkdocs build
+      # 2️⃣ Strict build (fail on warnings)
+      - name: Build site (strict mode)
+        run: mkdocs build --strict
 
+      # 3️⃣ Deploy
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 

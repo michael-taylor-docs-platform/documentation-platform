@@ -1,4 +1,23 @@
-# Michael Taylor
+---
+title: Michael Taylor – Documentation Systems Portfolio
+category: overview
+audience:
+  - hiring-managers
+  - engineering-leaders
+  - content-architects
+  - solution-architects
+tags:
+  - documentation-platform
+  - ci-cd
+  - structured-content
+  - content-governance
+project: portfolio-platform
+layer: platform
+status: published
+summary: Portfolio introduction outlining documentation platform architecture philosophy, deterministic publishing systems, AI-assisted engineering methodology, and enterprise governance design principles applied across CI/CD-driven documentation environments.
+---
+
+# Michael Taylor – Documentation Systems Portfolio
 
 ## Documentation Systems & Platform Engineering
 

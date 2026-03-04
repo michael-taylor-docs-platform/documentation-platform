@@ -1,4 +1,23 @@
-# Workflow: `sync_workflows.yml`
+---
+title: GitHub Workflow Synchronization Engine (sync_workflows.yml)
+category: pipeline
+audience:
+  - devops-engineers
+  - engineering-leaders
+  - solution-architects
+tags:
+  - github-actions
+  - ci-cd
+  - workflow-orchestration
+  - automation-scripts
+  - content-governance
+project: github-workflow-governance
+layer: workflow
+status: published
+summary: Organization-level GitHub Actions meta-workflow that enforces version consistency of managed workflow templates across repositories using the Git Data API, automated version comparison, and controlled main-branch updates.
+---
+
+# GitHub Workflow Synchronization Engine (sync_workflows.yml)
 
 ## 1. High-Level Overview & Purpose
 

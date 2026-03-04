@@ -9,7 +9,8 @@ tags:
   - ci-cd
   - github-actions
   - static-site
-  - azure-blob-storage
+  - content-pipeline
+  - workflow-orchestration
   - api-integration
   - automation-scripts
 project: enterprise-knowledge-lifecycle-platform

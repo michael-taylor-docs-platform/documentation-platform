@@ -266,23 +266,54 @@ def extract_metadata(root):
 
 def generate_frontmatter(title, metadata):
     """
-    Generate YAML frontmatter block.
+    Generate YAML frontmatter block with strict ordering.
 
-    - Title is always included.
-    - Comma-separated metadata values are rendered as YAML lists.
+    Required fields:
+    - category
+    - audience
+    - tags
+    - project
+    - layer
+    - status
+    - summary
+
+    Enforces:
+    - Deterministic key order
+    - YAML list rendering for audience and tags
+    - Clean whitespace trimming
     """
+
+    REQUIRED_ORDER = [
+        "category",
+        "audience",
+        "tags",
+        "project",
+        "layer",
+        "status",
+        "summary",
+    ]
+
     lines = ["---"]
-    lines.append(f"title: {title}")
+    lines.append(f"title: {yaml_safe_scalar(title)}")
 
-    for key, value in metadata.items():
+    for key in REQUIRED_ORDER:
+        value = metadata.get(key)
 
-        # Handle comma-separated lists as YAML lists
-        if "," in value:
+        if not value:
+            raise ValueError(f"Missing required metadata field: {key}")
+
+        value = value.strip()
+
+        # List fields
+        if key in ["audience", "tags"]:
             lines.append(f"{key}:")
-            for item in value.split(","):
-                lines.append(f"  - {item.strip()}")
+            items = [item.strip() for item in value.split(",") if item.strip()]
+            for item in items:
+                lines.append(f"  - {item}")
+
+        # Scalar fields
         else:
-            lines.append(f"{key}: {value}")
+            lines.append(f"{key}: {yaml_safe_scalar(value)}")
 
     lines.append("---\n")
 
@@ -452,6 +483,11 @@ def stub_dita_conversion(file_path):
         f.write(converted)
 
     print(f"[DITA] Converted {relative_path}")
+
+def yaml_safe_scalar(value):
+    if ":" in value or "#" in value:
+        return f'"{value}"'
+    return value
 
 if __name__ == "__main__":
     main()

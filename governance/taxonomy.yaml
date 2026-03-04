@@ -1,4 +1,4 @@
-version: 2.1
+version: 2.4
 
 categories:
   - architecture
@@ -6,10 +6,10 @@ categories:
   - pipeline
   - migration
   - governance
-  - case-study
   - portfolio
   - process
   - utility
+  - overview
 
 audience:
   - hiring-managers
@@ -30,8 +30,14 @@ status:
 projects:
   - knowledge-base-manager
   - enterprise-knowledge-lifecycle-platform
-  - dita-validation-pipeline
+  - dita-validation
   - standalone-guide-processor
+  - github-workflow-governance
+  - external-link-validation
+  - ai-ingestion-pipeline
+  - portfolio-platform
+  - publishing-automation
+  - structured-content-modernization
 
 layers:
   - platform
@@ -74,6 +80,8 @@ tags:
   - data-modeling
   - helper-column-pattern
   - filtering
+  - documentation-platform
+  - content-pipeline
 
   # Lifecycle & Feature Patterns
   - versioning
@@ -93,3 +101,9 @@ tags:
   - ai-integration
   - github-actions
   - dispatcher-worker-pattern
+
+  # Distribution & Syndication
+  - content-syndication
+
+  # Integration Patterns
+  - api-integration

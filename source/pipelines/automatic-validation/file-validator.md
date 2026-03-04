@@ -1,4 +1,23 @@
-# Go Utility: `fileValidator`
+---
+title: 'Go Utility: fileValidator'
+category: utility
+audience:
+  - content-architects
+  - devops-engineers
+  - engineering-leaders
+tags:
+  - dita
+  - file-validation
+  - structured-content
+  - content-governance
+  - automation-scripts
+project: dita-validation
+layer: data
+status: published
+summary: Reusable Go-based command-line validation engine that performs deep structural, metadata, and naming convention enforcement across DITA repositories, generating deterministic error reports and failing CI pipelines on critical violations.
+---
+
+# Go Utility: fileValidator
 
 **Parent Document:** [`Workflow: elixir-automatic-file-validation.yml`](./elixir-automatic-file-validation.md)
 
