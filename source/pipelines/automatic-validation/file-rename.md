@@ -1,4 +1,23 @@
-# Go Utility: `fileRename`
+---
+title: 'Go Utility: fileRename'
+category: utility
+audience:
+  - content-architects
+  - devops-engineers
+  - engineering-leaders
+tags:
+  - dita
+  - reference-processing
+  - structured-content
+  - metadata-modeling
+  - automation-scripts
+project: dita-validation
+layer: data
+status: published
+summary: Reusable Go-based command-line utility that programmatically renames DITA files based on their outputclass metadata and performs global reference updates to preserve link integrity during publishing and validation workflows.
+---
+
+# Go Utility: fileRename
 
 **Parent Document:** [`Workflow: elixir-automatic-file-validation.yml`](./elixir-automatic-file-validation.md)
 

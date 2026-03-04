@@ -15,6 +15,7 @@ tags:
 project: knowledge-base-manager
 layer: workflow
 status: published
+summary: Transactional Power Automate workflow that restores an archived article’s full version history to the active list, creates a new draft from the latest version, enforces lifecycle state integrity, and guarantees atomic behavior using a Try/Catch/Finally pattern with rollback and audit logging.
 ---
 
 # Reactivate Archived Article Workflow

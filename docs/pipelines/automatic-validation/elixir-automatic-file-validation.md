@@ -1,6 +1,6 @@
 ---
 title: Automated DITA Validation Pipeline (elixir-automatic-file-validation.yml)
-category: automation
+category: pipeline
 audience:
   - engineering-leaders
   - devops-engineers
@@ -9,11 +9,13 @@ tags:
   - dita
   - ci-cd
   - github-actions
-  - validation
+  - file-validation
   - content-governance
-  - automation
-summary: A fully automated GitHub Actions CI pipeline that validates DITA content, enforces metadata standards, performs DITA-OT dry-run validation, and synchronizes a centralized outputclass database.
+  - workflow-orchestration
+project: dita-validation
+layer: workflow
 status: published
+summary: Reusable GitHub Actions CI pipeline that enforces DITA structural validation, metadata standards, DITA-OT dry-run processing, and centralized outputclass database synchronization across repositories.
 ---
 
 # Automated DITA Validation Pipeline (elixir-automatic-file-validation.yml)

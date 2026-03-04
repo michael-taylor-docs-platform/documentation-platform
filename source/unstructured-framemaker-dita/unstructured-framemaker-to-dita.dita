@@ -3,10 +3,14 @@
 <concept id="concept_ijn_kpf_l3c">
     <title>Unstructured FrameMaker → DITA XML Pilot</title>
     <prolog>
-        <metadata>
-            <data name="tags" value="DITA, XML, Content Engineering"/>
-            <data name="category" value="Modernization"/>
-            <data name="audience" value="Hiring Managers"/>
-        </metadata>
+    <metadata>
+        <data name="category" value="migration"/>
+        <data name="audience" value="hiring-managers, content-architects, engineering-leaders"/>
+        <data name="tags" value="dita, xml, structured-content, reusable-components"/>
+        <data name="project" value="structured-content-modernization"/>
+        <data name="layer" value="platform"/>
+        <data name="status" value="published"/>
+        <data name="summary" value="Executive-sponsored pilot converting unstructured FrameMaker documentation into structured DITA XML, establishing reusable architecture patterns and scalable topic-based authoring across 3,000+ files."/>
+    </metadata>
     </prolog>
 </concept>

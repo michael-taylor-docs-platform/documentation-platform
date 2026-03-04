@@ -25,7 +25,7 @@ nav:
   - Home: index.md
 
   - Portfolio Architecture:
-      - Overview: architecture/platform-architecture.md
+      - architecture/platform-architecture.md
 
   - Engineering Projects:
       - unstructured-framemaker-dita/unstructured-framemaker-to-dita.md
@@ -74,12 +74,13 @@ nav:
      - Pipeline Overview: pipelines/pipeline-overview.md
      - CI/CD Workflows:
         - pipelines/automatic-validation/elixir-automatic-file-validation.md
-        - Scheduled External Link Validator: pipelines/external-link-validation/external-link-check.md
-        - Automatic Workflow Sync Across Organization: pipelines/automatic-workflow-sync/sync-workflows.md
+        - pipelines/external-link-validation/external-link-check.md
+        - pipelines/automatic-workflow-sync/sync-workflows.md
      - Automation Scripts:
-        - File Content and Metadata Validator: pipelines/automatic-validation/file-validator.md
-        - HTML File Renaming: pipelines/automatic-validation/file-rename.md
-        - Create Metadata Files: pipelines/create-metadata-files/create-met-go.md
-        - Create RSS Feed: pipelines/create-rss/create-rss.md
+        - pipelines/automatic-validation/file-validator.md
+        - pipelines/automatic-validation/file-rename.md
+        - pipelines/external-link-validation/external-link-check-utility.md
+        - pipelines/create-metadata-files/create-met-ai-ingestion.md
+        - pipelines/create-rss/create-rss.md
         - pipelines/standalone-guide-generator/standalone-guide-reference-processor.md
 

@@ -1,11 +1,19 @@
 ---
 title: Unstructured FrameMaker → DITA XML Pilot
+category: migration
+audience:
+  - hiring-managers
+  - content-architects
+  - engineering-leaders
 tags:
-  - DITA
-  - XML
-  - Content Engineering
-category: Modernization
-audience: Hiring Managers
+  - dita
+  - xml
+  - structured-content
+  - reusable-components
+project: structured-content-modernization
+layer: platform
+status: published
+summary: Executive-sponsored pilot converting unstructured FrameMaker documentation into structured DITA XML, establishing reusable architecture patterns and scalable topic-based authoring across 3,000+ files.
 ---
 ## Executive Summary
 

@@ -1,4 +1,23 @@
-# Workflow: `external-link-check.yml`
+---
+title: 'Workflow: external-link-check.yml'
+category: pipeline
+audience:
+  - content-architects
+  - devops-engineers
+  - engineering-leaders
+tags:
+  - github-actions
+  - automation-scripts
+  - structured-content
+  - reference-processing
+  - content-governance
+project: external-link-validation
+layer: workflow
+status: published
+summary: Scheduled GitHub Actions workflow that validates all external links in XML-based knowledge base content using a multi-layered Python validation engine with HTTP retries, headless browser fallback, anti-bot handling, and automated reporting.
+---
+
+# Workflow: external-link-check.yml
 
 This document provides a detailed breakdown of the `external-link-check.yml` workflow and its associated Python script, `externalLinkCheck.py`. This system is designed to proactively find and report broken external links within the XML-based knowledge base articles.
 
@@ -8,8 +27,8 @@ The system uses a GitHub Actions workflow to periodically scan all `.xml` files 
 
 ## 2. Core Components
 
--   **Workflow File:** otherWorkflows/external-link-check.yml
--   **Python Script:** otherWorkflows/externalLinkCheck.py
+-   **Workflow File:** external-link-check.yml
+-   **Python Script:** externalLinkCheck.py
 -   **Exception List:** `externalLinkExceptions.txt` (located in the script repository) - A simple text file containing a list of URLs to ignore, even if they fail validation.
 
 ## 3. Workflow Breakdown (`external-link-check.yml`)

@@ -14,7 +14,6 @@ tags:
   - state-management
   - response-handling
   - polling-pattern
-  - audit-logging
 project: knowledge-base-manager
 layer: workflow
 status: published

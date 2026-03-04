@@ -4,7 +4,7 @@ category: utility
 audience:
   - devops-engineers
   - solution-architects
-  - platform-engineers
+  - devops-engineers
 tags:
   - dita
   - reference-processing

@@ -335,6 +335,7 @@ tags:
 project: knowledge-base-manager
 layer: workflow
 status: published
+summary: Transactional Power Automate workflow that restores an archived article’s full version history to the active list, creates a new draft from the latest version, enforces lifecycle state integrity, and guarantees atomic behavior using a Try/Catch/Finally pattern with rollback and audit logging.
 ---
 
 ---
@@ -353,7 +354,6 @@ tags:
   - state-management
   - response-handling
   - polling-pattern
-  - audit-logging
 project: knowledge-base-manager
 layer: workflow
 status: published
@@ -568,7 +568,6 @@ tags:
   - dita
   - reference-processing
   - static-site
-  - azure-blob-storage
   - api-integration
   - automation-scripts
 project: enterprise-knowledge-lifecycle-platform
@@ -608,7 +607,8 @@ tags:
   - ci-cd
   - github-actions
   - static-site
-  - azure-blob-storage
+  - content-pipeline
+  - workflow-orchestration
   - api-integration
   - automation-scripts
 project: enterprise-knowledge-lifecycle-platform
@@ -623,7 +623,7 @@ category: utility
 audience:
   - devops-engineers
   - solution-architects
-  - platform-engineers
+  - devops-engineers
 tags:
   - dita
   - reference-processing
@@ -633,4 +633,257 @@ status: published
 summary: Go-based command-line utility that transforms SharePoint list item JSON into structured .MET metadata files required by the DITA-OT publishing pipeline, performing schema mapping, normalization, language resolution, visibility determination, and internal link extraction.
 ---
 
+---
+title: 'Python Utility: externalLinkCheck.py'
+category: utility
+audience:
+  - content-architects
+  - devops-engineers
+  - engineering-leaders
+tags:
+  - automation-scripts
+  - reference-processing
+  - structured-content
+  - content-governance
+project: external-link-validation
+layer: integration
+status: published
+summary: Resilient Python-based link validation engine that scans XML content repositories for external references and validates them using layered HTTP checks, JavaScript-aware browser rendering, anti-bot handling, and CI-integrated reporting.
+---
 
+---
+title: 'Workflow: external-link-check.yml'
+category: pipeline
+audience:
+  - content-architects
+  - devops-engineers
+  - engineering-leaders
+tags:
+  - github-actions
+  - automation-scripts
+  - structured-content
+  - reference-processing
+  - content-governance
+project: external-link-validation
+layer: workflow
+status: published
+summary: Scheduled GitHub Actions workflow that validates all external links in XML-based knowledge base content using a multi-layered Python validation engine with HTTP retries, headless browser fallback, anti-bot handling, and automated reporting.
+---
+
+---
+title: Automated DITA Validation Pipeline (elixir-automatic-file-validation.yml)
+category: pipeline
+audience:
+  - engineering-leaders
+  - devops-engineers
+  - content-architects
+tags:
+  - dita
+  - ci-cd
+  - github-actions
+  - file-validation
+  - content-governance
+  - workflow-orchestration
+project: dita-validation
+layer: workflow
+status: published
+summary: Reusable GitHub Actions CI pipeline that enforces DITA structural validation, metadata standards, DITA-OT dry-run processing, and centralized outputclass database synchronization across repositories.
+---
+
+---
+title: 'Go Utility: fileRename'
+category: utility
+audience:
+  - content-architects
+  - devops-engineers
+  - engineering-leaders
+tags:
+  - dita
+  - reference-processing
+  - structured-content
+  - metadata-modeling
+  - automation-scripts
+project: dita-validation
+layer: data
+status: published
+summary: Reusable Go-based command-line utility that programmatically renames DITA files based on their outputclass metadata and performs global reference updates to preserve link integrity during publishing and validation workflows.
+---
+
+---
+title: 'Go Utility: fileValidator'
+category: utility
+audience:
+  - content-architects
+  - devops-engineers
+  - engineering-leaders
+tags:
+  - dita
+  - file-validation
+  - structured-content
+  - content-governance
+  - automation-scripts
+project: dita-validation
+layer: data
+status: published
+summary: Reusable Go-based command-line validation engine that performs deep structural, metadata, and naming convention enforcement across DITA repositories, generating deterministic error reports and failing CI pipelines on critical violations.
+---
+
+---
+title: GitHub Workflow Synchronization Engine (sync_workflows.yml)
+category: pipeline
+audience:
+  - devops-engineers
+  - engineering-leaders
+  - solution-architects
+tags:
+  - github-actions
+  - ci-cd
+  - workflow-orchestration
+  - automation-scripts
+  - content-governance
+project: github-workflow-governance
+layer: workflow
+status: published
+summary: Organization-level GitHub Actions meta-workflow that enforces version consistency of managed workflow templates across repositories using the Git Data API, automated version comparison, and controlled main-branch updates.
+---
+
+---
+title: Standalone Guide Reference Processor
+category: utility
+audience:
+  - content-architects
+  - devops-engineers
+  - engineering-leaders
+tags:
+  - dita
+  - reference-processing
+  - structured-content
+  - automation-scripts
+  - ci-cd
+project: standalone-guide-processor
+layer: data
+status: published
+summary: Reusable DITA transformation utility that enables generation of production-ready standalone guides by injecting required key definitions, classifying cross-references, and rewriting unsafe project-level links during CI/CD execution.
+---
+
+---
+title: 'Go Utility: createMET.go'
+category: utility
+audience:
+- content-architects
+- devops-engineers
+- engineering-leaders
+tags:
+- metadata-modeling
+- structured-content
+- lifecycle-management
+- automation-scripts
+project: ai-ingestion-pipeline
+layer: integration
+status: published
+summary: Go-based metadata enrichment engine that generates structured
+  .MET files from Markdown content, product hierarchy data, and
+  navigation models to prepare content packages for vector database
+  ingestion within an AI-driven knowledge system.
+---
+
+---
+title: "Python Utility: create-rss.py"
+category: utility
+audience:
+- content-architects
+- devops-engineers
+- engineering-leaders
+tags:
+  - content-syndication
+  - automation-scripts
+  - content-pipeline
+project: publishing-automation
+layer: integration
+status: published
+summary: Python-based RSS generation engine that filters and transforms
+  published HTML content into standards-compliant RSS 2.0 feeds,
+  enabling automated release syndication within an enterprise publishing
+  pipeline.
+---
+
+---
+title: Unstructured FrameMaker → DITA XML Pilot
+category: migration
+audience:
+  - hiring-managers
+  - content-architects
+  - engineering-leaders
+tags:
+  - dita
+  - xml
+  - structured-content
+  - reusable-components
+project: structured-content-modernization
+layer: platform
+status: published
+summary: Executive-sponsored pilot converting unstructured FrameMaker documentation into structured DITA XML, establishing reusable architecture patterns and scalable topic-based authoring across 3,000+ files.
+---
+
+---
+title: Portfolio Architecture
+category: architecture
+audience:
+  - hiring-managers
+  - engineering-leaders
+  - content-architects
+  - devops-engineers
+tags:
+  - documentation-platform
+  - dita
+  - markdown
+  - mkdocs
+  - ci-cd
+  - content-pipeline
+  - ai-integration
+  - content-governance
+  - file-validation
+project: portfolio-platform
+layer: platform
+status: published
+summary: End-to-end deterministic documentation platform demonstrating structured ingestion, metadata governance enforcement, full-repository validation gates, CI/CD automation, and controlled manual promotion within a static site publishing architecture.
+---
+
+---
+title: Pipeline Overview
+category: architecture
+audience:
+  - hiring-managers
+  - content-architects
+  - devops-engineers
+  - engineering-leaders
+tags:
+  - ci-cd
+  - content-pipeline
+  - content-governance
+  - workflow-orchestration
+  - automation-scripts
+project: portfolio-platform
+layer: platform
+status: published
+summary: Architectural overview of CI/CD documentation pipelines and supporting automation utilities, describing governance enforcement, validation strategy, operational safeguards, and modular automation design principles used to maintain deterministic publishing behavior across repositories.
+---
+
+---
+title: Michael Taylor – Documentation Systems Portfolio
+category: overview
+audience:
+  - hiring-managers
+  - engineering-leaders
+  - content-architects
+  - solution-architects
+tags:
+  - documentation-platform
+  - ci-cd
+  - structured-content
+  - content-governance
+project: portfolio-platform
+layer: platform
+status: published
+summary: Portfolio introduction outlining documentation platform architecture philosophy, deterministic publishing systems, AI-assisted engineering methodology, and enterprise governance design principles applied across CI/CD-driven documentation environments.
+---

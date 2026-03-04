@@ -1,21 +1,20 @@
 ---
 title: Standalone Guide Reference Processor
-category: automation
+category: utility
 audience:
   - content-architects
-  - engineering-leaders
   - devops-engineers
+  - engineering-leaders
 tags:
   - dita
-  - reuse
-  - keydefs
-  - conrefs
-  - cross-references
-  - xml-processing
-  - automation
+  - reference-processing
+  - structured-content
+  - automation-scripts
   - ci-cd
-summary: A DITA processing utility that enables authors to generate production-ready standalone guides by injecting required key definitions, classifying cross-references, and rewriting unsafe project-level links during CI/CD execution.
+project: standalone-guide-processor
+layer: data
 status: published
+summary: Reusable DITA transformation utility that enables generation of production-ready standalone guides by injecting required key definitions, classifying cross-references, and rewriting unsafe project-level links during CI/CD execution.
 ---
 
 # Standalone Guide Reference Processor
