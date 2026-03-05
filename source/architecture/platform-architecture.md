@@ -41,43 +41,45 @@ It demonstrates:
 
 The platform separates content processing, validation, and publishing into distinct layers, mirroring enterprise documentation governance models where structural integrity is enforced before release.
 
+The platform architecture reflects the operational requirements typical in cybersecurity product organizations, where documentation must support controlled releases, governance validation, and secure publishing workflows.
+
 ## 2. High-Level Architecture
 
 ```mermaid
-graph TD
+flowchart LR
 
-    A[Source Content] --> B[Transform & Normalize Layer]
-    B --> C[Governance & Validation Engine]
-    C --> D[Normalized Markdown Output]
+subgraph Content Sources
+A[DITA XML Content]
+B[Markdown Content]
+end
 
-    D --> E[CI Build Workflow]
-    E --> F[Static Site Artifacts]
+subgraph Processing Layer
+C[content_build.py<br>Transform & Normalize]
+D[Metadata Governance<br>taxonomy.yaml + validator]
+end
 
-    F --> G[Manual Publish Trigger]
-    G --> H[Publish Workflow]
-    H --> I[Deployment]
+subgraph CI/CD Layer
+E[GitHub Actions Build Pipeline]
+F[Validation + Content Assembly]
+end
 
-    subgraph Source Formats
-        A1[DITA XML]
-        A2[Markdown]
-    end
+subgraph Publishing Layer
+G[MkDocs Static Site Generator]
+H[GitHub Pages Deployment]
+end
 
-    A1 --> A
-    A2 --> A
+subgraph AI / Knowledge Layer
+I[Metadata Extraction]
+J[Vector Database Ingestion]
+end
 
-    subgraph Governance Layer
-        C1[Frontmatter Schema Enforcement]
-        C2[Taxonomy Validation]
-        C3[Full-Repository Scan]
-    end
-
-    C1 --> C
-    C2 --> C
-    C3 --> C
-
-    subgraph Optional Enhancement
-        AI[AI-Assisted Restructuring]
-    end
-
-    AI -. optional .-> B
+A --> C
+B --> C
+C --> D
+D --> E
+E --> F
+F --> G
+G --> H
+H --> I
+I --> J
 ```

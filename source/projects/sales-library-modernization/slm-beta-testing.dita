@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_vmf_5s4_m3c">
+    <title>6. Beta Testing</title>
+    <conbody>
+        <p>Before launch, a <b>structured beta test</b> was conducted.</p>
+        <p>Participants were asked to complete a scripted set of tasks to evaluate:</p>
+        <ul id="ul_ur3_5s4_m3c">
+            <li>
+                <p>navigation</p>
+            </li>
+            <li>
+                <p>search behavior</p>
+            </li>
+            <li>
+                <p>content discoverability</p>
+            </li>
+            <li>
+                <p>upload workflows</p>
+            </li>
+        </ul>
+        <p>Feedback from the beta phase informed final adjustments before production release.</p>
+    </conbody>
+</concept>

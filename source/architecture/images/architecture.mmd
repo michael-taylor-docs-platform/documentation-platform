@@ -1,0 +1,47 @@
+flowchart LR
+
+%% ---------- Content Sources ----------
+subgraph Content Sources
+    DITA[DITA XML]
+    MD[Markdown]
+end
+
+%% ---------- Processing Layer ----------
+subgraph Processing Layer
+    BUILD[Content Build<br>Transforms & Normalize]
+    META[Metadata Governance<br>Taxonomy Validation]
+end
+
+%% ---------- CI/CD ----------
+subgraph CI/CD Layer
+    ACTIONS[GitHub Actions Build]
+    VALIDATE[Validation & Assembly]
+end
+
+%% ---------- Publishing ----------
+subgraph Publishing Layer
+    MKDOCS[MkDocs Static Site]
+    PAGES[GitHub Pages]
+end
+
+%% ---------- AI / Knowledge ----------
+subgraph Knowledge Layer
+    META_EXPORT[Metadata Extraction]
+    VECTOR[Vector Database Ingestion]
+end
+
+
+%% ---------- Flow ----------
+DITA --> BUILD
+MD --> BUILD
+
+BUILD --> META
+
+META --> ACTIONS
+ACTIONS --> VALIDATE
+
+VALIDATE --> MKDOCS
+MKDOCS --> PAGES
+
+VALIDATE --> META_EXPORT
+META_EXPORT --> VECTOR

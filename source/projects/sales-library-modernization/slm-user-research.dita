@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_lxb_ns4_m3c">
+    <title>4. User Research</title>
+    <conbody>
+        <p>User interviews were conducted with both <b>content contributors and sales
+            consumers</b>.</p>
+        <p>Key findings included:</p>
+        <section id="section_ps1_4s4_m3c">
+            <title>Search Usability Issues</title>
+            <p>Users reported that search results were difficult to navigate and often
+                overwhelming.</p>
+            <p>Several users requested:</p>
+            <ul id="ul_qs1_4s4_m3c">
+                <li>
+                    <p>smarter search ranking</p>
+                </li>
+                <li>
+                    <p>better filtering</p>
+                </li>
+                <li>
+                    <p>AI-enhanced discovery</p>
+                </li>
+                <li>
+                    <p>default sorting by most recently updated content. </p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_rs1_4s4_m3c">
+            <title>Preview Before Download</title>
+            <p>Multiple users requested the ability to <b>preview files before downloading</b>,
+                because download screens lacked sufficient context. </p>
+        </section>
+        <section id="section_ss1_4s4_m3c">
+            <title>Role-Based Content Visibility</title>
+            <p>Sales teams requested clearer filtering between:</p>
+            <ul id="ul_ts1_4s4_m3c">
+                <li>
+                    <p>internal-only documents</p>
+                </li>
+                <li>
+                    <p>customer-facing content. </p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_us1_4s4_m3c">
+            <title>Usage Analytics</title>
+            <p>Managers wanted insight into:</p>
+            <ul id="ul_vs1_4s4_m3c">
+                <li>
+                    <p>document popularity</p>
+                </li>
+                <li>
+                    <p>asset usage</p>
+                </li>
+                <li>
+                    <p>sales engagement trends. </p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_grb_zr4_m3c">
+    <title>2. Project Objectives</title>
+    <conbody>
+        <p>The initiative focused on three primary goals:</p>
+        <section id="section_qj1_1s4_m3c">
+            <title>Improve Sales Enablement</title>
+            <p>Provide sales teams with a centralized repository for resources including:</p>
+            <ul id="ul_rj1_1s4_m3c">
+                <li>
+                    <p>sales collateral</p>
+                </li>
+                <li>
+                    <p>product datasheets</p>
+                </li>
+                <li>
+                    <p>solution briefs</p>
+                </li>
+                <li>
+                    <p>presentations</p>
+                </li>
+                <li>
+                    <p>pricing resources</p>
+                </li>
+                <li>
+                    <p>training materials</p>
+                </li>
+                <li>
+                    <p>market insights</p>
+                </li>
+            </ul>
+            <p>These resources allow sales representatives to communicate product value effectively
+                and support client engagement. </p>
+        </section>
+        <section id="section_sj1_1s4_m3c">
+            <title>Improve Content Organization</title>
+            <p>The original system suffered from inconsistent categorization and limited search
+                capability.</p>
+            <p>A revised taxonomy was proposed including categories such as:</p>
+            <ul id="ul_tj1_1s4_m3c">
+                <li>
+                    <p>Battlecards</p>
+                </li>
+                <li>
+                    <p>Datasheets</p>
+                </li>
+                <li>
+                    <p>Success Stories</p>
+                </li>
+                <li>
+                    <p>Use Cases</p>
+                </li>
+                <li>
+                    <p>Pricing</p>
+                </li>
+                <li>
+                    <p>Presentations</p>
+                </li>
+                <li>
+                    <p>Sales Training</p>
+                </li>
+                <li>
+                    <p>Whitepapers</p>
+                </li>
+                <li>
+                    <p>Templates</p>
+                </li>
+            </ul>
+            <p>Users requested the ability to <b>select multiple categories per asset</b>,
+                acknowledging that many documents fit more than one classification. </p>
+        </section>
+        <section id="section_uj1_1s4_m3c">
+            <title>Improve Platform Sustainability</title>
+            <p>The Salesforce implementation created operational challenges:</p>
+            <ul id="ul_vj1_1s4_m3c">
+                <li>
+                    <p>difficult administration</p>
+                </li>
+                <li>
+                    <p>limited customization</p>
+                </li>
+                <li>
+                    <p>poor search experience</p>
+                </li>
+                <li>
+                    <p>complicated contributor workflows</p>
+                </li>
+            </ul>
+            <p>SharePoint provided a more flexible enterprise platform aligned with internal IT
+                standards.</p>
+        </section>
+    </conbody>
+</concept>

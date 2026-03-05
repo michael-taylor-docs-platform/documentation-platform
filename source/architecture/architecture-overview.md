@@ -1,0 +1,104 @@
+---
+title: Documentation Systems Portfolio Overview
+category: overview
+audience:
+  - hiring-managers
+  - engineering-leaders
+  - content-architects
+  - solution-architects
+tags:
+  - documentation-platform
+  - ci-cd
+  - structured-content
+  - content-governance
+project: portfolio-platform
+layer: platform
+status: published
+summary: Portfolio introduction outlining documentation platform architecture philosophy, deterministic publishing systems, AI-assisted engineering methodology, and enterprise governance design principles applied across CI/CD-driven documentation environments.
+---
+
+# Documentation Systems Portfolio Overview
+
+## Documentation Systems & Platform Engineering
+
+This portfolio highlights documentation engineering systems, automation workflows, and governance architectures built for enterprise-scale publishing environments.
+
+The work demonstrates how documentation can be engineered as deterministic, release-critical infrastructure.
+
+---
+
+## Core Capabilities Demonstrated
+
+- Deterministic documentation platform architecture
+- DITA + Markdown transformation pipelines
+- PR-gated validation workflows (GitHub Actions)
+- Cross-reference integrity automation
+- Author-enablement tooling
+- Environment-aware publishing controls
+- Enterprise governance separation
+- Manual promotion workflows for production safety
+- Enhancement of legacy pipelines without system disruption
+
+---
+
+## AI-Assisted Engineering Approach
+
+All projects showcased on this site were architected and implemented using a human-directed, AI-assisted engineering methodology.
+
+AI was used as:
+
+- A structured development accelerator
+- A design refinement partner
+- A validation and edge-case exploration tool
+- A documentation synthesis assistant
+
+System architecture, validation logic, governance patterns, and workflow integration were human-directed and architected with deterministic intent.
+
+The result demonstrates how AI can be responsibly integrated into enterprise documentation engineering workflows without sacrificing structural rigor, maintainability, or operational control.
+
+---
+
+## Architectural Philosophy
+
+Source → Transformation → Validation → Promotion → Publish
+
+Documentation is engineered as a system.
+
+It is:
+
+- Deterministic
+- CI/CD-integrated
+- Governance-aware
+- Author-friendly
+- Environment-controlled
+
+Each section of this site contains standalone examples of workflows and scripts developed to improve reliability, reduce manual correction, and strengthen documentation as an operational platform.
+
+---
+
+## Technology Stack
+
+This portfolio platform demonstrates a modern Docs-as-Code documentation architecture using the following technologies:
+
+### Core Platform
+
+• **Markdown** — primary authoring format for documentation  
+• **DITA XML** — structured content model for scalable documentation systems  
+• **Python** — validation and automation tooling  
+• **YAML metadata** — governance and taxonomy validation
+
+### Platform Infrastructure
+
+• **GitHub** — version control and repository management  
+• **GitHub Actions** — CI/CD automation and publishing pipelines  
+• **MkDocs + Material theme** — static documentation site generation
+
+### Platform Capabilities
+
+• Docs-as-Code content operations  
+• Metadata governance and taxonomy validation  
+• Automated documentation build pipelines  
+• Structured content transformation workflows  
+• Static site publishing via CI/CD
+
+---

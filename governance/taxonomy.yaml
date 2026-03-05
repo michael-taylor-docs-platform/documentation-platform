@@ -38,6 +38,7 @@ projects:
   - portfolio-platform
   - publishing-automation
   - structured-content-modernization
+  - sales-library-modernization
 
 layers:
   - platform
@@ -82,6 +83,12 @@ tags:
   - filtering
   - documentation-platform
   - content-pipeline
+  - enterprise-collaboration
+  - stakeholder-research
+  - requirements-analysis
+  - platform-migration
+  - user-research
+  - docs-as-code
 
   # Lifecycle & Feature Patterns
   - versioning

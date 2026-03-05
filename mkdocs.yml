@@ -1,11 +1,14 @@
-site_name: Michael Taylor – Documentation Systems Portfolio
-site_description: Documentation as Platform Architecture Demo
+site_name: Michael Taylor | Enterprise Knowledge Systems Architect
+site_description: Documentation as Infrastructure
 site_author: Michael Taylor
 
 theme:
   name: material
   features:
+    - content.action.edit
+    - content.action.view
     - content.code.copy
+    - content.tabs.link
 
 markdown_extensions:
   - pymdownx.superfences:
@@ -17,6 +20,12 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: true
+  - attr_list
+  - md_in_html
+
+plugins:
+  - search
+  - glightbox
 
 docs_dir: docs
 site_dir: site
@@ -25,10 +34,10 @@ nav:
   - Home: index.md
 
   - Portfolio Architecture:
+      - architecture/architecture-overview.md
       - architecture/platform-architecture.md
 
-  - Engineering Projects:
-      - unstructured-framemaker-dita/unstructured-framemaker-to-dita.md
+  - Projects:
       - CMS Platform: 
           - projects/cms-platform/cms-platform-overview.md
           - projects/cms-platform/cms-architecture.md
@@ -69,6 +78,8 @@ nav:
                  - projects/cms-platform/github-pipeline/elixir-kbarticle-publish-worker.md
                  - projects/cms-platform/github-pipeline/reusable-summarize-and-sync.md
                  - projects/cms-platform/github-pipeline/create-kb-met.md
+      - projects/sales-library-modernization/slm-sales-library-modernization.md
+      - unstructured-framemaker-dita/unstructured-framemaker-to-dita.md
 
   - Documentation Pipelines:
      - Pipeline Overview: pipelines/pipeline-overview.md

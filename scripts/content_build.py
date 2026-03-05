@@ -440,7 +440,8 @@ def process_files():
     """
     clean_docs_directory()
 
-    for root, _, files in os.walk(SOURCE_DIR):
+    for root, dirs, files in os.walk(SOURCE_DIR):
+
         root_path = Path(root)
 
         map_files = [f for f in files if f.endswith(".ditamap")]
@@ -463,10 +464,17 @@ def process_files():
                 stub_dita_conversion(file_path)
 
             elif file_path.suffix.lower() == ".ditamap":
-                continue  # already handled
+                continue
 
             else:
-                raise Exception(f"Unsupported file type: {file_path}")
+                # Copy asset files (images, JS, SVG, etc.)
+                relative_path = file_path.relative_to(SOURCE_DIR)
+                destination = DOCS_DIR / relative_path
+                destination.parent.mkdir(parents=True, exist_ok=True)
+
+                shutil.copy2(file_path, destination)
+
+                print(f"[ASSET] Copied {relative_path}")
 
 def stub_dita_conversion(file_path):
     """

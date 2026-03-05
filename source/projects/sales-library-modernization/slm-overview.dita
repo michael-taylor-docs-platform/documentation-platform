@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_spn_pr4_m3c">
+    <title>1. Overview</title>
+    <conbody>
+        <p>The <b>Sales Library Migration Project</b> replaced an existing Salesforce-hosted sales
+            enablement repository with a modern <b>SharePoint-based content platform</b>.</p>
+        <p>The goal of the project was to improve:</p>
+        <ul id="ul_a4z_qr4_m3c">
+            <li>
+                <p>content discoverability</p>
+            </li>
+            <li>
+                <p>sales team usability</p>
+            </li>
+            <li>
+                <p>contributor workflows</p>
+            </li>
+            <li>
+                <p>long-term platform maintainability</p>
+            </li>
+        </ul>
+        <p>The migration was completed over <b>six months</b>, progressing through platform
+            analysis, stakeholder research, user testing, and phased deployment.</p>
+    </conbody>
+</concept>
