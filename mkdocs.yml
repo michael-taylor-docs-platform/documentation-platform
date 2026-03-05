@@ -23,10 +23,6 @@ markdown_extensions:
   - attr_list
   - md_in_html
 
-plugins:
-  - search
-  - glightbox
-
 docs_dir: docs
 site_dir: site
 
