@@ -55,11 +55,11 @@ publishing automation, and long-term scalability planning.
 
 ## Business Drivers
 
--   Inconsistent article lifecycle governance across distributed teams\
--   Manual version tracking and approval coordination\
--   Limited auditability and structured archival processes\
--   Lack of standardized metadata modeling\
--   Publishing workflows dependent on manual intervention\
+-   Inconsistent article lifecycle governance across distributed teams
+-   Manual version tracking and approval coordination
+-   Limited auditability and structured archival processes
+-   Lack of standardized metadata modeling
+-   Publishing workflows dependent on manual intervention
 -   Need for scalable, AI-ready structured content
 
 ------------------------------------------------------------------------
@@ -156,25 +156,25 @@ constraints, ensuring long-term viability as content volume grows.
 
 ## Key Capabilities
 
--   Enforced multi-stage approval workflows\
--   Automated metadata validation and lifecycle gating\
--   Controlled publishing triggers through CI integration\
--   Structured archival migration with version preservation\
--   Schema-synchronized active and archive repositories\
--   Deterministic governance with audit traceability\
+-   Enforced multi-stage approval workflows
+-   Automated metadata validation and lifecycle gating
+-   Controlled publishing triggers through CI integration
+-   Structured archival migration with version preservation
+-   Schema-synchronized active and archive repositories
+-   Deterministic governance with audit traceability
 -   Scalable metadata architecture designed for AI readiness
 
 ------------------------------------------------------------------------
 
 ## Impact & Outcomes
 
--   Elimination of manual lifecycle coordination\
--   Centralized, governed documentation management\
--   Improved audit visibility and state traceability\
--   Structured archival model preserving version continuity\
--   Automated publishing to static web infrastructure\
+-   Elimination of manual lifecycle coordination
+-   Centralized, governed documentation management
+-   Improved audit visibility and state traceability
+-   Structured archival model preserving version continuity
+-   Automated publishing to static web infrastructure
 -   Reduced publishing errors through deterministic workflow
-    enforcement\
+    enforcement
 -   A scalable foundation for future AI-assisted content operations
 
 ------------------------------------------------------------------------
@@ -183,11 +183,11 @@ constraints, ensuring long-term viability as content volume grows.
 
 I designed and implemented the full lifecycle architecture, including:
 
--   SharePoint schema modeling and metadata strategy\
--   Power Automate workflow design and orchestration\
--   Versioning and archival architecture\
--   Publishing integration with GitHub CI pipelines\
--   Migration planning from legacy systems\
+-   SharePoint schema modeling and metadata strategy
+-   Power Automate workflow design and orchestration
+-   Versioning and archival architecture
+-   Publishing integration with GitHub CI pipelines
+-   Migration planning from legacy systems
 -   Performance modeling against SharePoint constraints
 
 This project represents the largest and most comprehensive system
@@ -198,7 +198,7 @@ engineering, automation, and structured publishing infrastructure.
 
 ## Explore the System Architecture
 
--   Full System Architecture\
--   Power App Architecture\
--   Power Automate Workflow Design\
--   GitHub Publishing Pipeline\
+-   Full System Architecture
+-   Power App Architecture
+-   Power Automate Workflow Design
+-   GitHub Publishing Pipeline

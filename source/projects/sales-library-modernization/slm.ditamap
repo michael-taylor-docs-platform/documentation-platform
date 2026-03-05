@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+    <title>Sales Library Migration</title>
+    <topicref href="slm-sales-library-modernization.dita" chunk="to-content">
+        <topicref href="slm-overview.dita"/>
+        <topicref href="slm-project-objectives.dita"/>
+        <topicref href="slm-my-role.dita"/>
+        <topicref href="slm-user-research.dita"/>
+        <topicref href="slm-platform-design-decisions.dita"/>
+        <topicref href="slm-beta-testing.dita"/>
+        <topicref href="slm-project-outcome.dita"/>
+        <topicref href="slm-key-skills-demonstrated.dita"/>
+    </topicref>
+</map>

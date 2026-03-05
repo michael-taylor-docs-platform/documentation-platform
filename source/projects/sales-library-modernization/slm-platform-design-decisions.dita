@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_nv4_rs4_m3c">
+    <title>5. Platform Design Decisions</title>
+    <conbody>
+        <p>Based on research findings, the SharePoint implementation prioritized:</p>
+        <section id="section_t3q_rs4_m3c">
+            <title>Improved Taxonomy</title>
+            <p>Structured content categories were introduced to improve navigation and
+                filtering.</p>
+        </section>
+        <section id="section_u3q_rs4_m3c">
+            <title>Enhanced Content Filtering</title>
+            <p>Filters enabled users to locate resources based on:</p>
+            <ul id="ul_v3q_rs4_m3c">
+                <li>
+                    <p>document category</p>
+                </li>
+                <li>
+                    <p>audience</p>
+                </li>
+                <li>
+                    <p>internal vs external visibility</p>
+                </li>
+                <li>
+                    <p>modification date</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_w3q_rs4_m3c">
+            <title>Contributor Workflow Improvements</title>
+            <p>Quality-of-life improvements were implemented for content contributors including:</p>
+            <ul id="ul_x3q_rs4_m3c">
+                <li>
+                    <p>simplified upload process</p>
+                </li>
+                <li>
+                    <p>improved metadata management</p>
+                </li>
+                <li>
+                    <p>clearer content organization.</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

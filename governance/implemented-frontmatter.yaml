@@ -887,3 +887,24 @@ layer: platform
 status: published
 summary: Portfolio introduction outlining documentation platform architecture philosophy, deterministic publishing systems, AI-assisted engineering methodology, and enterprise governance design principles applied across CI/CD-driven documentation environments.
 ---
+
+---
+title: Sales Library Platform Migration
+category: migration
+audience:
+  - hiring-managers
+  - solution-architects
+  - engineering-leaders
+tags:
+  - content-governance
+  - enterprise-collaboration
+  - stakeholder-research
+  - requirements-analysis
+  - platform-migration
+  - sharepoint
+  - user-research
+project: sales-library-modernization
+layer: platform
+status: published
+summary: Six-month enterprise migration project replacing a Salesforce-hosted Sales Library with a SharePoint-based knowledge repository, combining stakeholder interviews, user research, platform capability analysis, and phased rollout to deliver a more usable and maintainable sales enablement system.
+---

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_mc4_js4_m3c">
+    <title>3. My Role</title>
+    <conbody>
+        <section id="section_hxz_js4_m3c">
+            <title>Project Manager</title>
+            <p>Responsibilities included:</p>
+            <ul id="ul_ixz_js4_m3c">
+                <li>
+                    <p>evaluating the existing Salesforce implementation</p>
+                </li>
+                <li>
+                    <p>assessing SharePoint capabilities and platform limitations</p>
+                </li>
+                <li>
+                    <p>conducting stakeholder interviews</p>
+                </li>
+                <li>
+                    <p>identifying user pain points</p>
+                </li>
+                <li>
+                    <p>defining project scope</p>
+                </li>
+                <li>
+                    <p>coordinating engineering implementation</p>
+                </li>
+                <li>
+                    <p>managing beta testing and rollout</p>
+                </li>
+            </ul>
+            <p>The role required coordination across:</p>
+            <ul id="ul_jxz_js4_m3c">
+                <li>
+                    <p>sales leadership</p>
+                </li>
+                <li>
+                    <p>end users</p>
+                </li>
+                <li>
+                    <p>SharePoint engineers</p>
+                </li>
+                <li>
+                    <p>internal stakeholders</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

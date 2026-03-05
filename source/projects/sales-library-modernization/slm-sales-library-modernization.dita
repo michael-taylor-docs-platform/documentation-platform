@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ijn_kpf_l3c">
+    <title>Sales Library Platform Migration</title>
+    <prolog>
+        <metadata>
+            <data name="category" value="migration"/>
+            <data name="audience" value="hiring-managers,solution-architects,engineering-leaders"/>
+            <data name="tags"
+                value="content-governance,enterprise-collaboration,stakeholder-research,requirements-analysis,platform-migration,sharepoint,user-research"/>
+            <data name="project" value="sales-library-modernization"/>
+            <data name="layer" value="platform"/>
+            <data name="status" value="published"/>
+            <data name="summary"
+                value="Six-month enterprise migration project replacing a Salesforce-hosted Sales Library with a SharePoint-based knowledge repository, combining stakeholder interviews, user research, platform capability analysis, and phased rollout to deliver a more usable and maintainable sales enablement system."/>
+        </metadata>
+    </prolog>
+    <conbody>
+        <section id="section_rtr_lr4_m3c">
+            <title>Salesforce → SharePoint</title>
+        </section>
+    </conbody>
+</concept>
