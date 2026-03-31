@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_gld_r2w_t3c">
+    <title>10. Output Behavior</title>
+    <conbody>
+        <section id="section_nrv_r2w_t3c">
+            <title>Answer Generation</title>
+            <p>The LLM produces a natural language response based solely on retrieved context.</p>
+        </section>
+        <section id="section_orv_r2w_t3c">
+            <title>Source Attribution</title>
+            <p>Sources are derived from:</p>
+            <pre>r["document_path"]</pre>
+            <p>Returned as a deduplicated list.</p>
+        </section>
+    </conbody>
+</concept>

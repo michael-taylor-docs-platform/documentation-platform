@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ocj_wwv_m3c">
+    <title>3. Repository Structure</title>
+    <conbody>
+        <p>Recommended repository layout:</p>
+        <pre>repo-root
+│
+├── site
+│   ├── content
+│   │   └── markdown articles
+│   │
+│   └── static site files
+│
+├── api
+│   └── chat endpoint
+│
+├── tools
+│   └── ingestion-engine
+│
+├── data
+│   └── vector-index.json
+│
+├── docs
+│   ├── architecture.md
+│   ├── data-model-spec.md
+│   ├── api-contract-spec.md
+│   ├── retrieval-strategy-spec.md
+│   └── implementation-roadmap.md
+│
+└── tests</pre>
+    </conbody>
+</concept>

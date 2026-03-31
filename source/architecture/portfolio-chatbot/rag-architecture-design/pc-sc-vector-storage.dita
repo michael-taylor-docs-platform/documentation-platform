@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_sbc_nyq_m3c">
+    <title>3.3 Vector Storage</title>
+    <conbody>
+        <p>The system uses a hybrid storage model combining structured JSON artifacts with a FAISS
+            vector index.</p>
+        <p>This design separates:</p>
+        <ul id="ul_lkf_55w_t3c">
+            <li> textual and structural data (JSON) </li>
+            <li> vector embeddings (FAISS) </li>
+        </ul>
+        <section id="section_mkf_55w_t3c">
+            <title>Storage Components</title>
+            <p>The following data artifacts are used at runtime:</p>
+            <p><b><codeph>chunks.json</codeph></b></p>
+            <p>Contains all chunked content used for retrieval.</p>
+            <p>Each entry follows this structure:</p>
+            <ul id="ul_gjd_x5w_t3c">
+                <li>
+                    <p><b>id</b>: optional unique identifier</p>
+                </li>
+                <li>
+                    <p><b>document_path</b>: source document reference</p>
+                </li>
+                <li>
+                    <p><b>title</b>: document or section title</p>
+                </li>
+                <li>
+                    <p><b>content</b>: chunk text</p>
+                </li>
+            </ul>
+            <p>Embeddings are not stored in this file.</p>
+            <p><b><codeph>knowledge_graph.json</codeph></b></p>
+            <p>Stores document relationships as an adjacency map.</p>
+            <p>Example structure:</p>
+            <p>docA → [docB, docC]</p>
+            <p>This graph is used during retrieval for document-level context expansion.</p>
+            <p><b><codeph>kb_index.faiss</codeph></b></p>
+            <p>Contains vector embeddings generated from chunk content.</p>
+            <ul id="ul_nkf_55w_t3c">
+                <li> Built using FAISS </li>
+                <li> Loaded into memory during runtime </li>
+                <li> Queried using approximate nearest neighbor search </li>
+            </ul>
+        </section>
+        <section id="section_okf_55w_t3c">
+            <title>Design Rationale</title>
+            <p>This storage model provides several advantages:</p>
+            <ul id="ul_pkf_55w_t3c">
+                <li> avoids duplication of embedding data in JSON </li>
+                <li> improves memory efficiency </li>
+                <li> enables fast similarity search via FAISS </li>
+                <li> supports modular updates to content and index </li>
+            </ul>
+        </section>
+        <section id="section_qkf_55w_t3c">
+            <title>Retrieval Integration</title>
+            <p>During query execution:</p>
+            <ol id="ol_rkf_55w_t3c">
+                <li> FAISS returns candidate chunk indices </li>
+                <li> indices are mapped to entries in chunks.json </li>
+                <li> chunk data is used for scoring, ranking, and grouping </li>
+                <li> knowledge_graph.json is used for context expansion </li>
+            </ol>
+        </section>
+        <section id="section_skf_55w_t3c">
+            <title>Capacity Considerations</title>
+            <p>The system is designed for portfolio-scale datasets.</p>
+            <p>Typical size:</p>
+            <ul id="ul_tkf_55w_t3c">
+                <li> up to several thousand chunks </li>
+                <li> fully in-memory FAISS index </li>
+            </ul>
+            <p>This avoids the need for external vector databases while maintaining fast retrieval
+                performance.</p>
+        </section>
+    </conbody>
+</concept>

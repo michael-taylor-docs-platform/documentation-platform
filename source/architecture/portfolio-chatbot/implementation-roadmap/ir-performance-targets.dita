@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_g3x_1zv_m3c">
+    <title>7. Performance Targets</title>
+    <conbody>
+        <p>Desired system performance:</p>
+        <table id="table_vzn_bzv_m3c">
+            <tgroup cols="2">
+                <colspec colnum="1" colname="col1"/>
+                <colspec colnum="2" colname="col2"/>
+                <thead>
+                    <row>
+                        <entry>Metric</entry>
+                        <entry>Target</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Response latency</entry>
+                        <entry>&lt; 5 seconds</entry>
+                    </row>
+                    <row>
+                        <entry>Retrieval time</entry>
+                        <entry>&lt; 500 ms</entry>
+                    </row>
+                    <row>
+                        <entry>Context size</entry>
+                        <entry>&lt; 2000 tokens</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </conbody>
+</concept>

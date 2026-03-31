@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_khb_3sv_m3c">
+    <title>5. Response Model</title>
+    <conbody>
+        <section id="section_mmc_gtv_m3c">
+            <title>5.1 Response Body</title>
+            <pre>{
+  "answer": "string",
+  "sources": [
+    "string"
+  ]
+}</pre>
+        </section>
+        <section>
+            <title>5.2 Response Fields</title>
+            <table id="table_yqg_gtv_m3c">
+                <tgroup cols="3">
+                    <colspec colnum="1" colname="col1"/>
+                    <colspec colnum="2" colname="col2"/>
+                    <colspec colnum="3" colname="col3"/>
+                    <thead>
+                        <row>
+                            <entry>Field</entry>
+                            <entry>Type</entry>
+                            <entry>Description</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>answer</entry>
+                            <entry>string</entry>
+                            <entry>Generated response from the LLM</entry>
+                        </row>
+                        <row>
+                            <entry>sources</entry>
+                            <entry>array</entry>
+                            <entry>List of unique document paths used to construct the
+                                answer</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+    </conbody>
+</concept>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_o4k_nl4_t3c">
+    <title>9. Metadata Filtering</title>
+    <conbody>
+        <p>Metadata filters allow the retrieval engine to restrict candidate chunks based on
+            structured document attributes.</p>
+        <p>Example Filters</p>
+        <ul id="ul_s4x_ql4_t3c">
+            <li>
+                <p>type = project</p>
+            </li>
+            <li>
+                <p>tags include automation</p>
+            </li>
+            <li>
+                <p>category = tooling</p>
+            </li>
+        </ul>
+        <p>Metadata filters may be provided as parameters in API requests.</p>
+        <p>These filters allow the chatbot to behave more like a semantic search engine over the
+            portfolio content.</p>
+    </conbody>
+</concept>

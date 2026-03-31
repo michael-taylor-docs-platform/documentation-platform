@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_zwf_3zv_m3c">
+    <title>10. Future Roadmap</title>
+    <conbody>
+        <p>Possible future improvements:</p>
+        <ul id="ul_ksv_3zv_m3c">
+            <li>
+                <p>hybrid keyword + vector search</p>
+            </li>
+            <li>
+                <p>conversation memory</p>
+            </li>
+            <li>
+                <p>streaming responses</p>
+            </li>
+            <li>
+                <p>document recommendation system</p>
+            </li>
+            <li>
+                <p>semantic site search</p>
+            </li>
+        </ul>
+    </conbody>
+</concept>

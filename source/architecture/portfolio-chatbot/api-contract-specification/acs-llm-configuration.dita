@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_fw1_32w_t3c">
+    <title>9. LLM Configuration</title>
+    <conbody>
+        <ol>
+            <li>Provider: OpenAI </li>
+            <li> Model: <codeph>gpt-4o-mini</codeph></li>
+            <li> Temperature: <codeph>0.2</codeph></li>
+        </ol>
+    </conbody>
+</concept>

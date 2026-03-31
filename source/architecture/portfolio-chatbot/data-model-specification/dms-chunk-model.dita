@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ncj_xpv_m3c">
+    <title>5. Chunk Data Model</title>
+    <conbody>
+        <section id="section_e2l_ypv_m3c">
+            <title>5.1 Description</title>
+            <p>The retrieval system operates on document fragments called "chunks". Each chunk
+                represents a semantically meaningful section of a document that can be retrieved
+                independently during query processing.</p>
+            <p>Chunks are generated during the ingestion process by splitting Markdown documents
+                along heading boundaries.</p>
+            <p>Each chunk contains both textual content and metadata used for retrieval and
+                ranking.</p>
+        </section>
+        <section id="section_g2l_ypv_m3c">
+            <title>5.2 Chunk Structure</title>
+            <p>Each chunk contains the following fields:</p>
+            <ul id="ul_uhk_x34_t3c">
+                <li>
+                    <p><b>id</b>: Unique identifier for the chunk.</p>
+                </li>
+                <li>
+                    <p><b>content</b>: The textual content of the chunk.</p>
+                </li>
+                <li>
+                    <p><b>title</b>: The title of the document or section associated with the
+                        chunk.</p>
+                </li>
+                <li>
+                    <p><b>document_path</b>: The relative path to the source Markdown document.</p>
+                </li>
+                <li>
+                    <p><b>metadata</b>: Structured metadata extracted from the document
+                        frontmatter.</p>
+                </li>
+                <li>
+                    <p><b>embedding</b>: Vector embedding representing the semantic meaning of the
+                        chunk.</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_jw1_zpv_m3c">
+            <title>5.3 Example Chunk Object</title>
+            <pre>{
+  "chunk_id": "create-kb-met-overview",
+  "title": "create-kb-met Go Utility",
+  "document_path": "/projects/create-kb-met.md",
+  "content": "The create-kb-met utility converts SharePoint JSON metadata into DITA-compatible metadata files used in documentation pipelines.",
+  "metadata": {
+    "type": "project",
+    "category": "tooling",
+    "tags": "dita, automation, metadata",
+    "date": "2026-03-01"
+  }
+}</pre>
+        </section>
+    </conbody>
+</concept>

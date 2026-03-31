@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_mt2_swv_m3c">
+    <title>2. Project Objectives</title>
+    <conbody>
+        <p>The implementation must achieve the following outcomes:</p>
+        <ul id="ul_wzt_twv_m3c">
+            <li>
+                <p>Ingest Markdown portfolio content</p>
+            </li>
+            <li>
+                <p>Convert content into embeddings</p>
+            </li>
+            <li>
+                <p>Build a vector search index</p>
+            </li>
+            <li>
+                <p>Implement a retrieval API</p>
+            </li>
+            <li>
+                <p>Provide a frontend chatbot interface</p>
+            </li>
+            <li>
+                <p>Deploy the system on low-cost infrastructure</p>
+            </li>
+        </ul>
+        <p>The final system should allow users to ask questions such as:</p>
+        <ul id="ul_f4b_vwv_m3c">
+            <li>
+                <p>What automation tools have you built?</p>
+            </li>
+            <li>
+                <p>What experience do you have with DITA?</p>
+            </li>
+            <li>
+                <p>How does the metadata pipeline work?</p>
+            </li>
+        </ul>
+    </conbody>
+</concept>

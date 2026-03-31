@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_khb_3sv_m3c">
+    <title>1. Overview</title>
+    <conbody>
+        <p>This document defines the API contract for the portfolio chatbot system. The API provides
+            a query interface over a structured documentation corpus using a multi-stage retrieval
+            and generation pipeline.</p>
+        <p>The system implements a <b>hybrid Retrieval-Augmented Generation (RAG)</b> architecture
+            with:</p>
+        <ul id="ul_rx2_zx4_t3c">
+            <li>Vector similarity search (FAISS) </li>
+            <li>Keyword and hierarchy scoring </li>
+            <li>Hybrid score fusion </li>
+            <li>MMR-based diversity selection </li>
+            <li>Cross-encoder semantic reranking </li>
+            <li>Document-aware result selection </li>
+            <li>Knowledge graph expansion </li>
+            <li>LLM-based answer generation</li>
+        </ul>
+    </conbody>
+</concept>

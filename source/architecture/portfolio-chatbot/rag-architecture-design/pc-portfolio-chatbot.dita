@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_kgz_1xq_m3c">
+    <title>Retrieval-Augmented Generation (RAG) Architecture Design Specification</title>
+    <prolog>
+        <metadata>
+            <data name="category" value="architecture"/>
+            <data name="audience" value="engineering-leaders, solution-architects, developers, devops-engineers"/>
+            <data name="tags" value="rag, semantic-search, context-retrieval, hybrid-retrieval, knowledge-graph, llm-orchestration, embeddings, prompt-engineering, vector-database, ai-integration, data-modeling, content-pipeline"/>
+            <data name="project" value="portfolio-chatbot"/>
+            <data name="layer" value="platform"/>
+            <data name="status" value="published"/>
+            <data name="summary"
+                value="End-to-end architectural design of a Retrieval-Augmented Generation (RAG) system for a portfolio chatbot, including ingestion pipeline, Markdown parsing, metadata extraction, chunking strategy, embedding generation, FAISS-based vector indexing, hybrid retrieval scoring, MMR diversity selection, cross-encoder reranking, document-aware aggregation, knowledge graph expansion, and LLM-based response generation within a low-infrastructure, static-site-compatible deployment model."
+            />
+        </metadata>
+    </prolog>
+</concept>

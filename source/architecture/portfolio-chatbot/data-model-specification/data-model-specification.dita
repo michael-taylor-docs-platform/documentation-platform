@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_qkl_f1r_m3c">
+    <title>Data Model Specification</title>
+    <prolog>
+        <metadata>
+            <data name="category" value="architecture"/>
+            <data name="audience" value="engineering-leaders, solution-architects, developers, devops-engineers"/>
+            <data name="tags" value="rag, data-modeling, knowledge-graph, embeddings, vector-database, semantic-search, context-retrieval, hybrid-retrieval, ai-integration, content-pipeline"/>
+            <data name="project" value="portfolio-chatbot"/>
+            <data name="layer" value="data"/>
+            <data name="status" value="published"/>
+            <data name="summary"
+                value="Comprehensive data model specification for a RAG-based portfolio chatbot, defining the structure and transformation of content across source documents, parsed document models, chunk representations, metadata schemas, vector embeddings, retrieval signals, query models, and prompt context assembly to support efficient semantic search, hybrid ranking, and LLM-based response generation."
+            />
+        </metadata>
+    </prolog>
+</concept>

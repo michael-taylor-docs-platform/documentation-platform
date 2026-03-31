@@ -1,0 +1,210 @@
+[
+  {
+    "path": "docs\\architecture\\architecture-overview.md",
+    "title": "Documentation Systems Portfolio Overview"
+  },
+  {
+    "path": "docs\\architecture\\platform-architecture.md",
+    "title": "Portfolio Architecture"
+  },
+  {
+    "path": "docs\\architecture\\portfolio-chatbot\\ai-ingestion-engine\\ai-ingestion-engine.md",
+    "title": "Untitled"
+  },
+  {
+    "path": "docs\\architecture\\portfolio-chatbot\\ai-ingestion-engine\\ai-ingestion-implementation.md",
+    "title": "Untitled"
+  },
+  {
+    "path": "docs\\architecture\\portfolio-chatbot\\api-contract-specification\\api-contract-specification.md",
+    "title": "API Contract Specification"
+  },
+  {
+    "path": "docs\\architecture\\portfolio-chatbot\\data-model-specification\\data-model-specification.md",
+    "title": "Data Model Specification"
+  },
+  {
+    "path": "docs\\architecture\\portfolio-chatbot\\implementation-roadmap\\implementation-roadmap.md",
+    "title": "Implementation Roadmap"
+  },
+  {
+    "path": "docs\\architecture\\portfolio-chatbot\\rag-architecture-design\\pc-portfolio-chatbot.md",
+    "title": "Retrieval-Augmented Generation (RAG) Architecture Design Specification"
+  },
+  {
+    "path": "docs\\index.md",
+    "title": "Michael Taylor"
+  },
+  {
+    "path": "docs\\pipelines\\automatic-validation\\elixir-automatic-file-validation.md",
+    "title": "Automated DITA Validation Pipeline (elixir-automatic-file-validation.yml)"
+  },
+  {
+    "path": "docs\\pipelines\\automatic-validation\\file-rename.md",
+    "title": "Go Utility: fileRename"
+  },
+  {
+    "path": "docs\\pipelines\\automatic-validation\\file-validator.md",
+    "title": "Go Utility: fileValidator"
+  },
+  {
+    "path": "docs\\pipelines\\automatic-workflow-sync\\sync-workflows.md",
+    "title": "GitHub Workflow Synchronization Engine (sync_workflows.yml)"
+  },
+  {
+    "path": "docs\\pipelines\\create-metadata-files\\create-met-ai-ingestion.md",
+    "title": "Go Utility: createMET.go"
+  },
+  {
+    "path": "docs\\pipelines\\create-rss\\create-rss.md",
+    "title": "Python Utility: create-rss.py"
+  },
+  {
+    "path": "docs\\pipelines\\external-link-validation\\external-link-check-utility.md",
+    "title": "Python Utility: externalLinkCheck.py"
+  },
+  {
+    "path": "docs\\pipelines\\external-link-validation\\external-link-check.md",
+    "title": "Workflow: external-link-check.yml"
+  },
+  {
+    "path": "docs\\pipelines\\pipeline-overview.md",
+    "title": "Pipeline Overview"
+  },
+  {
+    "path": "docs\\pipelines\\standalone-guide-generator\\standalone-guide-reference-processor.md",
+    "title": "Standalone Guide Reference Processor"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\cms-architecture.md",
+    "title": "Enterprise Knowledge Lifecycle Platform \u2013 System Architecture"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\cms-platform-overview.md",
+    "title": "Enterprise Knowledge Lifecycle Platform Overview"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\github-pipeline\\create-kb-met.md",
+    "title": "Go Utility - create-kb-met"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\github-pipeline\\elixir-kbarticle-dispatcher.md",
+    "title": "GitHub Workflow - KB Article Dispatcher"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\github-pipeline\\elixir-kbarticle-publish-worker.md",
+    "title": "GitHub Workflow - Elixir KB Article Publish Worker"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\github-pipeline\\github-architecture.md",
+    "title": "GitHub KB Article Publishing Workflow"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\github-pipeline\\process-kb-repo.md",
+    "title": "GitHub Workflow - Process KB Repository"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\github-pipeline\\reusable-summarize-and-sync.md",
+    "title": "GitHub Workflow - Summarize and Sync Publication State"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-app-design\\power-app-features\\AdvancedTroubleshooting.md",
+    "title": "Advanced Troubleshooting and Integration Failure Modes"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-app-design\\power-app-features\\ArchivedHistoryManagement.md",
+    "title": "Archive History Management"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-app-design\\power-app-features\\ArticleVersioningFeature.md",
+    "title": "Article Versioning"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-app-design\\power-app-features\\DelegableFilteringAndSearching.md",
+    "title": "Delegable Filtering and Searching"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-app-design\\power-app-features\\GenericUIComponents.md",
+    "title": "Generic UI Components and Confirmation Dialog Architecture"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-app-design\\power-app-features\\ScreenBreakdownAndLogic.md",
+    "title": "App Startup, Architecture, and UI Logic"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-app-design\\power-app-features\\TroubleshootingAndKeyFixes.md",
+    "title": "Troubleshooting & Key Fixes (Direct SharePoint Connection)"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-app-design\\power-app-features\\UIUXBestPractices.md",
+    "title": "UI/UX Best Practices"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-app-design\\PowerApp_Standalone_DesignDoc.md",
+    "title": "Knowledge Base Manager \u2013 Power App Architecture"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\Instant_-_Create_New_Article_Version.md",
+    "title": "Instant - Create New Article Version"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\Instant_-_Discard_Article_Draft.md",
+    "title": "Instant - Discard Article Draft"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\Instant_-_Expire_Single_KB_Article_v2.md",
+    "title": "Instant - Expire Single KB Article"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\Instant_-_Manage_SME_Approval.md",
+    "title": "Instant - Manage SME Approval (V2 - Decoupled Response)"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\Instant_-_Reactivate_Archived_Article.md",
+    "title": "Reactivate Archived Article Workflow"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\Instant_-_Revert_to_Version.md",
+    "title": "Instant - Revert to Version"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\Instant_-_Start_KB_Article_Approval.md",
+    "title": "Instant - Start KB Article Approval (V2 - Decoupled Response)"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\KB-API-Endpoint.md",
+    "title": "KB API Endpoint"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\KB_ID_Generator_Child.md",
+    "title": "KB ID Generator Child Flow"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\LogAuditEvent_designDoc.md",
+    "title": "Instant - LogAuditEvent"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\LogSystemEvent_designDoc.md",
+    "title": "Child Flow - LogSystemEvent"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\Notify-StrippedCharacter.md",
+    "title": "HTTP - Stripped Character Notification"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\Orchestrate-GenerateAltTextAndSaveArticle.md",
+    "title": "Orchestrate Generate Alt Text and Save Article"
+  },
+  {
+    "path": "docs\\projects\\cms-platform\\power-automate-flows\\flow-designs\\Scheduled_-_Unassigned_Article_Reminder.md",
+    "title": "Scheduled - Article Review Reminder"
+  },
+  {
+    "path": "docs\\projects\\sales-library-modernization\\slm-sales-library-modernization.md",
+    "title": "Sales Library Platform Migration"
+  },
+  {
+    "path": "docs\\unstructured-framemaker-dita\\unstructured-framemaker-to-dita.md",
+    "title": "Unstructured FrameMaker \u2192 DITA XML Pilot"
+  }
+]

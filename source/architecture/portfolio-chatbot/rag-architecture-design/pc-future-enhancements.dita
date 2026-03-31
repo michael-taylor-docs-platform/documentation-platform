@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_bzj_mzq_m3c">
+    <title>8. Future Enhancements</title>
+    <conbody>
+        <p>Possible future improvements include:</p>
+        <ul id="ul_ls2_nzq_m3c">
+            <li>
+                <p>Hybrid keyword + vector search</p>
+            </li>
+            <li>
+                <p>Metadata filter UI</p>
+            </li>
+            <li>
+                <p>Conversation memory</p>
+            </li>
+            <li>
+                <p>Streaming responses</p>
+            </li>
+            <li>
+                <p>Knowledge graph visualization</p>
+            </li>
+            <li>
+                <p>Automated ingestion pipelines</p>
+            </li>
+        </ul>
+    </conbody>
+</concept>

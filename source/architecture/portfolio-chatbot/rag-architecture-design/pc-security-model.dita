@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ocm_bzq_m3c">
+    <title>4. Security Model</title>
+    <conbody>
+        <section id="section_v4d_czq_m3c">
+            <title>API Key Management</title>
+            <p>LLM API keys must be stored only within the serverless platform.</p>
+            <p>They must <b>never appear in client-side code</b>.</p>
+        </section>
+        <section id="section_w4d_czq_m3c">
+            <title>Access Control</title>
+            <p>CORS should restrict requests to:</p>
+            <pre>portfolio domain</pre>
+        </section>
+    </conbody>
+</concept>

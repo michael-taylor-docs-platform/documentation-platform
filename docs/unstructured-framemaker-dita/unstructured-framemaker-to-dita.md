@@ -15,12 +15,14 @@ layer: platform
 status: published
 summary: Executive-sponsored pilot converting unstructured FrameMaker documentation into structured DITA XML, establishing reusable architecture patterns and scalable topic-based authoring across 3,000+ files.
 ---
+<a id="uftd-executive-summary"></a>
 ## Executive Summary
 
 Led a 4-month executive-sponsored pilot to modernize legacy unstructured FrameMaker documentation into structured DITA XML for Trend Micro’s flagship product, Trend Micro **OfficeScan**. Converted approximately 3,000 XML topic files and 40 DITA maps across 4 user guides while independently researching and implementing advanced reuse strategies using conrefs and conkeyrefs.
 
 Delivered a scalable structured content model and reuse framework that demonstrated viability for broader organizational adoption
 
+<a id="uftd-context"></a>
 ## Context
 
 - Organization: Enterprise cybersecurity software company
@@ -35,64 +37,67 @@ Delivered a scalable structured content model and reuse framework that demonstra
 
 At the time, documentation was largely monolithic, difficult to reuse, and constrained by formatting-centric authoring tools.
 
+<a id="uftd-problem"></a>
 ## The Problem
 
 ### Technical Constraints
 
-- Content locked in unstructured FrameMaker format
-- Limited reuse capability
-- Manual duplication of shared content
-- Inconsistent information architecture
-- No scalable conditional publishing model
+  - Content locked in unstructured FrameMaker format
+  - Limited reuse capability
+  - Manual duplication of shared content
+  - Inconsistent information architecture
+  - No scalable conditional publishing model
 
 ### Operational Constraints
 
-- High visibility (flagship product)
-- Executive expectations for modernization
-- No existing internal DITA expertise
-- Pilot needed to prove ROI before broader adoption
+  - High visibility (flagship product)
+  - Executive expectations for modernization
+  - No existing internal DITA expertise
+  - Pilot needed to prove ROI before broader adoption
 
+<a id="uftd-strategic-approach"></a>
 ## Strategic Approach
 
 ### Technical Strategy
 
-1. Designed a DITA topic-based information architecture
-2. Established map hierarchy structure for each content source (40 supporting maps)
-3. Researched and implemented:
-  - DITA conrefs
-  - DITA conkeyrefs
-  - Reusable content modules
-  - Boilerplate repositories
-4. Defined reuse patterns for:
-  - Common procedures
-  - Shared configuration content
-  - Repeated warning and compliance blocks
+  1. Designed a DITA topic-based information architecture
+  2. Established map hierarchy structure for each content source (40 supporting maps)
+  3. Researched and implemented:
+    - DITA conrefs
+    - DITA conkeyrefs
+    - Reusable content modules
+    - Boilerplate repositories
+  4. Defined reuse patterns for:
+    - Common procedures
+    - Shared configuration content
+    - Repeated warning and compliance blocks
 
 The most technically demanding aspect was researching and implementing **conref and conkeyref structures** that allowed:
 
-- Centralized reusable content
-- Contextual content insertion
-- Controlled variable substitution
-- Reduced duplication across product variants
+  - Centralized reusable content
+  - Contextual content insertion
+  - Controlled variable substitution
+  - Reduced duplication across product variants
 
 This required deep study of DITA linking and key-based reuse models.
 
 ### Operational Strategy
 
-- Scoped pilot around flagship product for maximum visibility
-- Structured pilot duration to 4 months for measurable evaluation
-- Documented architecture decisions for stakeholder transparency
-- Maintained parallel legacy stability during transition
-- Created internal documentation to support future team adoption
+  - Scoped pilot around flagship product for maximum visibility
+  - Structured pilot duration to 4 months for measurable evaluation
+  - Documented architecture decisions for stakeholder transparency
+  - Maintained parallel legacy stability during transition
+  - Created internal documentation to support future team adoption
 
 Because the initiative was executive-driven, the pilot had to demonstrate:
 
-- Technical feasibility
-- Scalability
-- Content maintainability
-- Authoring efficiency gains
-- Translation cost reduction
+  - Technical feasibility
+  - Scalability
+  - Content maintainability
+  - Authoring efficiency gains
+  - Translation cost reduction
 
+<a id="uftd-implementation"></a>
 ## Implementation
 
 - Converted legacy content into modular DITA topics
@@ -103,6 +108,7 @@ Because the initiative was executive-driven, the pilot had to demonstrate:
 
 All transformation work was performed independently during the pilot phase.
 
+<a id="uftd-outcomes"></a>
 ## Outcomes
 
 - Successfully delivered a fully structured DITA content set for OfficeScan
@@ -112,6 +118,7 @@ All transformation work was performed independently during the pilot phase.
 
 The pilot validated structured authoring as an enterprise-scale solution rather than an experimental initiative.
 
+<a id="uftd-lessons-learned"></a>
 ## Lessons Learned
 
 1. Reuse modeling must be intentional from the beginning

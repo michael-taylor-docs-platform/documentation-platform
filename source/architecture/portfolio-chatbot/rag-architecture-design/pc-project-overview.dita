@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_jdc_4xq_m3c">
+    <title>1. Project Overview</title>
+    <conbody>
+        <section id="section_ssc_pxq_m3c">
+            <title>1.1 Objective</title>
+            <p>This project implements a <b>Retrieval-Augmented Generation (RAG) system</b> that
+                enables visitors to interact with a technical portfolio using natural language
+                queries.</p>
+            <p>The chatbot retrieves relevant information from a corpus of Markdown-based
+                documentation and generates answers grounded in the portfolio’s content.</p>
+            <p>The system is designed both as:</p>
+            <ul id="ul_s4c_vss_n3c">
+                <li>
+                    <p>a <b>functional portfolio search assistant</b></p>
+                </li>
+                <li>
+                    <p>a <b>demonstration of modern AI retrieval architecture</b></p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_tsc_pxq_m3c">
+            <title>1.2 Key Goals</title>
+            <p>The system is designed to:</p>
+            <ul id="ul_usc_pxq_m3c">
+                <li>
+                    <p>Enable natural language search over portfolio documentation</p>
+                </li>
+                <li>
+                    <p>Ground AI responses in existing content</p>
+                </li>
+                <li>
+                    <p>Leverage structured metadata contained in Markdown frontmatter</p>
+                </li>
+                <li>
+                    <p>Remain compatible with static site hosting</p>
+                </li>
+                <li>
+                    <p>Minimize infrastructure complexity and cost</p>
+                </li>
+                <li>
+                    <p>Demonstrate advanced retrieval architecture techniques</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_vsc_pxq_m3c">
+            <title>1.3 Architectural Philosophy</title>
+            <p>The system emphasizes <b>retrieval quality over model size</b>.</p>
+            <p>Rather than relying solely on LLM reasoning, the architecture focuses on improving
+                the relevance and diversity of retrieved context through:</p>
+            <ul id="ul_wsc_pxq_m3c">
+                <li>
+                    <p>hybrid retrieval scoring</p>
+                </li>
+                <li>
+                    <p>metadata awareness</p>
+                </li>
+                <li>
+                    <p>diversity selection</p>
+                </li>
+                <li>
+                    <p>semantic reranking</p>
+                </li>
+            </ul>
+            <p>These techniques improve answer quality while keeping infrastructure lightweight.</p>
+        </section>
+    </conbody>
+</concept>

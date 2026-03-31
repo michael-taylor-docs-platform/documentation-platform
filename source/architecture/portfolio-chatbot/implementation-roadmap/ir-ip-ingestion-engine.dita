@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_pqv_fxv_m3c">
+    <title>Phase 2 — Ingestion Engine</title>
+    <conbody>
+        <section id="section_zr5_gxv_m3c">
+            <title>Goal</title>
+            <p>Build a CLI tool that converts Markdown documents into vector embeddings.</p>
+        </section>
+        <section id="section_as5_gxv_m3c">
+            <title>Component</title>
+            <pre>tools/ingestion-engine</pre>
+            <p>Recommended language:</p>
+            <pre>Go</pre>
+        </section>
+        <section id="section_bs5_gxv_m3c">
+            <title>Tasks</title>
+            <ol id="ol_ubj_jxv_m3c">
+                <li>
+                    <p>Parse Markdown Files</p>
+                    <p>Read content from:</p>
+                    <pre>site/content</pre>
+                    <p>Extract:</p>
+                    <ul id="ul_cs5_gxv_m3c">
+                        <li>
+                            <p>frontmatter metadata</p>
+                        </li>
+                        <li>
+                            <p>document body</p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p>Implement Chunking Logic</p>
+                    <p>Split documents by:</p>
+                    <pre>H1
+H2
+H3</pre>
+                    <p>Target size:</p>
+                    <pre>200–500 tokens</pre>
+                </li>
+                <li>
+                    <p>Generate Embeddings</p>
+                    <p>Call embedding API using:</p>
+                    <ul id="ul_fs5_gxv_m3c">
+                        <li>
+                            <p>chunk text</p>
+                        </li>
+                        <li>
+                            <p>embedding model</p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p>Build Vector Index</p>
+                    <p>Create JSON index.</p>
+                    <p>Output:</p>
+                    <pre>data/vector-index.json</pre>
+                </li>
+            </ol>
+        </section>
+        <section id="section_ds5_gxv_m3c">
+            <title>Deliverables</title>
+            <ul id="ul_hs5_gxv_m3c">
+                <li>
+                    <p>ingestion CLI</p>
+                </li>
+                <li>
+                    <p>chunk generator</p>
+                </li>
+                <li>
+                    <p>embedding pipeline</p>
+                </li>
+                <li>
+                    <p>vector index file</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

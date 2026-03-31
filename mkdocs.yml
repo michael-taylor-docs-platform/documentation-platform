@@ -33,6 +33,17 @@ nav:
       - architecture/architecture-overview.md
       - architecture/platform-architecture.md
 
+      - Portfolio Chatbot:
+          - architecture/portfolio-chatbot/rag-architecture-design/pc-portfolio-chatbot.md
+
+          - Architecture:
+              - architecture/portfolio-chatbot/data-model-specification/data-model-specification.md
+              - architecture/portfolio-chatbot/api-contract-specification/api-contract-specification.md
+        
+          - Data Pipeline:
+              - architecture/portfolio-chatbot/ai-ingestion-engine/ai-ingestion-engine.md
+              - architecture/portfolio-chatbot/ai-ingestion-engine/ai-ingestion-implementation.md
+
   - Projects:
       - CMS Platform: 
           - projects/cms-platform/cms-platform-overview.md

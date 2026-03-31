@@ -1,0 +1,600 @@
+{
+  "nodes": [
+    {
+      "id": "home",
+      "label": "Home",
+      "type": "document"
+    },
+    {
+      "id": "portfolio-architecture",
+      "label": "Portfolio Architecture",
+      "type": "section"
+    },
+    {
+      "id": "architecture-overview",
+      "label": "architecture overview",
+      "type": "document",
+      "path": "architecture/architecture-overview.md"
+    },
+    {
+      "id": "platform-architecture",
+      "label": "platform architecture",
+      "type": "document",
+      "path": "architecture/platform-architecture.md"
+    },
+    {
+      "id": "projects",
+      "label": "Projects",
+      "type": "section"
+    },
+    {
+      "id": "cms-platform",
+      "label": "CMS Platform",
+      "type": "section"
+    },
+    {
+      "id": "cms-platform-overview",
+      "label": "cms platform overview",
+      "type": "document",
+      "path": "projects/cms-platform/cms-platform-overview.md"
+    },
+    {
+      "id": "cms-architecture",
+      "label": "cms architecture",
+      "type": "document",
+      "path": "projects/cms-platform/cms-architecture.md"
+    },
+    {
+      "id": "power-app-architecture",
+      "label": "Power App Architecture",
+      "type": "section"
+    },
+    {
+      "id": "powerapp-standalone-designdoc",
+      "label": "PowerApp Standalone DesignDoc",
+      "type": "document",
+      "path": "projects/cms-platform/power-app-design/PowerApp_Standalone_DesignDoc.md"
+    },
+    {
+      "id": "feature-modules",
+      "label": "Feature Modules",
+      "type": "section"
+    },
+    {
+      "id": "screenbreakdownandlogic",
+      "label": "ScreenBreakdownAndLogic",
+      "type": "document",
+      "path": "projects/cms-platform/power-app-design/power-app-features/ScreenBreakdownAndLogic.md"
+    },
+    {
+      "id": "delegablefilteringandsearching",
+      "label": "DelegableFilteringAndSearching",
+      "type": "document",
+      "path": "projects/cms-platform/power-app-design/power-app-features/DelegableFilteringAndSearching.md"
+    },
+    {
+      "id": "articleversioningfeature",
+      "label": "ArticleVersioningFeature",
+      "type": "document",
+      "path": "projects/cms-platform/power-app-design/power-app-features/ArticleVersioningFeature.md"
+    },
+    {
+      "id": "archivedhistorymanagement",
+      "label": "ArchivedHistoryManagement",
+      "type": "document",
+      "path": "projects/cms-platform/power-app-design/power-app-features/ArchivedHistoryManagement.md"
+    },
+    {
+      "id": "genericuicomponents",
+      "label": "GenericUIComponents",
+      "type": "document",
+      "path": "projects/cms-platform/power-app-design/power-app-features/GenericUIComponents.md"
+    },
+    {
+      "id": "uiuxbestpractices",
+      "label": "UIUXBestPractices",
+      "type": "document",
+      "path": "projects/cms-platform/power-app-design/power-app-features/UIUXBestPractices.md"
+    },
+    {
+      "id": "troubleshootingandkeyfixes",
+      "label": "TroubleshootingAndKeyFixes",
+      "type": "document",
+      "path": "projects/cms-platform/power-app-design/power-app-features/TroubleshootingAndKeyFixes.md"
+    },
+    {
+      "id": "advancedtroubleshooting",
+      "label": "AdvancedTroubleshooting",
+      "type": "document",
+      "path": "projects/cms-platform/power-app-design/power-app-features/AdvancedTroubleshooting.md"
+    },
+    {
+      "id": "power-automate-flows",
+      "label": "Power Automate Flows",
+      "type": "section"
+    },
+    {
+      "id": "instant---create-new-article-version",
+      "label": "Instant   Create New Article Version",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Create_New_Article_Version.md"
+    },
+    {
+      "id": "instant---discard-article-draft",
+      "label": "Instant   Discard Article Draft",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Discard_Article_Draft.md"
+    },
+    {
+      "id": "instant---expire-single-kb-article-v2",
+      "label": "Instant   Expire Single KB Article v2",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Expire_Single_KB_Article_v2.md"
+    },
+    {
+      "id": "instant---manage-sme-approval",
+      "label": "Instant   Manage SME Approval",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Manage_SME_Approval.md"
+    },
+    {
+      "id": "instant---reactivate-archived-article",
+      "label": "Instant   Reactivate Archived Article",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Reactivate_Archived_Article.md"
+    },
+    {
+      "id": "instant---revert-to-version",
+      "label": "Instant   Revert to Version",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Revert_to_Version.md"
+    },
+    {
+      "id": "instant---start-kb-article-approval",
+      "label": "Instant   Start KB Article Approval",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/Instant_-_Start_KB_Article_Approval.md"
+    },
+    {
+      "id": "kb-api-endpoint",
+      "label": "KB API Endpoint",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/KB-API-Endpoint.md"
+    },
+    {
+      "id": "kb-id-generator-child",
+      "label": "KB ID Generator Child",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/KB_ID_Generator_Child.md"
+    },
+    {
+      "id": "logauditevent-designdoc",
+      "label": "LogAuditEvent designDoc",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/LogAuditEvent_designDoc.md"
+    },
+    {
+      "id": "logsystemevent-designdoc",
+      "label": "LogSystemEvent designDoc",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/LogSystemEvent_designDoc.md"
+    },
+    {
+      "id": "notify-strippedcharacter",
+      "label": "Notify StrippedCharacter",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/Notify-StrippedCharacter.md"
+    },
+    {
+      "id": "orchestrate-generatealttextandsavearticle",
+      "label": "Orchestrate GenerateAltTextAndSaveArticle",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/Orchestrate-GenerateAltTextAndSaveArticle.md"
+    },
+    {
+      "id": "scheduled---unassigned-article-reminder",
+      "label": "Scheduled   Unassigned Article Reminder",
+      "type": "document",
+      "path": "projects/cms-platform/power-automate-flows/flow-designs/Scheduled_-_Unassigned_Article_Reminder.md"
+    },
+    {
+      "id": "github-publishing",
+      "label": "GitHub Publishing",
+      "type": "section"
+    },
+    {
+      "id": "github-architecture",
+      "label": "github architecture",
+      "type": "document",
+      "path": "projects/cms-platform/github-pipeline/github-architecture.md"
+    },
+    {
+      "id": "pipeline-design",
+      "label": "Pipeline Design",
+      "type": "section"
+    },
+    {
+      "id": "elixir-kbarticle-dispatcher",
+      "label": "elixir kbarticle dispatcher",
+      "type": "document",
+      "path": "projects/cms-platform/github-pipeline/elixir-kbarticle-dispatcher.md"
+    },
+    {
+      "id": "process-kb-repo",
+      "label": "process kb repo",
+      "type": "document",
+      "path": "projects/cms-platform/github-pipeline/process-kb-repo.md"
+    },
+    {
+      "id": "elixir-kbarticle-publish-worker",
+      "label": "elixir kbarticle publish worker",
+      "type": "document",
+      "path": "projects/cms-platform/github-pipeline/elixir-kbarticle-publish-worker.md"
+    },
+    {
+      "id": "reusable-summarize-and-sync",
+      "label": "reusable summarize and sync",
+      "type": "document",
+      "path": "projects/cms-platform/github-pipeline/reusable-summarize-and-sync.md"
+    },
+    {
+      "id": "create-kb-met",
+      "label": "create kb met",
+      "type": "document",
+      "path": "projects/cms-platform/github-pipeline/create-kb-met.md"
+    },
+    {
+      "id": "slm-sales-library-modernization",
+      "label": "slm sales library modernization",
+      "type": "document",
+      "path": "projects/sales-library-modernization/slm-sales-library-modernization.md"
+    },
+    {
+      "id": "unstructured-framemaker-to-dita",
+      "label": "unstructured framemaker to dita",
+      "type": "document",
+      "path": "unstructured-framemaker-dita/unstructured-framemaker-to-dita.md"
+    },
+    {
+      "id": "documentation-pipelines",
+      "label": "Documentation Pipelines",
+      "type": "section"
+    },
+    {
+      "id": "pipeline-overview",
+      "label": "Pipeline Overview",
+      "type": "document"
+    },
+    {
+      "id": "ci-cd-workflows",
+      "label": "CI/CD Workflows",
+      "type": "section"
+    },
+    {
+      "id": "elixir-automatic-file-validation",
+      "label": "elixir automatic file validation",
+      "type": "document",
+      "path": "pipelines/automatic-validation/elixir-automatic-file-validation.md"
+    },
+    {
+      "id": "external-link-check",
+      "label": "external link check",
+      "type": "document",
+      "path": "pipelines/external-link-validation/external-link-check.md"
+    },
+    {
+      "id": "sync-workflows",
+      "label": "sync workflows",
+      "type": "document",
+      "path": "pipelines/automatic-workflow-sync/sync-workflows.md"
+    },
+    {
+      "id": "automation-scripts",
+      "label": "Automation Scripts",
+      "type": "section"
+    },
+    {
+      "id": "file-validator",
+      "label": "file validator",
+      "type": "document",
+      "path": "pipelines/automatic-validation/file-validator.md"
+    },
+    {
+      "id": "file-rename",
+      "label": "file rename",
+      "type": "document",
+      "path": "pipelines/automatic-validation/file-rename.md"
+    },
+    {
+      "id": "external-link-check-utility",
+      "label": "external link check utility",
+      "type": "document",
+      "path": "pipelines/external-link-validation/external-link-check-utility.md"
+    },
+    {
+      "id": "create-met-ai-ingestion",
+      "label": "create met ai ingestion",
+      "type": "document",
+      "path": "pipelines/create-metadata-files/create-met-ai-ingestion.md"
+    },
+    {
+      "id": "create-rss",
+      "label": "create rss",
+      "type": "document",
+      "path": "pipelines/create-rss/create-rss.md"
+    },
+    {
+      "id": "standalone-guide-reference-processor",
+      "label": "standalone guide reference processor",
+      "type": "document",
+      "path": "pipelines/standalone-guide-generator/standalone-guide-reference-processor.md"
+    }
+  ],
+  "edges": [
+    {
+      "from": "portfolio-architecture",
+      "to": "architecture-overview",
+      "type": "contains"
+    },
+    {
+      "from": "portfolio-architecture",
+      "to": "platform-architecture",
+      "type": "contains"
+    },
+    {
+      "from": "projects",
+      "to": "cms-platform",
+      "type": "contains"
+    },
+    {
+      "from": "cms-platform",
+      "to": "cms-platform-overview",
+      "type": "contains"
+    },
+    {
+      "from": "cms-platform",
+      "to": "cms-architecture",
+      "type": "contains"
+    },
+    {
+      "from": "cms-platform",
+      "to": "power-app-architecture",
+      "type": "contains"
+    },
+    {
+      "from": "power-app-architecture",
+      "to": "powerapp-standalone-designdoc",
+      "type": "contains"
+    },
+    {
+      "from": "power-app-architecture",
+      "to": "feature-modules",
+      "type": "contains"
+    },
+    {
+      "from": "feature-modules",
+      "to": "screenbreakdownandlogic",
+      "type": "contains"
+    },
+    {
+      "from": "feature-modules",
+      "to": "delegablefilteringandsearching",
+      "type": "contains"
+    },
+    {
+      "from": "feature-modules",
+      "to": "articleversioningfeature",
+      "type": "contains"
+    },
+    {
+      "from": "feature-modules",
+      "to": "archivedhistorymanagement",
+      "type": "contains"
+    },
+    {
+      "from": "feature-modules",
+      "to": "genericuicomponents",
+      "type": "contains"
+    },
+    {
+      "from": "feature-modules",
+      "to": "uiuxbestpractices",
+      "type": "contains"
+    },
+    {
+      "from": "feature-modules",
+      "to": "troubleshootingandkeyfixes",
+      "type": "contains"
+    },
+    {
+      "from": "feature-modules",
+      "to": "advancedtroubleshooting",
+      "type": "contains"
+    },
+    {
+      "from": "cms-platform",
+      "to": "power-automate-flows",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "instant---create-new-article-version",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "instant---discard-article-draft",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "instant---expire-single-kb-article-v2",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "instant---manage-sme-approval",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "instant---reactivate-archived-article",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "instant---revert-to-version",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "instant---start-kb-article-approval",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "kb-api-endpoint",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "kb-id-generator-child",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "logauditevent-designdoc",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "logsystemevent-designdoc",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "notify-strippedcharacter",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "orchestrate-generatealttextandsavearticle",
+      "type": "contains"
+    },
+    {
+      "from": "power-automate-flows",
+      "to": "scheduled---unassigned-article-reminder",
+      "type": "contains"
+    },
+    {
+      "from": "cms-platform",
+      "to": "github-publishing",
+      "type": "contains"
+    },
+    {
+      "from": "github-publishing",
+      "to": "github-architecture",
+      "type": "contains"
+    },
+    {
+      "from": "github-publishing",
+      "to": "pipeline-design",
+      "type": "contains"
+    },
+    {
+      "from": "pipeline-design",
+      "to": "elixir-kbarticle-dispatcher",
+      "type": "contains"
+    },
+    {
+      "from": "pipeline-design",
+      "to": "process-kb-repo",
+      "type": "contains"
+    },
+    {
+      "from": "pipeline-design",
+      "to": "elixir-kbarticle-publish-worker",
+      "type": "contains"
+    },
+    {
+      "from": "pipeline-design",
+      "to": "reusable-summarize-and-sync",
+      "type": "contains"
+    },
+    {
+      "from": "pipeline-design",
+      "to": "create-kb-met",
+      "type": "contains"
+    },
+    {
+      "from": "projects",
+      "to": "slm-sales-library-modernization",
+      "type": "contains"
+    },
+    {
+      "from": "projects",
+      "to": "unstructured-framemaker-to-dita",
+      "type": "contains"
+    },
+    {
+      "from": "documentation-pipelines",
+      "to": "pipeline-overview",
+      "type": "contains"
+    },
+    {
+      "from": "documentation-pipelines",
+      "to": "ci-cd-workflows",
+      "type": "contains"
+    },
+    {
+      "from": "ci-cd-workflows",
+      "to": "elixir-automatic-file-validation",
+      "type": "contains"
+    },
+    {
+      "from": "ci-cd-workflows",
+      "to": "external-link-check",
+      "type": "contains"
+    },
+    {
+      "from": "ci-cd-workflows",
+      "to": "sync-workflows",
+      "type": "contains"
+    },
+    {
+      "from": "documentation-pipelines",
+      "to": "automation-scripts",
+      "type": "contains"
+    },
+    {
+      "from": "automation-scripts",
+      "to": "file-validator",
+      "type": "contains"
+    },
+    {
+      "from": "automation-scripts",
+      "to": "file-rename",
+      "type": "contains"
+    },
+    {
+      "from": "automation-scripts",
+      "to": "external-link-check-utility",
+      "type": "contains"
+    },
+    {
+      "from": "automation-scripts",
+      "to": "create-met-ai-ingestion",
+      "type": "contains"
+    },
+    {
+      "from": "automation-scripts",
+      "to": "create-rss",
+      "type": "contains"
+    },
+    {
+      "from": "automation-scripts",
+      "to": "standalone-guide-reference-processor",
+      "type": "contains"
+    }
+  ]
+}

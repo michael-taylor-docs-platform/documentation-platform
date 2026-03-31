@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_atp_gzq_m3c">
+    <title>6. Deployment Model</title>
+    <conbody>
+        <section id="section_cg2_hzq_m3c">
+            <title>6.1 Repository Structure</title>
+            <p>The system is organized into the following structure:</p>
+            <pre>repo-root
+│
+├── site
+│   └── static portfolio output
+│
+├── api
+│   └── serverless endpoint for query handling
+│
+├── scripts
+│   └── ingestion and indexing pipeline
+│
+├── data
+│   └── chunks.json
+│   └── knowledge_graph.json
+│   └── kb_index.faiss
+│
+└── docs
+    └── architecture and documentation files</pre>
+        </section>
+        <section id="section_tnx_rxw_t3c">
+            <title>6.2 Ingestion and Indexing</title>
+            <p>The ingestion pipeline is executed using:</p>
+            <p><codeph>scripts/rebuild_index.py </codeph></p>
+            <p>This script performs:</p>
+            <ul id="ul_omy_txw_t3c">
+                <li>
+                    <p>content parsing and chunking </p>
+                </li>
+                <li>
+                    <p>knowledge graph construction </p>
+                </li>
+                <li>
+                    <p>embedding generation </p>
+                </li>
+                <li>
+                    <p>FAISS index creation </p>
+                </li>
+            </ul>
+            <p>All generated artifacts are stored in the data directory.</p>
+        </section>
+        <section id="section_ilf_vxw_t3c">
+            <title>6.3 Runtime Environment</title>
+            <p>At runtime, the system:</p>
+            <ol id="ol_nbz_vxw_t3c">
+                <li>
+                    <p>Loads the FAISS index into memory </p>
+                </li>
+                <li>
+                    <p>Loads chunks.json for content retrieval </p>
+                </li>
+                <li>
+                    <p>Loads knowledge_graph.json for context expansion </p>
+                </li>
+            </ol>
+            <p>The retrieval pipeline executes within a serverless API layer.</p>
+        </section>
+        <section id="section_cbf_xxw_t3c">
+            <title>6.4 Architecture Characteristics</title>
+            <p>The deployment model is designed to:</p>
+            <ul id="ul_wnk_yxw_t3c">
+                <li>
+                    <p>avoid external databases </p>
+                </li>
+                <li>
+                    <p>minimize infrastructure complexity </p>
+                </li>
+                <li>
+                    <p>support static site hosting </p>
+                </li>
+                <li>
+                    <p>enable fast cold-start performance </p>
+                </li>
+            </ul>
+            <p>This approach is well-suited for portfolio-scale applications while maintaining
+                production-quality retrieval behavior.</p>
+        </section>
+    </conbody>
+</concept>

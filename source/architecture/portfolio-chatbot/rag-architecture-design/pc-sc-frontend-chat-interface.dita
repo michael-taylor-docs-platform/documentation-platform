@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_nmv_xyq_m3c">
+    <title>3.5 Frontend Chat Interface</title>
+    <conbody>
+        <section id="section_bjj_yyq_m3c">
+            <title>Description</title>
+            <p>A lightweight JavaScript chat interface embedded in the portfolio site.</p>
+        </section>
+        <section id="section_cjj_yyq_m3c">
+            <title>Responsibilities</title>
+            <p>The frontend must:</p>
+            <ul id="ul_djj_yyq_m3c">
+                <li>
+                    <p>Capture user queries</p>
+                </li>
+                <li>
+                    <p>Send requests to API endpoint</p>
+                </li>
+                <li>
+                    <p>Display responses</p>
+                </li>
+                <li>
+                    <p>Optionally show sources</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_ply_yyq_m3c">
+            <title>Example UI Features</title>
+            <ul id="ul_ejj_yyq_m3c">
+                <li>
+                    <p>Floating chat button</p>
+                </li>
+                <li>
+                    <p>Conversation history</p>
+                </li>
+                <li>
+                    <p>Source citations</p>
+                </li>
+                <li>
+                    <p>Link to relevant portfolio pages</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

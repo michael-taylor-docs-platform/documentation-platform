@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_t1p_cqv_m3c">
+    <title>8. Vector Index Model</title>
+    <conbody>
+        <section id="section_xcr_dqv_m3c">
+            <title>8.1 Description</title>
+            <p>Chunk embeddings are stored in a FAISS vector index to support efficient similarity
+                search.</p>
+            <p>The vector index stores embeddings for each chunk and enables nearest-neighbor
+                retrieval based on query embeddings.</p>
+        </section>
+        <section id="section_ycr_dqv_m3c">
+            <title>8.2 Index Structure</title>
+            <p>The index contains:</p>
+            <ul id="ul_nj1_ll4_t3c">
+                <li>
+                    <p>embedding vectors</p>
+                </li>
+                <li>
+                    <p>chunk identifiers</p>
+                </li>
+            </ul>
+            <p>When a query is executed, the retrieval engine returns the identifiers of the most
+                similar chunks.</p>
+            <p>These identifiers are then used to retrieve the full chunk objects from the corpus
+                data.</p>
+        </section>
+    </conbody>
+</concept>

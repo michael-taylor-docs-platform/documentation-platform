@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_mkz_hqv_m3c">
+    <title>6. Metadata Model</title>
+    <conbody>
+        <section id="section_gj5_zj4_t3c">
+            <title>6.1 Description</title>
+            <p>Markdown documents used by the portfolio contain YAML frontmatter that provides
+                structured metadata describing the document.</p>
+            <p>This metadata is extracted during ingestion and stored alongside each chunk.</p>
+            <p>Metadata enables structured filtering and ranking during retrieval.</p>
+        </section>
+        <section id="section_qhq_mqv_m3c">
+            <title>6.2 Common Metadata Fields</title>
+            <table id="table_o2y_3qv_m3c">
+                <tgroup cols="3">
+                    <colspec colnum="1" colname="col1" colwidth="1.0*"/>
+                    <colspec colnum="2" colname="col2" colwidth="1*"/>
+                    <colspec colnum="3" colname="col3" colwidth="2.5*"/>
+                    <thead>
+                        <row>
+                            <entry>Field</entry>
+                            <entry>Type</entry>
+                            <entry>Description</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>title</entry>
+                            <entry>string</entry>
+                            <entry>Human-readable title of the document.</entry>
+                        </row>
+                        <row>
+                            <entry>type</entry>
+                            <entry>string</entry>
+                            <entry>
+                                <p>Document classification such as:</p>
+                                <ul id="ul_rbm_gk4_t3c">
+                                    <li>
+                                        <p>project</p>
+                                    </li>
+                                    <li>
+                                        <p>article</p>
+                                    </li>
+                                    <li>
+                                        <p>architecture</p>
+                                    </li>
+                                    <li>
+                                        <p>tool</p>
+                                    </li>
+                                </ul>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>category</entry>
+                            <entry>string</entry>
+                            <entry>Functional category grouping similar documents.</entry>
+                        </row>
+                        <row>
+                            <entry>tags</entry>
+                            <entry>array[string]</entry>
+                            <entry>List of descriptive keywords associated with the
+                                document.</entry>
+                        </row>
+                        <row>
+                            <entry>date</entry>
+                            <entry>date</entry>
+                            <entry>Publication date of the document.</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+    </conbody>
+</concept>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ey5_wrv_m3c">
+    <title>14. Design Principles</title>
+    <conbody>
+        <p>The data model follows several key principles:</p>
+        <section id="section_shr_xrv_m3c">
+            <title>Simplicity</title>
+            <p>The model should remain easy to understand and implement.</p>
+        </section>
+        <section id="section_thr_xrv_m3c">
+            <title>Extensibility</title>
+            <p>New fields and capabilities should be added without breaking existing structures.</p>
+        </section>
+        <section id="section_uhr_xrv_m3c">
+            <title>Retrieval Efficiency</title>
+            <p>The model should support fast lookup and scoring operations.</p>
+        </section>
+        <section id="section_whr_xrv_m3c">
+            <title>Separation of Concerns</title>
+            <p>Embedding storage, metadata, and content should remain logically distinct.</p>
+        </section>
+        <section id="section_b3d_sp4_t3c">
+            <title>Alignment with Retrieval Pipeline</title>
+            <p>The data model should directly support the needs of the retrieval and ranking
+                system.</p>
+        </section>
+    </conbody>
+</concept>
