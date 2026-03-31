@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_nn3_4wv_m3c">
+    <title>Implementation Roadmap</title>
+    <prolog>
+        <metadata>
+            <data name="category" value="process"/>
+            <data name="audience" value="engineering-leaders, solution-architects, developers, devops-engineers"/>
+            <data name="tags" value="rag, ai-integration, content-pipeline, workflow-orchestration, ci-cd, requirements-analysis"/>
+            <data name="project" value="portfolio-chatbot"/>
+            <data name="layer" value="workflow"/>
+            <data name="status" value="published"/>
+            <data name="summary"
+                value="Phased implementation roadmap for a portfolio chatbot built on a RAG architecture, outlining project setup, ingestion engine development, retrieval system implementation, chat API creation, and frontend integration, along with testing strategy, deployment approach, performance targets, and risk mitigation for delivering a scalable, low-infrastructure AI-driven documentation assistant."
+            />
+        </metadata>
+    </prolog>
+    <conbody>
+        <section id="section_skw_dxq_m3c">
+            <p><b>Author</b></p>
+            <p>Michael Taylor</p>
+            <p><b>Status</b></p>
+            <p>Draft</p>
+            <p><b>Last Updated</b></p>
+            <p>2026-03-06</p>
+        </section>
+    </conbody>
+</concept>

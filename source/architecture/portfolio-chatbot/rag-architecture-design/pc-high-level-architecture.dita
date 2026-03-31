@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_vcb_sxq_m3c">
+    <title>2. High-Level Architecture</title>
+    <conbody>
+        <p>The system is composed of four major subsystems:</p>
+        <ol id="ol_f43_sxq_m3c">
+            <li>
+                <p>Content Source Layer</p>
+            </li>
+            <li>
+                <p>Ingestion Engine</p>
+            </li>
+            <li>
+                <p>Retrieval &amp; AI Layer</p>
+            </li>
+            <li>
+                <p>Frontend Chat Interface</p>
+            </li>
+        </ol>
+        <pre>                ┌────────────────────────────┐
+                │     Markdown Knowledge     │
+                │  (Portfolio Documentation) │
+                └─────────────┬──────────────┘
+                              │
+                       Ingestion Engine
+                              │
+                      Chunk Generation
+                              │
+                     Embedding Generation
+                              │
+                     Vector Index (FAISS)
+                              │
+                     Retrieval Pipeline
+                              │
+                        LLM Completion
+                              │
+                        Chat Interface</pre>
+        <p>The architecture separates <b>offline indexing</b> from <b>runtime retrieval</b>.</p>
+        <section id="section_mnl_qts_n3c">
+            <title>Offline Processing</title>
+            <p>Performed by the ingestion engine:</p>
+            <ul id="ul_bz4_rts_n3c">
+                <li>
+                    <p>parse Markdown documents</p>
+                </li>
+                <li>
+                    <p>extract metadata</p>
+                </li>
+                <li>
+                    <p>generate content chunks</p>
+                </li>
+                <li>
+                    <p>compute embeddings</p>
+                </li>
+                <li>
+                    <p>build the vector index</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_fjf_tts_n3c">
+            <title>Runtime Processing</title>
+            <p>Performed during a user query:</p>
+            <ul id="ul_ef3_5ts_n3c">
+                <li>
+                    <p>query embedding</p>
+                </li>
+                <li>
+                    <p>hybrid retrieval</p>
+                </li>
+                <li>
+                    <p>diversity filtering</p>
+                </li>
+                <li>
+                    <p>semantic reranking</p>
+                </li>
+                <li>
+                    <p>prompt construction</p>
+                </li>
+                <li>
+                    <p>LLM response generation</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

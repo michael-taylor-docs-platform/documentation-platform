@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_et2_gz4_t3c">
+    <title>3. Endpoint Definition</title>
+    <conbody>
+        <section id="section_pmq_3z4_t3c">
+            <title>3.1 Endpoint</title>
+            <codeblock>POST /chat</codeblock>
+        </section>
+        <section id="section_bpt_jz4_t3c">
+            <title>3.2 Description</title>
+            <p>Processes a user query and returns a grounded answer based on the documentation
+                corpus.</p>
+        </section>
+    </conbody>
+</concept>

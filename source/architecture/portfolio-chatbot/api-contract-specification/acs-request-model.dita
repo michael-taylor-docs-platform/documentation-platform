@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_khb_3sv_m3c">
+    <title>4. Request Model</title>
+    <conbody>
+        <section id="section_avg_ysv_m3c">
+            <title>4.1 Request Body</title>
+            <pre>{
+  "query": "string"
+}</pre>
+        </section>
+        <section>
+            <title>4.2 Request Fields</title>
+            <table id="table_pxh_ysv_m3c">
+                <tgroup cols="4">
+                    <colspec colnum="1" colname="col1"/>
+                    <colspec colnum="2" colname="col2"/>
+                    <colspec colnum="3" colname="col3"/>
+                    <colspec colnum="4" colname="col4"/>
+                    <thead>
+                        <row>
+                            <entry>Field</entry>
+                            <entry>Type</entry>
+                            <entry>Required</entry>
+                            <entry>Description</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>query</entry>
+                            <entry>string</entry>
+                            <entry>yes</entry>
+                            <entry>Natural language user query</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+    </conbody>
+</concept>

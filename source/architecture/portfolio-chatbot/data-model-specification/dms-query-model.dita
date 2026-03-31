@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_mz3_qqv_m3c">
+    <title>10. Query Model</title>
+    <conbody>
+        <section id="section_otd_rqv_m3c">
+            <title>10.1 Description</title>
+            <p>The Query Model represents the structure of a user query as it moves through the
+                retrieval pipeline.</p>
+            <p>It captures both the original user input and any derived representations used during
+                processing.</p>
+        </section>
+        <section id="section_dfk_rqv_m3c">
+            <title>8.2 Fields</title>
+            <table id="table_wmb_vqv_m3c">
+                <tgroup cols="3">
+                    <colspec colnum="1" colname="col1" colwidth="1.5*"/>
+                    <colspec colnum="2" colname="col2" colwidth="1*"/>
+                    <colspec colnum="3" colname="col3" colwidth="1.5*"/>
+                    <thead>
+                        <row>
+                            <entry>Field</entry>
+                            <entry>Type</entry>
+                            <entry>Description</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>query_text</entry>
+                            <entry>string</entry>
+                            <entry>Identifier of the retrieved chunk.</entry>
+                        </row>
+                        <row>
+                            <entry>expanded_query</entry>
+                            <entry>string</entry>
+                            <entry>A modified version of the query generated during query expansion
+                                to improve retrieval recall.</entry>
+                        </row>
+                        <row>
+                            <entry>query_embedding</entry>
+                            <entry>string</entry>
+                            <entry>The vector embedding generated from the expanded query.</entry>
+                        </row>
+                        <row>
+                            <entry>metadata_filters</entry>
+                            <entry>number</entry>
+                            <entry>Optional structured filters applied to restrict retrieval based
+                                on metadata.</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        <section id="section_wlx_tm4_t3c">
+            <title>8.3 Example</title>
+            <pre>{
+  "query_text: "How does validation work?",
+  "expanded_query": "validation system process automated checking pipeline",
+  "query_embedding": "[0.012, -0.221, ...]",
+  "metadata_filters": "type: pipeline"  
+}</pre>
+        </section>
+    </conbody>
+</concept>

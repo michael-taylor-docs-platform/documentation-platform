@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ufm_5yv_m3c">
+    <title>5. Testing Strategy</title>
+    <conbody>
+        <p>Testing will include:</p>
+        <section id="section_swr_vyv_m3c">
+            <title>Unit Tests</title>
+            <p>Components to test:</p>
+            <pre>markdown parsing
+chunk generation
+similarity calculations</pre>
+        </section>
+        <section id="section_twr_vyv_m3c">
+            <title>Integration Tests</title>
+            <p>Test full pipeline:</p>
+            <pre>query → retrieval → LLM → response</pre>
+        </section>
+        <section id="section_uwr_vyv_m3c">
+            <title>Manual Testing</title>
+            <p>Example queries:</p>
+            <ul id="ul_kwj_wyv_m3c">
+                <li>What automation tools have you built?</li>
+                <li>What is create-kb-met?</li>
+                <li>Explain your metadata pipeline.</li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

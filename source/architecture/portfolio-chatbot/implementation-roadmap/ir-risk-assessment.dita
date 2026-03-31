@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_djn_dzv_m3c">
+    <title>8. Risk Assessment</title>
+    <conbody>
+        <p>Potential risks include:</p>
+        <table id="table_w52_2zv_m3c">
+            <tgroup cols="2">
+                <colspec colnum="1" colname="col1"/>
+                <colspec colnum="2" colname="col2"/>
+                <thead>
+                    <row>
+                        <entry>Risk</entry>
+                        <entry>Mitigation</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>Large prompt size</entry>
+                        <entry>Limit Top-K chunks</entry>
+                    </row>
+                    <row>
+                        <entry>High API cost</entry>
+                        <entry>Cache responses</entry>
+                    </row>
+                    <row>
+                        <entry>Irrelevant retrieval</entry>
+                        <entry>Improve chunking strategy</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </conbody>
+</concept>

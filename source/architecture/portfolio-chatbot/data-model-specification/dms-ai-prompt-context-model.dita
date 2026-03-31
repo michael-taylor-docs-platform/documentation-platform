@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_kxc_zqv_m3c">
+    <title>12. AI Prompt Context Model</title>
+    <conbody>
+        <section id="section_gvr_zqv_m3c">
+            <title>12.1 Description</title>
+            <p>The AI Prompt Context Model defines how retrieved chunks are assembled and passed to
+                the language model.</p>
+            <p>The goal is to provide structured, relevant context that enables accurate and
+                grounded responses.</p>
+        </section>
+        <section id="section_rjb_v44_t3c">
+            <title>12.2 Structure</title>
+            <p>The prompt context consists of:</p>
+            <ul id="ul_djb_z44_t3c">
+                <li>
+                    <p>user query</p>
+                </li>
+                <li>
+                    <p>system instructions</p>
+                </li>
+                <li>
+                    <p>retrieved content blocks</p>
+                </li>
+            </ul>
+            <p>Each content block includes:</p>
+            <ul id="ul_w4d_1p4_t3c">
+                <li>
+                    <p>title</p>
+                </li>
+                <li>
+                    <p>document path</p>
+                </li>
+                <li>
+                    <p>chunk content</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_i31_1rv_m3c">
+            <title>12.3 Example Context Structure</title>
+            <pre>User Query:
+How does validation work?
+
+Context:
+
+[Document: elixir-automatic-file-validation.md]
+Title: Validation Pipeline Overview
+Content:
+The validation pipeline ensures that all documentation meets structural and metadata requirements...
+
+[Document: file-validator.md]
+Title: Validation Checks
+Content:
+The system validates filenames, identifiers, and metadata attributes...</pre>
+            <p>This structured format helps the model generate responses grounded in source
+                material.</p>
+        </section>
+    </conbody>
+</concept>

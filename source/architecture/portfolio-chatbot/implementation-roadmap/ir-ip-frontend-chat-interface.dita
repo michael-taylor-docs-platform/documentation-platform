@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_et2_4yv_m3c">
+    <title>Phase 5 — Frontend Chat Interface</title>
+    <conbody>
+        <section id="section_zms_pyv_m3c">
+            <title>Goal</title>
+            <p>Add a chatbot interface to the portfolio website.</p>
+        </section>
+        <section id="section_ffr_qyv_m3c">
+            <title>Component</title>
+            <pre>site/chat-widget</pre>
+        </section>
+        <section id="section_ans_pyv_m3c">
+            <title>Tasks</title>
+            <p>Create UI components:</p>
+            <ul id="ul_bns_pyv_m3c">
+                <li>
+                    <p>chat input</p>
+                </li>
+                <li>
+                    <p>message display</p>
+                </li>
+                <li>
+                    <p>loading indicator</p>
+                </li>
+            </ul>
+            <p>Send requests to:</p>
+            <pre>/api/chat</pre>
+            <p>Render:</p>
+            <ul id="ul_cns_pyv_m3c">
+                <li>
+                    <p>answer</p>
+                </li>
+                <li>
+                    <p>source links</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_mpp_pyv_m3c">
+            <title>Deliverables</title>
+            <ul id="ul_dns_pyv_m3c">
+                <li>
+                    <p>embedded chatbot UI</p>
+                </li>
+                <li>
+                    <p>API integration</p>
+                </li>
+                <li>
+                    <p>response rendering</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

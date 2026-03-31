@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_dfb_qpv_m3c">
+    <title>4. Document Model</title>
+    <conbody>
+        <section id="section_gm4_qpv_m3c">
+            <title>4.1 Description</title>
+            <p>The Document Model represents the parsed structure of a Markdown file.</p>
+            <p>This model exists <b>only during ingestion</b>.</p>
+        </section>
+        <section id="section_fny_spv_m3c">
+            <title>4.2 Structure</title>
+            <pre>{
+  "document_id": "create-kb-met",
+  "source_path": "/projects/create-kb-met.md",
+  "metadata": {},
+  "content": ""
+}</pre>
+        </section>
+        <section id="section_mbs_tpv_m3c">
+            <title>4.3 Fields</title>
+            <table id="table_hm4_qpv_m3c">
+                <tgroup cols="3">
+                    <colspec colnum="1" colname="col1" colwidth="1.5*"/>
+                    <colspec colnum="2" colname="col2" colwidth="1*"/>
+                    <colspec colnum="3" colname="col3" colwidth="1.5*"/>
+                    <thead>
+                        <row>
+                            <entry>Field</entry>
+                            <entry>Type</entry>
+                            <entry>Description</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>document_id</entry>
+                            <entry>string</entry>
+                            <entry>Unique identifier</entry>
+                        </row>
+                        <row>
+                            <entry>source_path</entry>
+                            <entry>string</entry>
+                            <entry>Location in repository</entry>
+                        </row>
+                        <row>
+                            <entry>metadata</entry>
+                            <entry>object</entry>
+                            <entry>Parsed frontmatter</entry>
+                        </row>
+                        <row>
+                            <entry>content</entry>
+                            <entry>string</entry>
+                            <entry>Markdown body content</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+    </conbody>
+</concept>

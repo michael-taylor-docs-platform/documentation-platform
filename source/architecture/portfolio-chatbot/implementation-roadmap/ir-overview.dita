@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_n3r_qwv_m3c">
+    <title>1. Overview</title>
+    <conbody>
+        <p>This document defines the <b>implementation plan for the portfolio chatbot
+            system</b>.</p>
+        <p>The roadmap converts the architecture and design specifications into a structured
+            development plan including:</p>
+        <ul id="ul_am3_rwv_m3c">
+            <li>
+                <p>milestones</p>
+            </li>
+            <li>
+                <p>deliverables</p>
+            </li>
+            <li>
+                <p>repository structure</p>
+            </li>
+            <li>
+                <p>development phases</p>
+            </li>
+            <li>
+                <p>testing strategy</p>
+            </li>
+        </ul>
+        <p>The goal is to build a <b>context-aware AI chatbot</b> capable of answering questions
+            about the portfolio using a <b>Retrieval-Augmented Generation (RAG)</b>
+            architecture.</p>
+    </conbody>
+</concept>

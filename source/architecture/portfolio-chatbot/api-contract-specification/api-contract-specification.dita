@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ecm_2sv_m3c">
+    <title>API Contract Specification</title>
+    <prolog>
+        <metadata>
+            <data name="category" value="architecture"/>
+            <data name="audience" value="engineering-leaders, solution-architects, developers, devops-engineers"/>
+            <data name="tags" value="rag, semantic-search, context-retrieval, hybrid-retrieval, knowledge-graph, llm-orchestration, api-integration, ai-integration, data-modeling, response-handling"/>
+            <data name="project" value="portfolio-chatbot"/>
+            <data name="layer" value="integration"/>
+            <data name="status" value="published"/>
+            <data name="summary"
+                value="Specification of the API contract for a RAG-based portfolio chatbot, defining the POST /chat endpoint, request and response schemas, and the underlying multi-stage retrieval pipeline including query expansion, embedding generation, FAISS-based vector search, hybrid scoring, MMR diversity selection, cross-encoder reranking, document-aware aggregation, knowledge graph expansion, and LLM-driven response generation with source attribution."
+            />
+        </metadata>
+    </prolog>
+</concept>

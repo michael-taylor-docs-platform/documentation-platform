@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_gsm_jzq_m3c">
+    <title>7. Implementation Phases</title>
+    <conbody>
+        <section id="section_kjk_kzq_m3c">
+            <title>Phase 1 — Architecture &amp; Design</title>
+            <p>Define system architecture and data model.</p>
+            <p>Deliverables:</p>
+            <ul id="ul_ljk_kzq_m3c">
+                <li>
+                    <p>Architecture specification</p>
+                </li>
+                <li>
+                    <p>Data schema</p>
+                </li>
+                <li>
+                    <p>Chunking strategy</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_mjk_kzq_m3c">
+            <title>Phase 2 — Ingestion Engine</title>
+            <p>Build ingestion and indexing pipeline.</p>
+            <p>Deliverables:</p>
+            <ul id="ul_njk_kzq_m3c">
+                <li>
+                    <p>Markdown parser</p>
+                </li>
+                <li>
+                    <p>Chunk generation system</p>
+                </li>
+                <li>
+                    <p>Knowledge graph construction</p>
+                </li>
+                <li>
+                    <p>JSON artifact generation (<codeph>chunks.json</codeph>,
+                            <codeph>knowledge_graph.json</codeph>)</p>
+                </li>
+                <li>
+                    <p>FAISS index generation</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_ojk_kzq_m3c">
+            <title>Phase 3 — Retrieval API</title>
+            <p>Implement serverless endpoint.</p>
+            <p>Deliverables:</p>
+            <ul id="ul_pjk_kzq_m3c">
+                <li>
+                    <p>Query embedding</p>
+                </li>
+                <li>
+                    <p>Vector similarity search</p>
+                </li>
+                <li>
+                    <p>Context assembly</p>
+                </li>
+                <li>
+                    <p>LLM response generation</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_qjk_kzq_m3c">
+            <title>Phase 4 — Chat Interface</title>
+            <p>Build frontend chat component.</p>
+            <p>Deliverables:</p>
+            <ul id="ul_rjk_kzq_m3c">
+                <li>
+                    <p>Chat UI</p>
+                </li>
+                <li>
+                    <p>API integration</p>
+                </li>
+                <li>
+                    <p>Response rendering</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_sjk_kzq_m3c">
+            <title>Phase 5 — Evaluation &amp; Tuning</title>
+            <p>Evaluate retrieval quality.</p>
+            <p>Tasks:</p>
+            <ul id="ul_tjk_kzq_m3c">
+                <li>
+                    <p>Adjust chunk size</p>
+                </li>
+                <li>
+                    <p>Improve prompts</p>
+                </li>
+                <li>
+                    <p>Tune top-K retrieval</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

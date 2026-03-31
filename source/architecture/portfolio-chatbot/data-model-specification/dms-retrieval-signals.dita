@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ygh_pk4_t3c">
+    <title>7. Retrieval Signals</title>
+    <conbody>
+        <section id="section_czx_5k4_t3c">
+            <title>7.1 Description</title>
+            <p>The retrieval engine uses multiple signals when ranking candidate chunks.</p>
+            <p>These signals allow the system to improve relevance beyond simple vector
+                similarity.</p>
+        </section>
+        <section id="section_q5d_wk4_t3c">
+            <title>7.2 Vector Similarity</title>
+            <p>Semantic similarity between the user query embedding and the chunk embedding.</p>
+        </section>
+        <section id="section_vwq_yk4_t3c">
+            <title>7.3 Keyword Matching</title>
+            <p>Semantic similarity between the user query embedding and the chunk embedding.</p>
+        </section>
+        <section id="section_pts_zk4_t3c">
+            <title>7.4 Hierarchy Signals</title>
+            <p>Structural signals derived from document titles and headings.</p>
+            <p>These signals help prioritize content that appears in higher-level sections of a
+                document.</p>
+        </section>
+        <section id="section_kjg_cl4_t3c">
+            <title>7.5 Metadata Signals (Planned)</title>
+            <p>Future versions of the system will incorporate metadata signals into ranking.</p>
+            <p>Examples include:</p>
+            <ul id="ul_fb4_dl4_t3c">
+                <li>
+                    <p>type matching</p>
+                </li>
+                <li>
+                    <p>tag matching</p>
+                </li>
+                <li>
+                    <p>category matching</p>
+                </li>
+            </ul>
+            <p>These signals will allow the retrieval system to incorporate structured document
+                information into relevance scoring.</p>
+        </section>
+    </conbody>
+</concept>

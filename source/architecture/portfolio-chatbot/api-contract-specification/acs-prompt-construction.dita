@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_fgs_b2w_t3c">
+    <title>8. Prompt Construction</title>
+    <conbody>
+        <p>The system constructs a structured prompt using retrieved chunks.</p>
+        <section id="section_cbm_c2w_t3c">
+            <title>Format</title>
+            <pre>DOCUMENT: &lt;document_path>
+SECTION: &lt;title>
+
+&lt;content></pre>
+            <p>Multiple sections are concatenated to form the context.</p>
+        </section>
+        <section>
+            <title>Prompt Rules</title>
+            <ul id="ul_yqq_32w_t3c">
+                <li>Use only provided documentation </li>
+                <li>Do not hallucinate information </li>
+                <li>Combine information across sections when necessary </li>
+                <li>Prefer explicit grounding in source content</li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

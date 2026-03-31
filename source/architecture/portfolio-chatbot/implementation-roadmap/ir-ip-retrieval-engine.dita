@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_tss_rxv_m3c">
+    <title>Phase 3 — Retrieval Engine</title>
+    <conbody>
+        <section id="section_r3z_txv_m3c">
+            <title>Goal</title>
+            <p>Implement vector search functionality.</p>
+        </section>
+        <section id="section_hdk_vxv_m3c">
+            <title>Component</title>
+            <pre>api/retrieval</pre>
+        </section>
+        <section id="section_s3z_txv_m3c">
+            <title>Tasks</title>
+            <ul id="ul_hkf_xxv_m3c">
+                <li>
+                    <p><b>Load Vector Index</b></p>
+                    <p>Load:</p>
+                    <pre>vector-index.json</pre>
+                    <p>into memory.</p>
+                </li>
+                <li>
+                    <p><b>Query Embedding</b></p>
+                    <p>Convert user query to vector embedding.</p>
+                </li>
+                <li>
+                    <p><b>Similarity Calculation</b></p>
+                    <p>Use cosine similarity.</p>
+                    <pre>similarity(query, chunk)</pre>
+                    <p>Rank chunks.</p>
+                </li>
+                <li>
+                    <p><b>Top-K Retrieval</b></p>
+                    <p>Return best matches.</p>
+                    <pre>Top-K = 5</pre>
+                </li>
+            </ul>
+        </section>
+        <section id="section_t3z_txv_m3c">
+            <title>Deliverables</title>
+            <ul id="ul_w3z_txv_m3c">
+                <li>
+                    <p>vector search implementation</p>
+                </li>
+                <li>
+                    <p>retrieval ranking system</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_myp_trv_m3c">
+    <title>13. Future Data Model Extensions</title>
+    <conbody>
+        <p>The data model is designed to support future enhancements without requiring major
+            restructuring.</p>
+        <p>Planned extensions include:</p>
+        <ul id="ul_w1r_hp4_t3c">
+            <li>
+                <p>metadata-based filtering fields</p>
+            </li>
+            <li>
+                <p>additional ranking signals</p>
+            </li>
+            <li>
+                <p>user interaction history</p>
+            </li>
+            <li>
+                <p>query analytics data</p>
+            </li>
+            <li>
+                <p>feedback scoring for retrieved results</p>
+            </li>
+        </ul>
+        <p>These extensions will support improvements in retrieval accuracy, personalization, and
+            system observability.</p>
+    </conbody>
+</concept>

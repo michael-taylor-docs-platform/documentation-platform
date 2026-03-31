@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ftw_zy4_t3c">
+    <title>2. High-Level Flow</title>
+    <conbody>
+        <p>User Query</p>
+        <p> → Query Expansion</p>
+        <p> → Embedding Generation</p>
+        <p> → Vector Search (FAISS)</p>
+        <p> → Hybrid Scoring</p>
+        <p> → MMR Diversity Selection</p>
+        <p> → Cross-Encoder Reranking</p>
+        <p> → Document-Aware Selection</p>
+        <p> → Knowledge Graph Expansion</p>
+        <p> → Prompt Construction</p>
+        <p> → LLM Response Generation</p>
+    </conbody>
+</concept>

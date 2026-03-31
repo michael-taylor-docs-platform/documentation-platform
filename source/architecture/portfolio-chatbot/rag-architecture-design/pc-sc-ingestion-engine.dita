@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_ykz_3yq_m3c">
+    <title>3.2 Ingestion Engine</title>
+    <conbody>
+        <section id="section_dlv_n5w_t3c">
+            <title>Description</title>
+            <p>The ingestion engine converts Markdown-based portfolio content into structured
+                artifacts used by the retrieval system.</p>
+            <p>This process runs offline as a Python-based pipeline and is responsible for preparing
+                all data required for runtime retrieval.</p>
+            <p>The ingestion process is divided into two distinct phases:</p>
+            <ul id="ul_elv_n5w_t3c">
+                <li>Phase 1 — Content Processing </li>
+                <li>Phase 2 — Index Construction </li>
+            </ul>
+            <p>This separation ensures a clean boundary between data preparation and vector
+                indexing.</p>
+        </section>
+        <section id="section_flv_n5w_t3c">
+            <title>Implementation Language</title>
+            <p>Python</p>
+            <p>The ingestion pipeline is implemented as a set of Python scripts to align with:</p>
+            <ul id="ul_glv_n5w_t3c">
+                <li>embedding model integration </li>
+                <li>FAISS index generation </li>
+                <li>retrieval system compatibility </li>
+            </ul>
+        </section>
+        <section id="section_hlv_n5w_t3c">
+            <title>Responsibilities</title>
+            <p>The ingestion engine performs the following operations:</p>
+            <p>Phase 1 — Content Processing:</p>
+            <ol id="ol_ilv_n5w_t3c">
+                <li> Parse Markdown files </li>
+                <li> Extract frontmatter metadata </li>
+                <li> Extract document body content </li>
+                <li> Generate content chunks using document structure </li>
+                <li> Assign document-level identifiers </li>
+                <li> Build a document-level knowledge graph </li>
+                <li> Write structured JSON artifacts </li>
+            </ol>
+            <p>Phase 2 — Index Construction:</p>
+            <ol id="ol_jlv_n5w_t3c">
+                <li> Load chunk data from JSON artifacts </li>
+                <li> Generate embeddings using a sentence-transformer model </li>
+                <li> Build a FAISS vector index </li>
+                <li> Persist the index to disk </li>
+            </ol>
+        </section>
+        <section id="section_klv_n5w_t3c">
+            <title>Chunking Strategy</title>
+            <p>Documents are chunked using heading-based segmentation.</p>
+            <p>Each chunk represents a semantically meaningful section of a document.</p>
+            <p>Chunk structure includes:</p>
+            <ul id="ul_llv_n5w_t3c">
+                <li> document_path </li>
+                <li> title </li>
+                <li> content </li>
+            </ul>
+            <p>This structure enables downstream document-aware retrieval.</p>
+        </section>
+        <section id="section_mlv_n5w_t3c">
+            <title>Output Artifacts</title>
+            <p>The ingestion pipeline produces the following files:</p>
+            <p><codeph>data/chunks.json</codeph></p>
+            <p><codeph>data/knowledge_graph.json</codeph></p>
+            <p><codeph>data/kb_index.faiss</codeph></p>
+            <p><codeph>chunks.json</codeph> contains all text chunks and associated metadata.</p>
+            <p><codeph>knowledge_graph.json</codeph> stores document relationships as an adjacency
+                map.</p>
+            <p><codeph>kb_index.faiss</codeph> contains vector embeddings for similarity search.</p>
+        </section>
+        <section id="section_nlv_n5w_t3c">
+            <title>Execution</title>
+            <p>The ingestion and indexing pipeline is executed via:</p>
+            <p><codeph>scripts/rebuild_index.py</codeph></p>
+            <p>This script performs both:</p>
+            <ul id="ul_olv_n5w_t3c">
+                <li> content processing </li>
+                <li> FAISS index generation</li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

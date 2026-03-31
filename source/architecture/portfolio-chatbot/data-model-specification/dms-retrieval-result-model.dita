@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_p33_5qv_m3c">
+    <title>11. Retrieval Result Model</title>
+    <conbody>
+        <section id="section_vmb_vqv_m3c">
+            <title>11.1 Description</title>
+            <p>The Retrieval Result Model represents candidate chunks returned during the retrieval
+                process along with their associated ranking signals.</p>
+            <p>Each result includes multiple scores used in hybrid ranking and reranking.</p>
+        </section>
+        <section id="section_arg_wqv_m3c">
+            <title>11.2 Fields</title>
+            <table id="table_wmb_vqv_m3c">
+                <tgroup cols="3">
+                    <colspec colnum="1" colname="col1" colwidth="1.5*"/>
+                    <colspec colnum="2" colname="col2" colwidth="1*"/>
+                    <colspec colnum="3" colname="col3" colwidth="1.5*"/>
+                    <thead>
+                        <row>
+                            <entry>Field</entry>
+                            <entry>Type</entry>
+                            <entry>Description</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry>chunk_id</entry>
+                            <entry>string</entry>
+                            <entry>Identifier of the retrieved chunk.</entry>
+                        </row>
+                        <row>
+                            <entry>content</entry>
+                            <entry>string</entry>
+                            <entry>Text content of the chunk.</entry>
+                        </row>
+                        <row>
+                            <entry>document_path</entry>
+                            <entry>string</entry>
+                            <entry>Source document location.</entry>
+                        </row>
+                        <row>
+                            <entry>vector_score</entry>
+                            <entry>number</entry>
+                            <entry>Score derived from embedding similarity.</entry>
+                        </row>
+                        <row>
+                            <entry>keyword_score</entry>
+                            <entry>number</entry>
+                            <entry>Score based on keyword overlap with the query.</entry>
+                        </row>
+                        <row>
+                            <entry>hierarchy_score</entry>
+                            <entry>number</entry>
+                            <entry>Score derived from document structure and headings.</entry>
+                        </row>
+                        <row>
+                            <entry>hybrid_score</entry>
+                            <entry>number</entry>
+                            <entry>Combined score used for initial ranking.</entry>
+                        </row>
+                        <row>
+                            <entry>rerank_score</entry>
+                            <entry>number</entry>
+                            <entry>Score assigned during semantic reranking.</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </section>
+        <section id="section_b5m_vqv_m3c">
+            <title>11.3 Example</title>
+            <pre>{
+  "results": [
+    {
+      "chunk_id": "validation-overview",
+      "vector_score": 0.33,
+      "keyword_score": 4.0,
+      "hierarchy_score": 4.0,
+      "hybrid_score": 0.47,
+      "rerank_score": 0.82
+    }
+  ]
+}</pre>
+        </section>
+    </conbody>
+</concept>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_cml_1xv_m3c">
+    <title>Phase 1 — Project Setup</title>
+    <conbody>
+        <section id="section_szb_cxv_m3c">
+            <title>Goal</title>
+            <p>Prepare the repository and development environment.</p>
+        </section>
+        <section id="section_tzb_cxv_m3c">
+            <title>Tasks</title>
+            <p>Create directory structure</p>
+            <pre>tools
+api
+data
+docs
+tests</pre>
+            <p>Define Go module for CLI tools.</p>
+            <p>Set up environment configuration.</p>
+            <p>Example:</p>
+            <pre>.env</pre>
+            <p>Variables:</p>
+            <pre>OPENAI_API_KEY
+EMBEDDING_MODEL</pre>
+        </section>
+        <section id="section_zv4_cxv_m3c">
+            <title>Deliverables</title>
+            <ul id="ul_uzb_cxv_m3c">
+                <li>
+                    <p>repository structure</p>
+                </li>
+                <li>
+                    <p>development environment</p>
+                </li>
+                <li>
+                    <p>dependency management</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

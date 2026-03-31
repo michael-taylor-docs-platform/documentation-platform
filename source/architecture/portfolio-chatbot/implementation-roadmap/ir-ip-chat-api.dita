@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_imx_2yv_m3c">
+    <title>Phase 4 — Chat API</title>
+    <conbody>
+        <section id="section_jbn_gyv_m3c">
+            <title>Goal</title>
+            <p>Implement the chatbot API endpoint.</p>
+        </section>
+        <section id="section_kbn_gyv_m3c">
+            <title>Component</title>
+            <pre>api/chat</pre>
+            <p>Endpoint:</p>
+            <pre>POST /api/chat</pre>
+        </section>
+        <section id="section_lbn_gyv_m3c">
+            <title>Tasks</title>
+            <ul id="ul_fny_3yv_m3c">
+                <li>
+                    <p><b>Accept Chat Request</b></p>
+                    <p>Input:</p>
+                    <pre>query
+metadata_filter
+top_k</pre>
+                </li>
+                <li>
+                    <p><b>Run Retrieval</b></p>
+                    <p>Retrieve relevant chunks.</p>
+                </li>
+                <li>
+                    <p><b>Construct Prompt</b></p>
+                    <p>Combine:</p>
+                    <pre>retrieved context
+user question</pre>
+                </li>
+                <li>
+                    <p><b>Call LLM API</b></p>
+                    <p>Generate answer.</p>
+                </li>
+                <li>
+                    <p><b>Return Response</b></p>
+                    <p>Include:</p>
+                    <pre>answer
+sources</pre>
+                </li>
+            </ul>
+        </section>
+        <section id="section_mbn_gyv_m3c">
+            <title>Deliverables</title>
+            <ul id="ul_qbn_gyv_m3c">
+                <li>
+                    <p>chat API endpoint</p>
+                </li>
+                <li>
+                    <p>LLM integration</p>
+                </li>
+                <li>
+                    <p>response formatting</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

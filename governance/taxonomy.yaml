@@ -39,6 +39,7 @@ projects:
   - publishing-automation
   - structured-content-modernization
   - sales-library-modernization
+  - portfolio-chatbot
 
 layers:
   - platform
@@ -89,6 +90,14 @@ tags:
   - platform-migration
   - user-research
   - docs-as-code
+  - rag
+  - semantic-search
+  - context-retrieval
+  - knowledge-graph
+  - hybrid-retrieval
+  - llm-orchestration
+  - modular-architecture
+  - deterministic-processing
 
   # Lifecycle & Feature Patterns
   - versioning
@@ -108,9 +117,12 @@ tags:
   - ai-integration
   - github-actions
   - dispatcher-worker-pattern
+  - embeddings
+  - prompt-engineering
 
   # Distribution & Syndication
   - content-syndication
 
   # Integration Patterns
   - api-integration
+  - vector-database

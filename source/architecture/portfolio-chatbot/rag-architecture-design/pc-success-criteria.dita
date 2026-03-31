@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_vc5_4zq_m3c">
+    <title>9. Success Criteria</title>
+    <conbody>
+        <p>The project will be considered successful if:</p>
+        <ul id="ul_dyc_pzq_m3c">
+            <li>
+                <p>Users can ask questions about portfolio projects</p>
+            </li>
+            <li>
+                <p>Responses cite real portfolio content</p>
+            </li>
+            <li>
+                <p>The system runs on low-cost infrastructure</p>
+            </li>
+            <li>
+                <p>Architecture is clearly documented</p>
+            </li>
+            <li>
+                <p>The implementation demonstrates strong engineering practices</p>
+            </li>
+        </ul>
+    </conbody>
+</concept>

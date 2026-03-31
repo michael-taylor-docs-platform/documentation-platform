@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_bsl_5dw_t3c">
+    <title>7. Data Model (As Used by API)</title>
+    <conbody>
+        <section id="section_jh1_22w_t3c">
+            <title>Chunk Structure</title>
+            <pre>{
+  "document_path": "string",
+  "title": "string",
+  "content": "string"
+}</pre>
+        </section>
+        <section id="section_vlv_d2w_t3c">
+            <title>Notes</title>
+            <ul id="ul_wcb_vdw_t3c">
+                <li> Metadata (frontmatter) is <b>not currently included in chunk objects</b></li>
+                <li> Retrieval operates only on: <ul id="ul_xcb_vdw_t3c">
+                        <li> content </li>
+                        <li> title </li>
+                        <li> document_path</li>
+                    </ul></li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

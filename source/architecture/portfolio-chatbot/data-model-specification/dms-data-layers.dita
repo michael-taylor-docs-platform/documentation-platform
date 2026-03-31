@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_fqy_fpv_m3c">
+    <title>2. Data Model Layers</title>
+    <conbody>
+        <p>The system uses four logical data layers.</p>
+        <pre>Source Content
+    │
+    ▼
+Document Model
+    │
+    ▼
+Chunk Model
+    │
+    ▼
+Vector Index Model</pre>
+        <p>Each layer progressively transforms the data for AI retrieval.</p>
+    </conbody>
+</concept>

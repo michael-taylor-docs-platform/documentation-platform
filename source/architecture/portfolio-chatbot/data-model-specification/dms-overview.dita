@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_kc4_bpv_m3c">
+    <title>1. Overview</title>
+    <conbody>
+        <p>This document defines the <b>data structures used throughout the RAG system</b>
+            supporting the portfolio chatbot.</p>
+        <p>The data model governs how content is:</p>
+        <ul id="ul_ynz_cpv_m3c">
+            <li>
+                <p>Parsed</p>
+            </li>
+            <li>
+                <p>Chunked</p>
+            </li>
+            <li>
+                <p>Embedded</p>
+            </li>
+            <li>
+                <p>Stored</p>
+            </li>
+            <li>
+                <p>Retrieved</p>
+            </li>
+            <li>
+                <p>Delivered to the AI model</p>
+            </li>
+        </ul>
+        <p>The design emphasizes:</p>
+        <ul id="ul_znz_cpv_m3c">
+            <li>
+                <p>Structured metadata</p>
+            </li>
+            <li>
+                <p>Transparency</p>
+            </li>
+            <li>
+                <p>Compatibility with static hosting</p>
+            </li>
+            <li>
+                <p>Ease of debugging</p>
+            </li>
+            <li>
+                <p>Extensibility</p>
+            </li>
+        </ul>
+    </conbody>
+</concept>

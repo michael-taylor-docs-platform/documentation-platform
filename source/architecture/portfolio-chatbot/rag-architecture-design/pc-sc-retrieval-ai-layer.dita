@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_omv_ryq_m3c">
+    <title>3.4 Retrieval &amp; AI Layer</title>
+    <conbody>
+        <section id="section_rk5_xvs_n3c">
+            <p>The Retrieval and AI Layer is responsible for transforming user queries into
+                grounded, context-aware responses using a multi-stage retrieval pipeline.</p>
+            <p>This system goes beyond basic vector similarity search by incorporating:</p>
+            <ul id="ul_bzq_bws_n3c">
+                <li>
+                    <p>hybrid scoring</p>
+                </li>
+                <li>
+                    <p>diversity filtering (MMR)</p>
+                </li>
+                <li>
+                    <p>semantic reranking</p>
+                </li>
+                <li>
+                    <p>document-aware aggregation</p>
+                </li>
+                <li>
+                    <p>knowledge graph expansion</p>
+                </li>
+            </ul>
+            <p>These steps significantly improve both <b>retrieval precision</b> and <b>context
+                    quality</b>, enabling more accurate and explainable responses.</p>
+        </section>
+        <section id="section_pct_yvs_n3c">
+            <title>3.4.1 Retrieval Pipeline</title>
+            <p>The runtime pipeline executes the following stages:</p>
+            <ul id="ul_t1q_psw_t3c">
+                <li>
+                    <p>User Query</p>
+                </li>
+                <li>
+                    <p> Query Expansion (rule-based)</p>
+                </li>
+                <li>
+                    <p> Query Embedding (SentenceTransformers)</p>
+                </li>
+                <li>
+                    <p> FAISS Vector Search (top ~30 chunks)</p>
+                </li>
+                <li>
+                    <p> Hybrid Scoring</p>
+                </li>
+                <li>
+                    <p> MMR Diversity Selection (k ≈ 12)</p>
+                </li>
+                <li>
+                    <p> Cross-Encoder Reranking</p>
+                </li>
+                <li>
+                    <p> Document-Aware Aggregation</p>
+                </li>
+                <li>
+                    <p> Top Documents (top 3)</p>
+                </li>
+                <li>
+                    <p> Top Chunks per Document (top 2)</p>
+                </li>
+                <li>
+                    <p> Knowledge Graph Expansion (document-level)</p>
+                </li>
+                <li>
+                    <p> Prompt Construction</p>
+                </li>
+                <li>
+                    <p> LLM Response Generation</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_i3n_tsw_t3c">
+            <title>3.4.2 Query Expansion</title>
+            <p>User queries are expanded using rule-based techniques to improve recall.</p>
+            <p>This step helps bridge vocabulary gaps between:</p>
+            <ul id="ul_jwg_vsw_t3c">
+                <li>
+                    <p>user phrasing</p>
+                </li>
+                <li>
+                    <p>technical terminology in documentation</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_ytt_wsw_t3c">
+            <title>3.4.3 Query Embedding</title>
+            <p>The expanded query is converted into a vector embedding using:</p>
+            <p><codeph>sentence-transformers/all-MiniLM-L6-v2</codeph></p>
+        </section>
+        <section id="section_pqg_lvw_t3c">
+            <title>3.4.4 Vector Retrieval (FAISS)</title>
+            <p>A FAISS index is used to perform approximate nearest neighbor search.</p>
+            <ul id="ul_z3r_mvw_t3c">
+                <li>
+                    <p>Input: query embedding</p>
+                </li>
+                <li>
+                    <p>Output: top ~30 candidate chunks</p>
+                </li>
+            </ul>
+            <p>This stage prioritizes <b>recall</b>, returning a broad candidate pool for downstream
+                filtering.</p>
+        </section>
+        <section id="section_trk_4vw_t3c">
+            <title>3.4.5 Hybrid Scoring</title>
+            <p>Each candidate chunk is rescored using a hybrid approach combining:</p>
+            <ul id="ul_stx_pvw_t3c">
+                <li>
+                    <p>vector similarity (semantic relevance)</p>
+                </li>
+                <li>
+                    <p>keyword overlap (lexical match)</p>
+                </li>
+            </ul>
+            <p>This improves performance in cases where:</p>
+            <ul id="ul_i5q_qvw_t3c">
+                <li>
+                    <p>exact terminology matters</p>
+                </li>
+                <li>
+                    <p>embeddings alone are insufficient</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_u34_rvw_t3c">
+            <title>3.4.6 Diversity Selection (MMR)</title>
+            <p>Maximal Marginal Relevance (MMR) is applied to reduce redundancy.</p>
+            <ul id="ul_sbs_tvw_t3c">
+                <li>
+                    <p>Input: ~30 candidates</p>
+                </li>
+                <li>
+                    <p>Output: ~12 diverse chunks</p>
+                </li>
+            </ul>
+            <p>MMR balances:</p>
+            <ul id="ul_pgh_5vw_t3c">
+                <li>
+                    <p>relevance to the query</p>
+                </li>
+                <li>
+                    <p>diversity across sources</p>
+                </li>
+            </ul>
+            <p>This prevents over-representation of a single document or section.</p>
+        </section>
+        <section id="section_qyx_1tw_t3c">
+            <title>3.4.7 Semantic Reranking</title>
+            <p>A cross-encoder model is used for final ranking:</p>
+            <p><codeph>cross-encoder/ms-marco-MiniLM-L-6-v2</codeph></p>
+            <p>This model evaluates query–chunk pairs directly and produces a more precise relevance
+                ranking than embedding similarity alone.</p>
+        </section>
+        <section id="section_dgz_htw_t3c">
+            <title>3.4.8 Document-Aware Aggregation</title>
+            <p>Unlike naive RAG systems, this implementation performs <b>document-level
+                grouping</b>.</p>
+            <p>Steps:</p>
+            <ol id="ol_wz3_ktw_t3c">
+                <li>
+                    <p>Group chunks by <codeph>document_path</codeph></p>
+                </li>
+                <li>
+                    <p>Score each document using its highest-ranked chunk</p>
+                </li>
+                <li>
+                    <p>Select top 3 documents</p>
+                </li>
+                <li>
+                    <p>Select top 2 chunks per document</p>
+                </li>
+            </ol>
+            <p>This ensures:</p>
+            <ul id="ul_jhn_mtw_t3c">
+                <li>
+                    <p>better contextual coherence</p>
+                </li>
+                <li>
+                    <p>reduced fragmentation</p>
+                </li>
+                <li>
+                    <p>stronger alignment with how humans consume documentation</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_o3l_4tw_t3c">
+            <title>3.4.9 Knowledge Graph Expansion</title>
+            <p>After document selection, the system expands context using a document-level knowledge
+                graph.</p>
+            <p>The graph is stored as an adjacency map:</p>
+            <pre>{
+  "docA": [
+    "docB",
+    "docC"
+  ]
+}</pre>
+            <p>Expansion behavior:</p>
+            <ul id="ul_ogh_rtw_t3c">
+                <li>
+                    <p>retrieve related documents for selected top documents</p>
+                </li>
+                <li>
+                    <p>include additional supporting context when relevant</p>
+                </li>
+            </ul>
+            <p>This enables:</p>
+            <ul id="ul_a3w_rtw_t3c">
+                <li>
+                    <p>cross-document reasoning</p>
+                </li>
+                <li>
+                    <p>improved coverage of related concepts</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_kms_stw_t3c">
+            <title>3.4.10 Context Assembly</title>
+            <p>The final context is constructed from:</p>
+            <ul id="ul_wcg_5tw_t3c">
+                <li>
+                    <p>top-ranked chunks (document-aware selection)</p>
+                </li>
+                <li>
+                    <p>graph-expanded documents (when applicable)</p>
+                </li>
+            </ul>
+            <p>The context is structured to:</p>
+            <ul id="ul_a5z_5tw_t3c">
+                <li>
+                    <p>preserve document boundaries</p>
+                </li>
+                <li>
+                    <p>maintain logical grouping</p>
+                </li>
+                <li>
+                    <p>maximize relevance per token</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_zws_wtw_t3c">
+            <title>3.4.11 Response Generation</title>
+            <p>The final prompt is sent to the language model:</p>
+            <p><codeph>GPT-4o-mini</codeph></p>
+            <p>The model generates a response grounded entirely in retrieved context.</p>
+            <p>This ensures:</p>
+            <ul id="ul_bsb_15w_t3c">
+                <li>
+                    <p>factual consistency with the knowledge base</p>
+                </li>
+                <li>
+                    <p>reduced hallucination risk</p>
+                </li>
+                <li>
+                    <p>explainability via source attribution</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_k5r_15w_t3c">
+            <title>3.4.12 Metadata Usage (Current State)</title>
+            <p>Metadata extracted from Markdown frontmatter is:</p>
+            <ul id="ul_trt_c5w_t3c">
+                <li>
+                    <p>parsed during ingestion</p>
+                </li>
+                <li>
+                    <p>partially stored in chunk data</p>
+                </li>
+            </ul>
+            <p>However, metadata is not currently used in retrieval scoring or filtering.</p>
+            <p>It is reserved for future enhancements such as:</p>
+            <ul id="ul_ihv_d5w_t3c">
+                <li>
+                    <p>metadata filtering</p>
+                </li>
+                <li>
+                    <p>structured query constraints</p>
+                </li>
+                <li>
+                    <p>UI-driven search refinement</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

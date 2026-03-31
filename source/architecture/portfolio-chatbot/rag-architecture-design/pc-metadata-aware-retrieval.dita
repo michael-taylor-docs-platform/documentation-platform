@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_lzc_2zq_m3c">
+    <title>5. Metadata-Aware Retrieval</title>
+    <conbody>
+        <p>One of the design goals of the system is to leverage structured metadata present in
+            Markdown frontmatter.</p>
+        <p>Example metadata:</p>
+        <ul id="ul_skp_k5s_n3c">
+            <li>
+                <p>title</p>
+            </li>
+            <li>
+                <p>type</p>
+            </li>
+            <li>
+                <p>category</p>
+            </li>
+            <li>
+                <p>tags</p>
+            </li>
+        </ul>
+        <p>This metadata enables <b>metadata-aware retrieval strategies</b>, including:</p>
+        <ul id="ul_vvf_n5s_n3c">
+            <li>
+                <p>metadata filtering</p>
+            </li>
+            <li>
+                <p>metadata scoring</p>
+            </li>
+            <li>
+                <p>hybrid metadata + semantic ranking</p>
+            </li>
+        </ul>
+        <p>Example filter:</p>
+        <ul id="ul_p5c_p5s_n3c">
+            <li>
+                <p>type: project</p>
+            </li>
+            <li>
+                <p>tags: automation</p>
+            </li>
+        </ul>
+        <p>This allows the system to restrict search to relevant content classes.</p>
+        <section id="section_y5b_s5s_n3c">
+            <title>Planned Capabilities</title>
+            <p>Future versions of the retrieval engine will support:</p>
+            <ul id="ul_m41_t5s_n3c">
+                <li>
+                    <p>metadata filter parameters in API requests</p>
+                </li>
+                <li>
+                    <p>weighted metadata scoring</p>
+                </li>
+                <li>
+                    <p>structured query filtering</p>
+                </li>
+                <li>
+                    <p>UI-based filtering options</p>
+                </li>
+            </ul>
+            <p>These features allow the chatbot to behave more like a <b>semantic search engine</b>
+                than a simple question-answering system.</p>
+        </section>
+    </conbody>
+</concept>

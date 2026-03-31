@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_agn_fzv_m3c">
+    <title>9. Success Criteria</title>
+    <conbody>
+        <p>The implementation will be successful when:</p>
+        <ul id="ul_gps_gzv_m3c">
+            <li>
+                <p>the ingestion engine builds a vector index from Markdown content</p>
+            </li>
+            <li>
+                <p>the retrieval engine returns relevant chunks</p>
+            </li>
+            <li>
+                <p>the chatbot produces grounded answers</p>
+            </li>
+            <li>
+                <p>responses include source references</p>
+            </li>
+            <li>
+                <p>the system runs reliably on serverless infrastructure</p>
+            </li>
+        </ul>
+    </conbody>
+</concept>

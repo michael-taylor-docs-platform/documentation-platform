@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+    <title> Context-Aware Portfolio Chatbot </title>
+    <topicref href="pc-portfolio-chatbot.dita" chunk="to-content">
+        <topicref href="pc-project-overview.dita"/>
+        <topicref href="pc-high-level-architecture.dita"/>
+        <topicref href="pc-system-components.dita">
+            <topicref href="pc-sc-content-source-layer.dita"/>
+            <topicref href="pc-sc-ingestion-engine.dita"/>
+            <topicref href="pc-sc-vector-storage.dita"/>
+            <topicref href="pc-sc-retrieval-ai-layer.dita"/>
+            <topicref href="pc-sc-frontend-chat-interface.dita"/>
+        </topicref>
+        <topicref href="pc-security-model.dita"/>
+        <topicref href="pc-metadata-aware-retrieval.dita"/>
+        <topicref href="pc-deployment-model.dita"/>
+        <topicref href="pc-implementation-phases.dita"/>
+        <topicref href="pc-future-enhancements.dita"/>
+        <topicref href="pc-success-criteria.dita"/>
+    </topicref>
+</map>

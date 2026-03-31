@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_khb_3sv_m3c">
+    <title>12. Future Extensions</title>
+    <conbody>
+        <ol>
+            <li>Metadata-aware filtering and scoring </li>
+            <li> Structured citation references (chunk-level) </li>
+            <li> Debug/trace output (scores, ranking stages) </li>
+            <li> Streaming responses </li>
+            <li> API parameterization (top-k, filters)</li>
+        </ol>
+    </conbody>
+</concept>

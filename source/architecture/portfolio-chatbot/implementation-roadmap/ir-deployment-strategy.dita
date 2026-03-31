@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_szp_yyv_m3c">
+    <title>6. Deployment Strategy</title>
+    <conbody>
+        <p>The system will deploy using a <b>serverless architecture</b>.</p>
+        <p>Possible platforms include:</p>
+        <ul id="ul_dsx_zyv_m3c">
+            <li>
+                <p>Vercel</p>
+            </li>
+            <li>
+                <p>Netlify</p>
+            </li>
+            <li>
+                <p>Cloudflare</p>
+            </li>
+        </ul>
+        <section id="section_esx_zyv_m3c">
+            <title>Deployment Steps</title>
+            <p>1 Deploy static site</p>
+            <p>2 Deploy serverless API</p>
+            <p>3 Upload vector index</p>
+            <p>4 Configure environment variables</p>
+        </section>
+    </conbody>
+</concept>

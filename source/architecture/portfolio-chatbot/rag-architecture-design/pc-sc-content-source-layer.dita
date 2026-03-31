@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_jxx_cyq_m3c">
+    <title>3.1 Content Source Layer</title>
+    <conbody>
+        <section id="section_imf_2yq_m3c">
+            <title>Description</title>
+            <p>The knowledge corpus consists of Markdown files used by the portfolio website.</p>
+            <p>Each document contains <b>YAML frontmatter metadata</b>.</p>
+            <p>Example:</p>
+            <pre>---
+title: create-kb-met Go Utility
+type: project
+category: tooling
+tags:
+  - dita
+  - automation
+  - metadata
+date: 2026-03-01
+---</pre>
+        </section>
+        <section id="section_jmf_2yq_m3c">
+            <title>Responsibilities</title>
+            <p>The content layer provides:</p>
+            <ul id="ul_kmf_2yq_m3c">
+                <li>
+                    <p>Human-readable documentation</p>
+                </li>
+                <li>
+                    <p>Structured metadata</p>
+                </li>
+                <li>
+                    <p>Knowledge corpus for retrieval</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_lmf_2yq_m3c">
+            <title>Supported Content Types</title>
+            <p>Examples:</p>
+            <ul id="ul_mmf_2yq_m3c">
+                <li>
+                    <p>Projects</p>
+                </li>
+                <li>
+                    <p>Technical Articles</p>
+                </li>
+                <li>
+                    <p>Architecture Notes</p>
+                </li>
+                <li>
+                    <p>Tool Documentation</p>
+                </li>
+            </ul>
+        </section>
+    </conbody>
+</concept>

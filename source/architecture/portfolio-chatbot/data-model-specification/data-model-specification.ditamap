@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+    <title>Data Model Specification</title>
+    <topicref href="data-model-specification.dita" chunk="to-content">
+        <topicref href="dms-overview.dita"/>
+        <topicref href="dms-data-layers.dita"/>
+        <topicref href="dms-source-content-model.dita"/>
+        <topicref href="dms-document-model.dita"/>
+        <topicref href="dms-chunk-model.dita"/>
+        <topicref href="dms-metadata-model.dita"/>
+        <topicref href="dms-retrieval-signals.dita"/>
+        <topicref href="dms-vector-index-model.dita"/>
+        <topicref href="dms-metadata-filters.dita"/>
+        <topicref href="dms-query-model.dita"/>
+        <topicref href="dms-retrieval-result-model.dita"/>
+        <topicref href="dms-ai-prompt-context-model.dita"/>
+        <topicref href="dms-future-data-model-extensions.dita"/>
+        <topicref href="dms-design-principals.dita"/>
+    </topicref>
+</map>

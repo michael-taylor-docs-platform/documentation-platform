@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+    <title>Implementation Roadmap</title>
+    <topicref href="implementation-roadmap.dita" chunk="to-content">
+        <topicref href="ir-overview.dita"/>
+        <topicref href="ir-project-objectives.dita"/>
+        <topicref href="ir-repository-structure.dita"/>
+        <topicref href="ir-implementation-phases.dita">
+            <topicref href="ir-ip-project-setup.dita"/>
+            <topicref href="ir-ip-ingestion-engine.dita"/>
+            <topicref href="ir-ip-retrieval-engine.dita"/>
+            <topicref href="ir-ip-chat-api.dita"/>
+            <topicref href="ir-ip-frontend-chat-interface.dita"/>
+        </topicref>
+        <topicref href="ir-testing-strategy.dita"/>
+        <topicref href="ir-deployment-strategy.dita"/>
+        <topicref href="ir-performance-targets.dita"/>
+        <topicref href="ir-risk-assessment.dita"/>
+        <topicref href="ir-success-criteria.dita"/>
+        <topicref href="ir-future-roadmap.dita"/>
+    </topicref>
+</map>
