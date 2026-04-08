@@ -24,22 +24,68 @@
                 document.</p>
         </section>
         <section id="section_kjg_cl4_t3c">
-            <title>7.5 Metadata Signals (Planned)</title>
-            <p>Future versions of the system will incorporate metadata signals into ranking.</p>
-            <p>Examples include:</p>
+            <title>7.5 Metadata Signals</title>
+            <p>Metadata signals are actively used during retrieval scoring.</p>
+            <p>These include:</p>
             <ul id="ul_fb4_dl4_t3c">
                 <li>
-                    <p>type matching</p>
+                    <p>category matching</p>
                 </li>
                 <li>
                     <p>tag matching</p>
                 </li>
                 <li>
-                    <p>category matching</p>
+                    <p>project grouping</p>
+                </li>
+                <li>
+                    <p>layer-based contextual weighting</p>
                 </li>
             </ul>
-            <p>These signals will allow the retrieval system to incorporate structured document
-                information into relevance scoring.</p>
+            <p>Metadata contributes to ranking through weighted scoring bonuses applied during
+                hybrid scoring.</p>
+            <p>This allows the system to:</p>
+            <ul id="ul_mhb_pld_w3c">
+                <li>
+                    <p>prioritize relevant content types</p>
+                </li>
+                <li>
+                    <p>improve alignment with structured queries</p>
+                </li>
+                <li>
+                    <p>enhance retrieval precision beyond semantic similarity</p>
+                </li>
+            </ul>
+        </section>
+        <section id="section_acf_qld_w3c">
+            <title>7.6 Intent Signals</title>
+            <p>The system incorporates query intent as a dynamic retrieval signal.</p>
+            <p>Intent is classified into:</p>
+            <ul id="ul_ovb_sld_w3c">
+                <li>
+                    <p>identity</p>
+                </li>
+                <li>
+                    <p>experience</p>
+                </li>
+                <li>
+                    <p>technical</p>
+                </li>
+            </ul>
+            <p>Intent influences ranking by adjusting metadata-based scoring weights.</p>
+            <p>Examples:</p>
+            <ul id="ul_r5v_sld_w3c">
+                <li>
+                    <p>identity queries prioritize profile-related content</p>
+                </li>
+                <li>
+                    <p>experience queries prioritize resume and project history</p>
+                </li>
+                <li>
+                    <p>technical queries prioritize architecture and pipeline documentation</p>
+                </li>
+            </ul>
+            <p>This enables context-aware retrieval behavior without requiring additional model
+                inference.</p>
         </section>
     </conbody>
 </concept>

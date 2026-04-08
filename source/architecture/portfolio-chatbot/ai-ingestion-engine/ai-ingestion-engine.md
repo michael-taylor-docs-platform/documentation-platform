@@ -145,9 +145,10 @@ The ingestion system operates in two phases:
 
 1. Content Discovery  
 2. Frontmatter Extraction  
-3. Document Chunking  
-4. Knowledge Graph Generation  
-5. Artifact Serialization (chunks + graph)  
+3. Metadata Normalization
+4. Document Chunking  
+5. Knowledge Graph Generation  
+6. Artifact Serialization (chunks + graph)  
 
 ### Phase 2 — Semantic Indexing
 
@@ -182,20 +183,30 @@ List of Markdown documents
 
 ## 6. Frontmatter Extraction
 
-Frontmatter metadata is extracted but NOT currently used in retrieval.
+Frontmatter metadata is extracted, normalized, and stored as part of each chunk.
 
-Extracted fields:
+Extracted fields include:
 
-| Field   | Status        |
-| ------- | ------------- |
-| title   | used (chunk)  |
-| type    | stored (future) |
-| tags    | stored (future) |
-| summary | stored (future) |
+| Field     | Usage                          |
+|----------|--------------------------------|
+| title     | used for chunk labeling        |
+| category  | used in retrieval scoring      |
+| tags      | used in retrieval scoring      |
+| project   | used for grouping/filtering    |
+| layer     | used for contextual weighting  |
+| summary   | stored for future use          |
 
-⚠️ Metadata must NOT influence retrieval scoring until fully integrated.
+### Usage
 
-Partial usage may introduce inconsistent ranking behavior.
+Metadata is actively used during retrieval to improve relevance through:
+
+- category-based weighting
+- tag matching
+- intent-aware scoring adjustments
+
+### Design Constraint
+
+Metadata must remain consistent and schema-aligned across all documents to ensure stable retrieval behavior.
 
 ---
 
@@ -216,7 +227,13 @@ Each section becomes a chunk.
 {
   "document_path": "string",
   "title": "string",
-  "content": "string"
+  "content": "string",
+  "metadata": {
+    "category": "string",
+    "tags": ["string"],
+    "project": "string",
+    "layer": "string"
+    }
 }
 ```
 
@@ -240,7 +257,8 @@ Changing this format will break retrieval behavior.
 
 ### Notes
 
-- No metadata is stored in chunks (yet)
+- Metadata is stored per chunk and used during retrieval scoring
+- Metadata enables hybrid ranking and intent-aware boosting
 - Chunk IDs are NOT required
 
 ---
@@ -296,6 +314,17 @@ sentence-transformers/all-MiniLM-L6-v2
 The same embedding model and normalization settings MUST be used during both indexing and query time.
 
 Any mismatch will result in degraded or invalid similarity scoring.
+
+### Additional Note
+
+Embeddings are generated solely from chunk content.
+
+Metadata is NOT embedded but is applied during retrieval scoring as a separate signal.
+
+This separation ensures:
+
+- stable semantic embeddings
+- flexible ranking adjustments without reindexing
 
 ---
 
@@ -397,8 +426,8 @@ This ensures the chatbot index remains synchronized with documentation updates.
 
 ## 13. Future Enhancements
 
-- metadata integration into chunks
-- metadata-based filtering
+- intent-aware metadata weighting refinement
+- metadata validation enforcement (strict schema)
 - incremental indexing
 - improved graph weighting
 - response citations

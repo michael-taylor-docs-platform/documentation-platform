@@ -23,11 +23,22 @@ markdown_extensions:
   - attr_list
   - md_in_html
 
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/marked/marked.min.js
+  - assets/javascripts/chatbot.js
+
+extra_css:
+  - assets/stylesheets/chatbot.css
+
 docs_dir: docs
 site_dir: site
 
 nav:
   - Home: index.md
+
+  - Profile:
+      - profile/professional-resume.md
+      - profile/linkedin-profile.md      
 
   - Portfolio Architecture:
       - architecture/architecture-overview.md

@@ -8,7 +8,16 @@
         <p>Planned extensions include:</p>
         <ul id="ul_w1r_hp4_t3c">
             <li>
-                <p>metadata-based filtering fields</p>
+                <p>intent confidence scoring</p>
+            </li>
+            <li>
+                <p>advanced metadata weighting strategies</p>
+            </li>
+            <li>
+                <p>retrieval trace logging (scores + signals)</p>
+            </li>
+            <li>
+                <p>adaptive ranking based on query patterns</p>
             </li>
             <li>
                 <p>additional ranking signals</p>

@@ -5,9 +5,10 @@
     <conbody>
         <p>User Query</p>
         <p> → Query Expansion</p>
+        <p>→ Query Intent Classification</p>
         <p> → Embedding Generation</p>
         <p> → Vector Search (FAISS)</p>
-        <p> → Hybrid Scoring</p>
+        <p> → Hybrid Scoring (vector + keyword + hierarchy + metadata + intent)</p>
         <p> → MMR Diversity Selection</p>
         <p> → Cross-Encoder Reranking</p>
         <p> → Document-Aware Selection</p>

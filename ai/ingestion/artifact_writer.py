@@ -34,7 +34,8 @@ def write_chunks(chunks):
             "id": f"chunk_{i}",
             "document_path": chunk.document_path,
             "title": chunk.title,
-            "content": chunk.content
+            "content": chunk.content,
+            "metadata": chunk.metadata
         })
 
     write_json(data, "data/chunks.json")

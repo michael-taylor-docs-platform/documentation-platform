@@ -57,6 +57,7 @@ Rather than relying solely on LLM reasoning, the architecture focuses on improvi
 
   - hybrid retrieval scoring
   - metadata awareness
+  - intent-aware retrieval weighting
   - diversity selection
   - semantic reranking
 
@@ -343,9 +344,10 @@ The runtime pipeline executes the following stages:
 
   - User Query
   - Query Expansion (rule-based)
+  - Query Intent Classification (rule-based)
   - Query Embedding (SentenceTransformers)
   - FAISS Vector Search (top ~30 chunks)
-  - Hybrid Scoring
+  - Hybrid Scoring (vector + keyword + hierarchy + metadata + intent)
   - MMR Diversity Selection (k ≈ 12)
   - Cross-Encoder Reranking
   - Document-Aware Aggregation
@@ -364,13 +366,37 @@ This step helps bridge vocabulary gaps between:
   - user phrasing
   - technical terminology in documentation
 
-#### 3.4.3 Query Embedding
+#### 3.4.3 Query Intent Classification
+
+The system performs lightweight, rule-based query intent classification prior to retrieval scoring.
+
+Intent categories:
+
+  - identity — questions about the author (e.g., "Who is Michael Taylor?")
+  - experience — questions about career history, roles, and projects
+  - technical — questions about system design, architecture, or implementation
+
+Intent is determined using keyword matching against the user query.
+
+This classification influences retrieval behavior by adjusting metadata-based scoring weights.
+
+**Design Rationale**
+
+This approach enables:
+
+  - prioritization of profile-related documents for identity queries
+  - improved alignment between query intent and retrieved content
+  - better separation between technical and biographical responses
+
+The classifier is intentionally lightweight and deterministic to avoid additional model overhead.
+
+#### 3.4.4 Query Embedding
 
 The expanded query is converted into a vector embedding using:
 
 `sentence-transformers/all-MiniLM-L6-v2`
 
-#### 3.4.4 Vector Retrieval (FAISS)
+#### 3.4.5 Vector Retrieval (FAISS)
 
 A FAISS index is used to perform approximate nearest neighbor search.
 
@@ -379,19 +405,26 @@ A FAISS index is used to perform approximate nearest neighbor search.
 
 This stage prioritizes **recall**, returning a broad candidate pool for downstream filtering.
 
-#### 3.4.5 Hybrid Scoring
+#### 3.4.6 Hybrid Scoring
 
 Each candidate chunk is rescored using a hybrid approach combining:
 
   - vector similarity (semantic relevance)
   - keyword overlap (lexical match)
+  - hierarchy weighting (title relevance)
+  - metadata matching (category, tags)
+  - intent-aware boosting
+
+Metadata extracted from Markdown frontmatter is actively used during scoring to improve relevance.
+
+Intent-aware boosting dynamically adjusts scoring weights based on the classified query intent, improving alignment between user intent and retrieved content.
 
 This improves performance in cases where:
 
   - exact terminology matters
   - embeddings alone are insufficient
 
-#### 3.4.6 Diversity Selection (MMR)
+#### 3.4.7 Diversity Selection (MMR)
 
 Maximal Marginal Relevance (MMR) is applied to reduce redundancy.
 
@@ -405,7 +438,7 @@ MMR balances:
 
 This prevents over-representation of a single document or section.
 
-#### 3.4.7 Semantic Reranking
+#### 3.4.8 Semantic Reranking
 
 A cross-encoder model is used for final ranking:
 
@@ -413,7 +446,7 @@ A cross-encoder model is used for final ranking:
 
 This model evaluates query–chunk pairs directly and produces a more precise relevance ranking than embedding similarity alone.
 
-#### 3.4.8 Document-Aware Aggregation
+#### 3.4.9 Document-Aware Aggregation
 
 Unlike naive RAG systems, this implementation performs **document-level grouping**.
 
@@ -430,7 +463,7 @@ This ensures:
   - reduced fragmentation
   - stronger alignment with how humans consume documentation
 
-#### 3.4.9 Knowledge Graph Expansion
+#### 3.4.10 Knowledge Graph Expansion
 
 After document selection, the system expands context using a document-level knowledge graph.
 
@@ -455,7 +488,7 @@ This enables:
   - cross-document reasoning
   - improved coverage of related concepts
 
-#### 3.4.10 Context Assembly
+#### 3.4.11 Context Assembly
 
 The final context is constructed from:
 
@@ -468,7 +501,7 @@ The context is structured to:
   - maintain logical grouping
   - maximize relevance per token
 
-#### 3.4.11 Response Generation
+#### 3.4.12 Response Generation
 
 The final prompt is sent to the language model:
 
@@ -482,20 +515,30 @@ This ensures:
   - reduced hallucination risk
   - explainability via source attribution
 
-#### 3.4.12 Metadata Usage (Current State)
+#### 3.4.13 Metadata Usage
 
-Metadata extracted from Markdown frontmatter is:
+Metadata extracted from Markdown frontmatter is actively used during retrieval scoring.
 
-  - parsed during ingestion
-  - partially stored in chunk data
+Metadata fields include:
 
-However, metadata is not currently used in retrieval scoring or filtering.
+  - category
+  - tags
+  - project
+  - layer
 
-It is reserved for future enhancements such as:
+Metadata contributes to retrieval through:
 
-  - metadata filtering
-  - structured query constraints
-  - UI-driven search refinement
+  - direct matching between query terms and metadata values
+  - weighted scoring bonuses for matching categories and tags
+  - integration into hybrid scoring alongside vector and keyword signals
+
+This enables:
+
+  - improved relevance for structured queries
+  - better alignment between user intent and content type
+  - enhanced discoverability of portfolio and profile content
+
+Metadata-aware scoring is further enhanced by query intent classification, allowing the system to prioritize different content types dynamically.
 
 <a id="pc-sc-frontend-chat-interface"></a>
 ### 3.5 Frontend Chat Interface
@@ -698,12 +741,11 @@ Tasks:
 
 Possible future improvements include:
 
-- Hybrid keyword + vector search
-- Metadata filter UI
+- Intent confidence scoring
+- Metadata filter UI (user-selectable filters)
 - Conversation memory
-- Streaming responses
 - Knowledge graph visualization
-- Automated ingestion pipelines
+- Adaptive retrieval weighting based on query patterns
 
 <a id="pc-success-criteria"></a>
 ## 9. Success Criteria

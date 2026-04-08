@@ -6,22 +6,19 @@
         <p>Possible future improvements include:</p>
         <ul id="ul_ls2_nzq_m3c">
             <li>
-                <p>Hybrid keyword + vector search</p>
+                <p>Intent confidence scoring</p>
             </li>
             <li>
-                <p>Metadata filter UI</p>
+                <p>Metadata filter UI (user-selectable filters)</p>
             </li>
             <li>
                 <p>Conversation memory</p>
             </li>
             <li>
-                <p>Streaming responses</p>
-            </li>
-            <li>
                 <p>Knowledge graph visualization</p>
             </li>
             <li>
-                <p>Automated ingestion pipelines</p>
+                <p>Adaptive retrieval weighting based on query patterns</p>
             </li>
         </ul>
     </conbody>

@@ -45,11 +45,13 @@ User Query
 
 → Query Expansion
 
+→ Query Intent Classification
+
 → Embedding Generation
 
 → Vector Search (FAISS)
 
-→ Hybrid Scoring
+→ Hybrid Scoring (vector + keyword + hierarchy + metadata + intent)
 
 → MMR Diversity Selection
 
@@ -130,48 +132,69 @@ Example:
 
 The expanded query is used for embedding generation.
 
-### 6.2 Embedding Generation
+### 6.2 Query Intent Classification
+
+The system performs lightweight, rule-based query intent classification prior to retrieval scoring.
+
+Supported intents:
+
+  - identity — questions about the author (e.g., "Who is Michael Taylor?")
+  - experience — questions about career history and projects
+  - technical — questions about system architecture, pipelines, and implementation
+
+Intent classification is based on keyword matching within the query.
+
+**Purpose**
+
+Intent is used to dynamically adjust retrieval scoring, improving alignment between query intent and selected content.
+
+This enables:
+
+  - prioritization of profile content for identity queries
+  - stronger weighting of experience-related documents for career queries
+  - emphasis on technical documentation for system-related questions
+
+### 6.3 Embedding Generation
 
   - Model:
   - Input: expanded query
   - Output: normalized embedding vector
 
-### 6.3 Vector Search
+### 6.4 Vector Search
 
   - Index: FAISS ()
   - Retrieval size: top 30 candidates
 
-### 6.4 Hybrid Scoring
+### 6.5 Hybrid Scoring
 
 Each candidate chunk is scored using:
 
   - Vector similarity score
   - Keyword match score
   - Hierarchy (title) score
+  - Metadata match score (category, tags)
+  - Intent-aware scoring adjustments
 
 **Score Fusion**
 
-```
-hybrid_score =
-  0.6 * vector_score +
-  0.25 * keyword_score +
-  0.15 * hierarchy_score
-```
+Scoring is performed using a weighted hybrid model combining semantic, lexical, structural, and metadata signals.
 
-### 6.5 MMR Diversity Selection
+Weights may be dynamically adjusted based on query intent.
+
+### 6.6 MMR Diversity Selection
 
 Maximal Marginal Relevance (MMR) is applied to reduce redundancy and improve diversity.
 
   - Input: top hybrid-ranked candidates
   - Output: diversified subset (k = 12)
 
-### 6.6 Semantic Reranking
+### 6.7 Semantic Reranking
 
   - Model:
   - Method: query–chunk pair scoring
   - Output: reranked candidates by semantic relevance
 
-### 6.7 Document-Aware Selection
+### 6.8 Document-Aware Selection
 
 Chunks are grouped by `document_path`.
 
@@ -181,7 +204,7 @@ Selection strategy:
   2. Select top 3 documents
   3. Select top 2 chunks per document
 
-### 6.8 Knowledge Graph Expansion
+### 6.9 Knowledge Graph Expansion
 
 A document-level graph is used to identify related documents.
 
@@ -199,7 +222,13 @@ Additional chunks from related documents may be appended to the result set.
 {
   "document_path": "string",
   "title": "string",
-  "content": "string"
+  "content": "string",
+  "metadata": {
+    "category": "string",
+    "tags": ["string"],
+    "project": "string",
+    "layer": "string"
+  }
 }
 ```
 
@@ -207,14 +236,21 @@ Additional chunks from related documents may be appended to the result set.
 
   - Metadata (frontmatter) is
   - Retrieval operates only on:
-    - content
-    - title
-    - document_path
+    - content (semantic similarity)
+    - title (hierarchy scoring)
+    - metadata (category, tags, project, layer)
+    - intent (dynamic scoring adjustment)
 
 <a id="acs-prompt-construction"></a>
 ## 8. Prompt Construction
 
 The system constructs a structured prompt using retrieved chunks.
+
+Prompt construction is influenced by query intent, which guides response style:
+
+- identity → concise summary of the individual
+- experience → emphasis on roles, projects, and career history
+- technical → detailed explanation of systems and architecture
 
 ### Format
 
@@ -261,11 +297,10 @@ Returned as a deduplicated list.
 <a id="acs-limitations"></a>
 ## 11. Limitations (Current State)
 
-1. No metadata-based filtering
-2. No structured citation linking to specific chunks
-3. No scoring transparency in API response
-4. No streaming responses
-5. Knowledge graph expansion is document-level only
+1. No structured citation linking to specific chunks
+2. No scoring transparency in API response
+3. Limited intent classification (rule-based only)
+4. Knowledge graph expansion is document-level only
 
 <a id="acs-future-api-extensions"></a>
 ## 12. Future Extensions

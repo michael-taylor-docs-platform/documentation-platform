@@ -9,11 +9,11 @@
   },
   {
     "path": "docs\\architecture\\portfolio-chatbot\\ai-ingestion-engine\\ai-ingestion-engine.md",
-    "title": "Untitled"
+    "title": "AI Ingestion Engine Specification"
   },
   {
     "path": "docs\\architecture\\portfolio-chatbot\\ai-ingestion-engine\\ai-ingestion-implementation.md",
-    "title": "Untitled"
+    "title": "AI Ingestion Engine Implementation Plan"
   },
   {
     "path": "docs\\architecture\\portfolio-chatbot\\api-contract-specification\\api-contract-specification.md",
@@ -74,6 +74,14 @@
   {
     "path": "docs\\pipelines\\standalone-guide-generator\\standalone-guide-reference-processor.md",
     "title": "Standalone Guide Reference Processor"
+  },
+  {
+    "path": "docs\\profile\\linkedin-profile.md",
+    "title": "Michael Taylor LinkedIn Profile"
+  },
+  {
+    "path": "docs\\profile\\professional-resume.md",
+    "title": "Michael Taylor Professional Resume"
   },
   {
     "path": "docs\\projects\\cms-platform\\cms-architecture.md",

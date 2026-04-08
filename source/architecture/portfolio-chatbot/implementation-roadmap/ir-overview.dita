@@ -27,5 +27,7 @@
         <p>The goal is to build a <b>context-aware AI chatbot</b> capable of answering questions
             about the portfolio using a <b>Retrieval-Augmented Generation (RAG)</b>
             architecture.</p>
+        <p>The system implements a hybrid, metadata-aware, and intent-aware retrieval pipeline to
+            improve response relevance and accuracy.</p>
     </conbody>
 </concept>

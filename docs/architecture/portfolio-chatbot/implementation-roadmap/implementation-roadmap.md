@@ -45,6 +45,8 @@ The roadmap converts the architecture and design specifications into a structure
 
 The goal is to build a **context-aware AI chatbot** capable of answering questions about the portfolio using a **Retrieval-Augmented Generation (RAG)** architecture.
 
+The system implements a hybrid, metadata-aware, and intent-aware retrieval pipeline to improve response relevance and accuracy.
+
 <a id="ir-project-objectives"></a>
 ## 2. Project Objectives
 
@@ -167,7 +169,12 @@ Go
   1. Parse Markdown FilesRead content from:Extract:
     - frontmatter metadata
     - document body
-  2. Implement Chunking LogicSplit documents by:Target size:
+  1. Normalize metadata fields to align with taxonomy.Propagate metadata into each generated chunk for use in retrieval scoring.
+  2. Implement Chunking LogicSplit documents by:Target size:Each chunk must include:
+    - content
+    - title
+    - document_path
+    - metadata (category, tags, project, layer)
   3. Generate EmbeddingsCall embedding API using:
     - chunk text
     - embedding model
@@ -195,10 +202,20 @@ api/retrieval
 
 #### Tasks
 
-  - Load Vector IndexLoad:into memory.
-  - Query EmbeddingConvert user query to vector embedding.
-  - Similarity CalculationUse cosine similarity.Rank chunks.
-  - Top-K RetrievalReturn best matches.
+  - Load Vector IndexLoad embeddings and chunk data (including metadata)
+  - Query ExpansionExpand user query using rule-based techniques
+  - Query Intent ClassificationClassify query as identity, experience, or technical
+  - Query EmbeddingConvert expanded query into vector embedding
+  - Initial Retrieval (FAISS)Retrieve top-N candidate chunks using vector similarity
+  - Hybrid ScoringCombine:
+    - vector similarity
+    - keyword matching
+    - hierarchy signals (title relevance)
+    - metadata matching (category, tags)
+    - intent-aware scoring adjustments
+  - MMR Diversity SelectionEnsure diversity across selected chunks
+  - Cross-Encoder RerankingRe-rank top candidates for semantic precision
+  - Document-Level AggregationPrioritize high-value documents before final selection
 
 #### Deliverables
 
@@ -226,11 +243,21 @@ POST /api/chat
 
 #### Tasks
 
-  - Accept Chat RequestInput:
-  - Run RetrievalRetrieve relevant chunks.
+  - Accept Chat RequestInput: user query
+  - Execute Retrieval PipelineIncludes:
+    - query expansion
+    - intent classification
+    - hybrid retrieval
+    - reranking
+    - graph expansion
   - Construct PromptCombine:
-  - Call LLM APIGenerate answer.
+    - user query
+    - intent-aware instructions
+    - retrieved context blocks
+  - Call LLM APIGenerate streamed response
   - Return ResponseInclude:
+    - generated answer
+    - source references
 
 #### Deliverables
 
@@ -307,6 +334,12 @@ Example queries:
   - What is create-kb-met?
   - Explain your metadata pipeline.
 
+### Additional validation:
+
+  - intent classification accuracy
+  - metadata influence on retrieval ranking
+  - comparison queries (multi-document reasoning)
+
 <a id="ir-deployment-strategy"></a>
 ## 6. Deployment Strategy
 
@@ -366,9 +399,12 @@ The implementation will be successful when:
 
 Possible future improvements:
 
-- hybrid keyword + vector search
+- intent confidence scoring
 - conversation memory
-- streaming responses
+- retrieval trace visibility (scores + signals)
 - document recommendation system
 - semantic site search
+- adaptive weighting based on query patterns
+- conversation memory
+- knowledge graph weighting (beyond expansion)
 

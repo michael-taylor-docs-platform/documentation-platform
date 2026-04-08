@@ -86,7 +86,7 @@ I --> J
 
 ## 3. RAG Documentation Architecture
 
-``mermaid
+```mermaid
 flowchart TD
 
     A[Documentation Repository<br>/docs Markdown Files]
@@ -137,7 +137,7 @@ flowchart TD
     M --> L
     M --> P
     P --> O
-    ```
+```
 
 ### 4. AI Retrieval Pipeline
 

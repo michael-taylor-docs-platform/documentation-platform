@@ -11,7 +11,7 @@
                 processing.</p>
         </section>
         <section id="section_dfk_rqv_m3c">
-            <title>8.2 Fields</title>
+            <title>10.2 Fields</title>
             <table id="table_wmb_vqv_m3c">
                 <tgroup cols="3">
                     <colspec colnum="1" colname="col1" colwidth="1.5*"/>
@@ -47,17 +47,24 @@
                             <entry>Optional structured filters applied to restrict retrieval based
                                 on metadata.</entry>
                         </row>
+                        <row>
+                            <entry>intent </entry>
+                            <entry>string </entry>
+                            <entry>Classified query intent (identity, experience, technical) used to
+                                influence retrieval scoring. |</entry>
+                        </row>
                     </tbody>
                 </tgroup>
             </table>
         </section>
         <section id="section_wlx_tm4_t3c">
-            <title>8.3 Example</title>
+            <title>10.3 Example</title>
             <pre>{
-  "query_text: "How does validation work?",
+  "query_text": "How does validation work?",
   "expanded_query": "validation system process automated checking pipeline",
   "query_embedding": "[0.012, -0.221, ...]",
-  "metadata_filters": "type: pipeline"  
+  "metadata_filters": "type: pipeline",
+  "intent": "technical"
 }</pre>
         </section>
     </conbody>

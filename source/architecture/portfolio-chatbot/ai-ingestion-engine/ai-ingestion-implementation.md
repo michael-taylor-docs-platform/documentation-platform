@@ -42,6 +42,8 @@ Implementation goals:
 
 The ingestion system will be implemented as a Python command-line utility.
 
+The ingestion pipeline produces metadata-enriched chunks that enable hybrid and intent-aware retrieval strategies.
+
 ---
 
 ## 2. Execution Model
@@ -156,6 +158,8 @@ Responsibilities:
 * detect frontmatter block
 * parse YAML metadata
 * separate body content
+* normalize metadata fields to match taxonomy
+* validate required metadata fields (category, tags, project, layer)
 
 Example output:
 
@@ -168,6 +172,9 @@ Example output:
   "content": "## Overview..."
 }
 ```
+
+Note:
+Parsed metadata is passed downstream and attached to all derived chunks.
 
 Key function:
 
@@ -204,13 +211,20 @@ Example chunk:
 {
   "document_path": "source/architecture/ai-pipeline.md",
   "title": "Overview",
-  "content": "The AI pipeline orchestrates..."
+  "content": "The AI pipeline orchestrates...",
+  "metadata": {
+    "category": "architecture",
+    "tags": ["rag", "pipeline"],
+    "project": "portfolio-chatbot",
+    "layer": "application"
+  }
 }
 ```
-Constraint:
+Constraints:
 
 - document_path must remain stable across builds
-- no metadata included yet
+- metadata is attached to each chunk and used during retrieval scoring
+- metadata must be propagated from frontmatter to each generated chunk
 
 Key function:
 
@@ -308,6 +322,7 @@ Embeddings are generated from:
 chunk["content"]
 ```
 
+Metadata is NOT included in embedding generation and is applied separately during retrieval scoring.
 
 ### Process
 
@@ -412,8 +427,8 @@ documents = load_documents()
 
 for doc_path in documents:
 metadata, content = parse_frontmatter(doc_path)
-doc = Document(...)
-chunks.extend(chunk_markdown(doc))
+doc = Document(metadata=metadata, content=content)
+chunks.extend(chunk_markdown(doc))  # metadata propagated into each chunk
 
 graph = build_graph()
 
@@ -592,8 +607,8 @@ This ensures the chatbot index always reflects the latest documentation.
 
 Potential improvements include:
 
-- metadata integration
-- metadata filtering
+- metadata validation enforcement (strict schema checks)
+- intent-aware metadata weighting refinement
 - graph-weighted retrieval
 - chunk scoring improvements
 

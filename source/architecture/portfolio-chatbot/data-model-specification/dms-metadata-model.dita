@@ -10,8 +10,26 @@
             <p>This metadata is extracted during ingestion and stored alongside each chunk.</p>
             <p>Metadata enables structured filtering and ranking during retrieval.</p>
         </section>
+        <section id="section_uhv_yld_w3c">
+            <title>6.2 Retrieval Usage</title>
+            <p>Metadata is actively used during retrieval scoring and is not limited to
+                filtering.</p>
+            <p>It contributes to:</p>
+            <ul id="ul_xjb_1md_w3c">
+                <li>
+                    <p>hybrid ranking</p>
+                </li>
+                <li>
+                    <p>intent-aware scoring adjustments</p>
+                </li>
+                <li>
+                    <p>content-type prioritization</p>
+                </li>
+            </ul>
+            <p>Metadata is a first-class input to the retrieval system.</p>
+        </section>
         <section id="section_qhq_mqv_m3c">
-            <title>6.2 Common Metadata Fields</title>
+            <title>6.3 Common Metadata Fields</title>
             <table id="table_o2y_3qv_m3c">
                 <tgroup cols="3">
                     <colspec colnum="1" colname="col1" colwidth="1.0*"/>

@@ -4,10 +4,9 @@
     <title>11. Limitations (Current State)</title>
     <conbody>
         <ol>
-            <li>No metadata-based filtering </li>
             <li> No structured citation linking to specific chunks </li>
             <li> No scoring transparency in API response </li>
-            <li> No streaming responses </li>
+            <li>Limited intent classification (rule-based only)</li>
             <li> Knowledge graph expansion is document-level only</li>
         </ol>
     </conbody>

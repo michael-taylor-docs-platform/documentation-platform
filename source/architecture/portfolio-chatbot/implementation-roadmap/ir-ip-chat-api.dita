@@ -18,30 +18,59 @@
             <ul id="ul_fny_3yv_m3c">
                 <li>
                     <p><b>Accept Chat Request</b></p>
-                    <p>Input:</p>
-                    <pre>query
-metadata_filter
-top_k</pre>
+                    <p>Input: user query</p>
                 </li>
                 <li>
-                    <p><b>Run Retrieval</b></p>
-                    <p>Retrieve relevant chunks.</p>
+                    <p><b>Execute Retrieval Pipeline</b></p>
+                    <p>Includes:</p>
+                    <ul id="ul_rwb_qnd_w3c">
+                        <li>
+                            <p>query expansion</p>
+                        </li>
+                        <li>
+                            <p>intent classification</p>
+                        </li>
+                        <li>
+                            <p>hybrid retrieval</p>
+                        </li>
+                        <li>
+                            <p>reranking</p>
+                        </li>
+                        <li>
+                            <p>graph expansion</p>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <p><b>Construct Prompt</b></p>
                     <p>Combine:</p>
-                    <pre>retrieved context
-user question</pre>
+                    <ul id="ul_cfm_snd_w3c">
+                        <li>
+                            <p>user query</p>
+                        </li>
+                        <li>
+                            <p>intent-aware instructions</p>
+                        </li>
+                        <li>
+                            <p>retrieved context blocks</p>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <p><b>Call LLM API</b></p>
-                    <p>Generate answer.</p>
+                    <p>Generate streamed response</p>
                 </li>
                 <li>
                     <p><b>Return Response</b></p>
                     <p>Include:</p>
-                    <pre>answer
-sources</pre>
+                    <ul id="ul_zfs_5nd_w3c">
+                        <li>
+                            <p>generated answer</p>
+                        </li>
+                        <li>
+                            <p>source references</p>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </section>

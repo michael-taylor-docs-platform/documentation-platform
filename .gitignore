@@ -1,4 +1,18 @@
+# Python
 venv/
-site/
 __pycache__/
 *.pyc
+
+# Environment
+.env
+
+# Build output
+site/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large / generated data (optional but recommended)
+data/*.faiss
+data/*.json

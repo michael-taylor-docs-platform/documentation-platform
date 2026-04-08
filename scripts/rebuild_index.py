@@ -18,7 +18,8 @@ for doc_path in docs:
     doc = Document(
         path=str(doc_path),
         title=metadata.get("title", "Untitled"),
-        content=content
+        content=content,
+        metadata=metadata
     )
 
     documents.append(doc)
