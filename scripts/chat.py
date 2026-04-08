@@ -24,21 +24,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load everything once (IMPORTANT for performance)
-print("Loading embedding model...")
-model = SentenceTransformer(MODEL_NAME)
-print("Model loaded.")
-
-
-index, chunks = load_index()
-graph = load_graph()
-client = OpenAI()
+model = None
+index = None
+chunks = None
+graph = None
+client = None
 
 class ChatRequest(BaseModel):
     message: str
 
 @app.post("/api/chat")
 def chat(req: ChatRequest):
+
+    global model, index, chunks, graph, client
+
+    if model is None:
+        print("Loading model + index...")
+        model = SentenceTransformer(MODEL_NAME)
+        index, chunks = load_index()
+        graph = load_graph()
+        client = OpenAI()
+        print("Loaded.")
 
     query = req.message
 
