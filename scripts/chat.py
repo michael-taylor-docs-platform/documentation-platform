@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from scripts.ask_docs import (
+from ask_docs import (
     load_index,
     load_graph,
     search,
