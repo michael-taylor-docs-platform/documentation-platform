@@ -73,3 +73,12 @@ def stream_llm(prompt, client):
     for chunk in stream:
         if chunk.choices[0].delta.content:
             yield chunk.choices[0].delta.content
+
+import os
+
+if __name__ == "__main__":
+    import uvicorn
+
+    port = int(os.environ.get("PORT", 10000))
+
+    uvicorn.run("scripts.chat:app", host="0.0.0.0", port=port)
