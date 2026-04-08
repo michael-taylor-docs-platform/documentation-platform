@@ -64,6 +64,16 @@
                             <entry>number</entry>
                             <entry>Score assigned during semantic reranking.</entry>
                         </row>
+                        <row>
+                            <entry>metadata_score</entry>
+                            <entry>number</entry>
+                            <entry>Score contribution from metadata matching.</entry>
+                        </row>
+                        <row>
+                            <entry>intent_boost</entry>
+                            <entry>number</entry>
+                            <entry>Additional score applied based on query intent.</entry>
+                        </row>
                     </tbody>
                 </tgroup>
             </table>

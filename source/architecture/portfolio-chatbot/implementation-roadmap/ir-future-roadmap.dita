@@ -6,19 +6,28 @@
         <p>Possible future improvements:</p>
         <ul id="ul_ksv_3zv_m3c">
             <li>
-                <p>hybrid keyword + vector search</p>
+                <p>intent confidence scoring</p>
             </li>
             <li>
                 <p>conversation memory</p>
             </li>
             <li>
-                <p>streaming responses</p>
+                <p>retrieval trace visibility (scores + signals)</p>
             </li>
             <li>
                 <p>document recommendation system</p>
             </li>
             <li>
                 <p>semantic site search</p>
+            </li>
+            <li>
+                <p>adaptive weighting based on query patterns</p>
+            </li>
+            <li>
+                <p>conversation memory</p>
+            </li>
+            <li>
+                <p>knowledge graph weighting (beyond expansion)</p>
             </li>
         </ul>
     </conbody>

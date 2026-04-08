@@ -4,6 +4,18 @@
     <title>8. Prompt Construction</title>
     <conbody>
         <p>The system constructs a structured prompt using retrieved chunks.</p>
+        <p>Prompt construction is influenced by query intent, which guides response style:</p>
+        <ul id="ul_ef2_fld_w3c">
+            <li>
+                <p>identity → concise summary of the individual</p>
+            </li>
+            <li>
+                <p>experience → emphasis on roles, projects, and career history</p>
+            </li>
+            <li>
+                <p>technical → detailed explanation of systems and architecture</p>
+            </li>
+        </ul>
         <section id="section_cbm_c2w_t3c">
             <title>Format</title>
             <pre>DOCUMENT: &lt;document_path>

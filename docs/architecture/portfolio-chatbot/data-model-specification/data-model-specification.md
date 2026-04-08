@@ -158,6 +158,8 @@ Each chunk contains the following fields:
   - metadata: Structured metadata extracted from the document frontmatter.
   - embedding: Vector embedding representing the semantic meaning of the chunk.
 
+Metadata fields must retain their original types (e.g., tags as arrays) to support accurate retrieval scoring.
+
 ### 5.3 Example Chunk Object
 
 ```
@@ -169,7 +171,7 @@ Each chunk contains the following fields:
   "metadata": {
     "type": "project",
     "category": "tooling",
-    "tags": "dita, automation, metadata",
+    "tags": ["dita", "automation", "metadata"],
     "date": "2026-03-01"
   }
 }
@@ -186,7 +188,19 @@ This metadata is extracted during ingestion and stored alongside each chunk.
 
 Metadata enables structured filtering and ranking during retrieval.
 
-### 6.2 Common Metadata Fields
+### 6.2 Retrieval Usage
+
+Metadata is actively used during retrieval scoring and is not limited to filtering.
+
+It contributes to:
+
+  - hybrid ranking
+  - intent-aware scoring adjustments
+  - content-type prioritization
+
+Metadata is a first-class input to the retrieval system.
+
+### 6.3 Common Metadata Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -219,17 +233,44 @@ Structural signals derived from document titles and headings.
 
 These signals help prioritize content that appears in higher-level sections of a document.
 
-### 7.5 Metadata Signals (Planned)
+### 7.5 Metadata Signals
 
-Future versions of the system will incorporate metadata signals into ranking.
+Metadata signals are actively used during retrieval scoring.
 
-Examples include:
+These include:
 
-  - type matching
-  - tag matching
   - category matching
+  - tag matching
+  - project grouping
+  - layer-based contextual weighting
 
-These signals will allow the retrieval system to incorporate structured document information into relevance scoring.
+Metadata contributes to ranking through weighted scoring bonuses applied during hybrid scoring.
+
+This allows the system to:
+
+  - prioritize relevant content types
+  - improve alignment with structured queries
+  - enhance retrieval precision beyond semantic similarity
+
+### 7.6 Intent Signals
+
+The system incorporates query intent as a dynamic retrieval signal.
+
+Intent is classified into:
+
+  - identity
+  - experience
+  - technical
+
+Intent influences ranking by adjusting metadata-based scoring weights.
+
+Examples:
+
+  - identity queries prioritize profile-related content
+  - experience queries prioritize resume and project history
+  - technical queries prioritize architecture and pipeline documentation
+
+This enables context-aware retrieval behavior without requiring additional model inference.
 
 <a id="dms-vector-index-model"></a>
 ## 8. Vector Index Model
@@ -275,7 +316,7 @@ The Query Model represents the structure of a user query as it moves through the
 
 It captures both the original user input and any derived representations used during processing.
 
-### 8.2 Fields
+### 10.2 Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -283,15 +324,17 @@ It captures both the original user input and any derived representations used du
 | expanded_query | string | A modified version of the query generated during query expansion to improve retrieval recall. |
 | query_embedding | string | The vector embedding generated from the expanded query. |
 | metadata_filters | number | Optional structured filters applied to restrict retrieval based on metadata. |
+| intent | string | Classified query intent (identity, experience, technical) used to influence retrieval scoring. | |
 
-### 8.3 Example
+### 10.3 Example
 
 ```
 {
-  "query_text: "How does validation work?",
+  "query_text": "How does validation work?",
   "expanded_query": "validation system process automated checking pipeline",
   "query_embedding": "[0.012, -0.221, ...]",
-  "metadata_filters": "type: pipeline"  
+  "metadata_filters": "type: pipeline",
+  "intent": "technical"
 }
 ```
 
@@ -316,6 +359,8 @@ Each result includes multiple scores used in hybrid ranking and reranking.
 | hierarchy_score | number | Score derived from document structure and headings. |
 | hybrid_score | number | Combined score used for initial ranking. |
 | rerank_score | number | Score assigned during semantic reranking. |
+| metadata_score | number | Score contribution from metadata matching. |
+| intent_boost | number | Additional score applied based on query intent. |
 
 ### 11.3 Example
 
@@ -385,7 +430,10 @@ The data model is designed to support future enhancements without requiring majo
 
 Planned extensions include:
 
-- metadata-based filtering fields
+- intent confidence scoring
+- advanced metadata weighting strategies
+- retrieval trace logging (scores + signals)
+- adaptive ranking based on query patterns
 - additional ranking signals
 - user interaction history
 - query analytics data

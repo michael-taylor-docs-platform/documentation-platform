@@ -25,5 +25,19 @@ similarity calculations</pre>
                 <li>Explain your metadata pipeline.</li>
             </ul>
         </section>
+        <section id="section_x4h_wnd_w3c">
+            <title>Additional validation:</title>
+            <ul id="ul_qz1_ynd_w3c">
+                <li>
+                    <p>intent classification accuracy</p>
+                </li>
+                <li>
+                    <p>metadata influence on retrieval ranking</p>
+                </li>
+                <li>
+                    <p>comparison queries (multi-document reasoning)</p>
+                </li>
+            </ul>
+        </section>
     </conbody>
 </concept>

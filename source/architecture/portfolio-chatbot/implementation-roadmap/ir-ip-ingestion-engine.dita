@@ -29,6 +29,9 @@
                             <p>document body</p>
                         </li>
                     </ul>
+                    <p>Normalize metadata fields to align with taxonomy.</p>
+                    <p>Propagate metadata into each generated chunk for use in retrieval
+                        scoring.</p>
                 </li>
                 <li>
                     <p>Implement Chunking Logic</p>
@@ -38,6 +41,21 @@ H2
 H3</pre>
                     <p>Target size:</p>
                     <pre>200–500 tokens</pre>
+                    <p>Each chunk must include:</p>
+                    <ul id="ul_fkd_wmd_w3c">
+                        <li>
+                            <p>content</p>
+                        </li>
+                        <li>
+                            <p>title</p>
+                        </li>
+                        <li>
+                            <p>document_path</p>
+                        </li>
+                        <li>
+                            <p>metadata (category, tags, project, layer)</p>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <p>Generate Embeddings</p>

@@ -38,13 +38,16 @@
                     <p> Query Expansion (rule-based)</p>
                 </li>
                 <li>
+                    <p>Query Intent Classification (rule-based)</p>
+                </li>
+                <li>
                     <p> Query Embedding (SentenceTransformers)</p>
                 </li>
                 <li>
                     <p> FAISS Vector Search (top ~30 chunks)</p>
                 </li>
                 <li>
-                    <p> Hybrid Scoring</p>
+                    <p> Hybrid Scoring (vector + keyword + hierarchy + metadata + intent)</p>
                 </li>
                 <li>
                     <p> MMR Diversity Selection (k ≈ 12)</p>
@@ -85,13 +88,49 @@
                 </li>
             </ul>
         </section>
+        <section id="section_i54_b3d_w3c">
+            <title>3.4.3 Query Intent Classification</title>
+            <p>The system performs lightweight, rule-based query intent classification prior to
+                retrieval scoring.</p>
+            <p>Intent categories:</p>
+            <ul id="ul_fyt_d3d_w3c">
+                <li>
+                    <p>identity — questions about the author (e.g., "Who is Michael Taylor?")</p>
+                </li>
+                <li>
+                    <p>experience — questions about career history, roles, and projects</p>
+                </li>
+                <li>
+                    <p>technical — questions about system design, architecture, or
+                        implementation</p>
+                </li>
+            </ul>
+            <p>Intent is determined using keyword matching against the user query.</p>
+            <p>This classification influences retrieval behavior by adjusting metadata-based scoring
+                weights.</p>
+            <p><b>Design Rationale</b></p>
+            <p>This approach enables:</p>
+            <ul id="ul_w4c_g3d_w3c">
+                <li>
+                    <p>prioritization of profile-related documents for identity queries</p>
+                </li>
+                <li>
+                    <p>improved alignment between query intent and retrieved content</p>
+                </li>
+                <li>
+                    <p>better separation between technical and biographical responses</p>
+                </li>
+            </ul>
+            <p>The classifier is intentionally lightweight and deterministic to avoid additional
+                model overhead.</p>
+        </section>
         <section id="section_ytt_wsw_t3c">
-            <title>3.4.3 Query Embedding</title>
+            <title>3.4.4 Query Embedding</title>
             <p>The expanded query is converted into a vector embedding using:</p>
             <p><codeph>sentence-transformers/all-MiniLM-L6-v2</codeph></p>
         </section>
         <section id="section_pqg_lvw_t3c">
-            <title>3.4.4 Vector Retrieval (FAISS)</title>
+            <title>3.4.5 Vector Retrieval (FAISS)</title>
             <p>A FAISS index is used to perform approximate nearest neighbor search.</p>
             <ul id="ul_z3r_mvw_t3c">
                 <li>
@@ -105,7 +144,7 @@
                 filtering.</p>
         </section>
         <section id="section_trk_4vw_t3c">
-            <title>3.4.5 Hybrid Scoring</title>
+            <title>3.4.6 Hybrid Scoring</title>
             <p>Each candidate chunk is rescored using a hybrid approach combining:</p>
             <ul id="ul_stx_pvw_t3c">
                 <li>
@@ -114,7 +153,20 @@
                 <li>
                     <p>keyword overlap (lexical match)</p>
                 </li>
+                <li>
+                    <p>hierarchy weighting (title relevance)</p>
+                </li>
+                <li>
+                    <p>metadata matching (category, tags)</p>
+                </li>
+                <li>
+                    <p>intent-aware boosting</p>
+                </li>
             </ul>
+            <p>Metadata extracted from Markdown frontmatter is actively used during scoring to
+                improve relevance.</p>
+            <p>Intent-aware boosting dynamically adjusts scoring weights based on the classified
+                query intent, improving alignment between user intent and retrieved content.</p>
             <p>This improves performance in cases where:</p>
             <ul id="ul_i5q_qvw_t3c">
                 <li>
@@ -126,7 +178,7 @@
             </ul>
         </section>
         <section id="section_u34_rvw_t3c">
-            <title>3.4.6 Diversity Selection (MMR)</title>
+            <title>3.4.7 Diversity Selection (MMR)</title>
             <p>Maximal Marginal Relevance (MMR) is applied to reduce redundancy.</p>
             <ul id="ul_sbs_tvw_t3c">
                 <li>
@@ -148,14 +200,14 @@
             <p>This prevents over-representation of a single document or section.</p>
         </section>
         <section id="section_qyx_1tw_t3c">
-            <title>3.4.7 Semantic Reranking</title>
+            <title>3.4.8 Semantic Reranking</title>
             <p>A cross-encoder model is used for final ranking:</p>
             <p><codeph>cross-encoder/ms-marco-MiniLM-L-6-v2</codeph></p>
             <p>This model evaluates query–chunk pairs directly and produces a more precise relevance
                 ranking than embedding similarity alone.</p>
         </section>
         <section id="section_dgz_htw_t3c">
-            <title>3.4.8 Document-Aware Aggregation</title>
+            <title>3.4.9 Document-Aware Aggregation</title>
             <p>Unlike naive RAG systems, this implementation performs <b>document-level
                 grouping</b>.</p>
             <p>Steps:</p>
@@ -187,7 +239,7 @@
             </ul>
         </section>
         <section id="section_o3l_4tw_t3c">
-            <title>3.4.9 Knowledge Graph Expansion</title>
+            <title>3.4.10 Knowledge Graph Expansion</title>
             <p>After document selection, the system expands context using a document-level knowledge
                 graph.</p>
             <p>The graph is stored as an adjacency map:</p>
@@ -217,7 +269,7 @@
             </ul>
         </section>
         <section id="section_kms_stw_t3c">
-            <title>3.4.10 Context Assembly</title>
+            <title>3.4.11 Context Assembly</title>
             <p>The final context is constructed from:</p>
             <ul id="ul_wcg_5tw_t3c">
                 <li>
@@ -241,7 +293,7 @@
             </ul>
         </section>
         <section id="section_zws_wtw_t3c">
-            <title>3.4.11 Response Generation</title>
+            <title>3.4.12 Response Generation</title>
             <p>The final prompt is sent to the language model:</p>
             <p><codeph>GPT-4o-mini</codeph></p>
             <p>The model generates a response grounded entirely in retrieved context.</p>
@@ -259,29 +311,50 @@
             </ul>
         </section>
         <section id="section_k5r_15w_t3c">
-            <title>3.4.12 Metadata Usage (Current State)</title>
-            <p>Metadata extracted from Markdown frontmatter is:</p>
+            <title>3.4.13 Metadata Usage</title>
+            <p>Metadata extracted from Markdown frontmatter is actively used during retrieval
+                scoring.</p>
+            <p>Metadata fields include:</p>
+            <ul id="ul_yjm_p3d_w3c">
+                <li>
+                    <p>category</p>
+                </li>
+                <li>
+                    <p>tags</p>
+                </li>
+                <li>
+                    <p>project</p>
+                </li>
+                <li>
+                    <p>layer</p>
+                </li>
+            </ul>
+            <p>Metadata contributes to retrieval through:</p>
             <ul id="ul_trt_c5w_t3c">
                 <li>
-                    <p>parsed during ingestion</p>
+                    <p>direct matching between query terms and metadata values</p>
                 </li>
                 <li>
-                    <p>partially stored in chunk data</p>
+                    <p>weighted scoring bonuses for matching categories and tags</p>
+                </li>
+                <li>
+                    <p>integration into hybrid scoring alongside vector and keyword signals</p>
                 </li>
             </ul>
-            <p>However, metadata is not currently used in retrieval scoring or filtering.</p>
-            <p>It is reserved for future enhancements such as:</p>
+            <p>This enables:</p>
             <ul id="ul_ihv_d5w_t3c">
                 <li>
-                    <p>metadata filtering</p>
+                    <p>improved relevance for structured queries</p>
                 </li>
                 <li>
-                    <p>structured query constraints</p>
+                    <p>better alignment between user intent and content type</p>
                 </li>
                 <li>
-                    <p>UI-driven search refinement</p>
+                    <p>enhanced discoverability of portfolio and profile content</p>
                 </li>
             </ul>
+            <p>Metadata-aware scoring is further enhanced by query intent classification, allowing
+                the system to prioritize different content types dynamically.</p>
         </section>
     </conbody>
 </concept>

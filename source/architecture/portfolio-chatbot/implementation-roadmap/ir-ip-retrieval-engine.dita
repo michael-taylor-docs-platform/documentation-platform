@@ -16,24 +16,56 @@
             <ul id="ul_hkf_xxv_m3c">
                 <li>
                     <p><b>Load Vector Index</b></p>
-                    <p>Load:</p>
-                    <pre>vector-index.json</pre>
-                    <p>into memory.</p>
+                    <p>Load embeddings and chunk data (including metadata)</p>
+                </li>
+                <li>
+                    <p><b>Query Expansion</b></p>
+                    <p>Expand user query using rule-based techniques</p>
+                </li>
+                <li>
+                    <p><b>Query Intent Classification</b></p>
+                    <p>Classify query as identity, experience, or technical</p>
                 </li>
                 <li>
                     <p><b>Query Embedding</b></p>
-                    <p>Convert user query to vector embedding.</p>
+                    <p>Convert expanded query into vector embedding</p>
                 </li>
                 <li>
-                    <p><b>Similarity Calculation</b></p>
-                    <p>Use cosine similarity.</p>
-                    <pre>similarity(query, chunk)</pre>
-                    <p>Rank chunks.</p>
+                    <p><b>Initial Retrieval (FAISS)</b></p>
+                    <p>Retrieve top-N candidate chunks using vector similarity</p>
                 </li>
                 <li>
-                    <p><b>Top-K Retrieval</b></p>
-                    <p>Return best matches.</p>
-                    <pre>Top-K = 5</pre>
+                    <p><b>Hybrid Scoring</b></p>
+                    <p>Combine:</p>
+                    <ul id="ul_f5q_knd_w3c">
+                        <li>
+                            <p>vector similarity</p>
+                        </li>
+                        <li>
+                            <p>keyword matching</p>
+                        </li>
+                        <li>
+                            <p>hierarchy signals (title relevance)</p>
+                        </li>
+                        <li>
+                            <p>metadata matching (category, tags)</p>
+                        </li>
+                        <li>
+                            <p>intent-aware scoring adjustments</p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p><b>MMR Diversity Selection</b></p>
+                    <p>Ensure diversity across selected chunks</p>
+                </li>
+                <li>
+                    <p><b>Cross-Encoder Reranking</b></p>
+                    <p>Re-rank top candidates for semantic precision</p>
+                </li>
+                <li>
+                    <p><b>Document-Level Aggregation</b></p>
+                    <p>Prioritize high-value documents before final selection</p>
                 </li>
             </ul>
         </section>

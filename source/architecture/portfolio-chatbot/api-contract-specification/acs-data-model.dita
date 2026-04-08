@@ -8,7 +8,13 @@
             <pre>{
   "document_path": "string",
   "title": "string",
-  "content": "string"
+  "content": "string",
+  "metadata": {
+    "category": "string",
+    "tags": ["string"],
+    "project": "string",
+    "layer": "string"
+  }
 }</pre>
         </section>
         <section id="section_vlv_d2w_t3c">
@@ -16,9 +22,10 @@
             <ul id="ul_wcb_vdw_t3c">
                 <li> Metadata (frontmatter) is <b>not currently included in chunk objects</b></li>
                 <li> Retrieval operates only on: <ul id="ul_xcb_vdw_t3c">
-                        <li> content </li>
-                        <li> title </li>
-                        <li> document_path</li>
+                        <li>content (semantic similarity) </li>
+                        <li>title (hierarchy scoring) </li>
+                        <li>metadata (category, tags, project, layer)</li>
+                        <li>intent (dynamic scoring adjustment)</li>
                     </ul></li>
             </ul>
         </section>

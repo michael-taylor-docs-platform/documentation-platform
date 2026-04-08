@@ -3,74 +3,15 @@ import faiss
 from sentence_transformers import SentenceTransformer
 import re
 from openai import OpenAI
-import os
-import yaml
-
-def classify_query_intent(query: str) -> str:
-    q = query.lower()
-
-    identity_keywords = [
-        "who is",
-        "who's",
-        "tell me about",
-        "about him",
-        "about michael",
-        "background",
-        "profile",
-    ]
-
-    experience_keywords = [
-        "experience",
-        "worked",
-        "companies",
-        "career",
-        "roles",
-        "projects",
-        "history",
-        "what has he done",
-    ]
-
-    technical_keywords = [
-        "how",
-        "architecture",
-        "design",
-        "rag",
-        "pipeline",
-        "implementation",
-        "system",
-        "metadata",
-        "retrieval",
-    ]
-
-    for kw in identity_keywords:
-        if kw in q:
-            return "identity"
-
-    for kw in experience_keywords:
-        if kw in q:
-            return "experience"
-
-    return "technical"
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
-def load_taxonomy():
-    BASE_DIR = os.path.dirname(__file__)
-    path = os.path.join(BASE_DIR, "../governance/taxonomy.yaml")
 
-    with open(path, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
-    
 def load_index():
 
-    BASE_DIR = os.path.dirname(__file__)
+    index = faiss.read_index("data/kb_index.faiss")
 
-    index_path = os.path.join(BASE_DIR, "../data/kb_index.faiss")
-    chunks_path = os.path.join(BASE_DIR, "../data/chunks.json")
-
-    index = faiss.read_index(index_path)
-
-    with open(chunks_path, "r", encoding="utf-8") as f:
+    with open("data/chunks.json", "r", encoding="utf-8") as f:
         chunks = json.load(f)
 
     return index, chunks
@@ -118,37 +59,6 @@ def expand_query(query):
             expanded_terms.update(expansions[term])
 
     return " ".join(expanded_terms)
-
-def normalize(text):
-    return text.replace("-", " ").replace("_", " ").lower()
-
-def detect_metadata(query: str, taxonomy: dict):
-    q = query.lower()
-
-    metadata = {}
-
-    # --- category detection ---
-    matched_categories = [
-        c for c in taxonomy.get("categories", [])
-        if c in q
-    ]
-
-    if matched_categories:
-        metadata["category"] = matched_categories[0]
-
-    # --- tag detection ---
-    matched_tags = []
-
-    q_norm = normalize(query)
-
-    for tag in taxonomy.get("tags", []):
-        if normalize(tag) in q_norm:
-            matched_tags.append(tag)
-
-    if matched_tags:
-        metadata["tags"] = matched_tags
-
-    return metadata
 
 from sentence_transformers import CrossEncoder
 
@@ -226,14 +136,6 @@ def search(query, model, index, chunks, k=8):
 
     expanded_query = expand_query(query)
 
-    intent = classify_query_intent(query)
-
-    print("\n--- DETECTED INTENT ---")
-    print(intent)
-
-    taxonomy = load_taxonomy()
-    metadata_filters = detect_metadata(query, taxonomy)
-
     query_embedding = model.encode(
         [expanded_query],
         normalize_embeddings=True
@@ -282,68 +184,10 @@ def search(query, model, index, chunks, k=8):
         keyword_norm = min(keyword / 5, 1)
         hierarchy_norm = min(hierarchy / 8, 1)
 
-        # --- metadata boost ---
-        metadata_bonus = 0
-        chunk_meta = chunk.get("metadata", {})
-        category = chunk_meta.get("category")
-        tags = chunk_meta.get("tags", [])
-
-        # --- existing metadata matching ---
-        for key, value in metadata_filters.items():
-
-            if key == "tags":
-                chunk_tags = chunk_meta.get("tags", [])
-                matches = sum(1 for t in value if t in chunk_tags)
-                metadata_bonus += 0.2 * matches
-
-            else:
-                if chunk_meta.get(key) == value:
-                    metadata_bonus += 0.3
-
-        # --- NEW: intent-based boosting ---
-        if intent == "identity":
-            if category == "portfolio":
-                metadata_bonus += 0.25
-
-        elif intent == "experience":
-            if category == "portfolio":
-                metadata_bonus += 0.15
-
-        elif intent == "technical":
-            if category == "architecture":
-                metadata_bonus += 0.15
-            if category == "pipeline":
-                metadata_bonus += 0.10
-
-            # tag-level boosts
-            if "rag" in tags:
-                metadata_bonus += 0.1
-            if "semantic-search" in tags:
-                metadata_bonus += 0.1
-
-        # cap bonus
-        metadata_bonus = min(metadata_bonus, 1.0)
-
-        for key, value in metadata_filters.items():
-
-            if key == "tags":
-                chunk_tags = chunk_meta.get("tags", [])
-
-                matches = sum(1 for t in value if t in chunk_tags)
-                metadata_bonus += 0.2 * matches
-
-            else:
-                if chunk_meta.get(key) == value:
-                    metadata_bonus += 0.3
-
-        metadata_bonus = min(metadata_bonus, 0.8)
-
-        # --- final score ---
         hybrid_score = (
             0.6 * vector_score +
             0.25 * keyword_norm +
-            0.15 * hierarchy_norm +
-            metadata_bonus
+            0.15 * hierarchy_norm
         )
 
         candidates.append((hybrid_score, vector_score, keyword, hierarchy, chunk))
@@ -384,15 +228,7 @@ def search(query, model, index, chunks, k=8):
     doc_scores.sort(reverse=True)
 
     # select top documents
-   # Adjust number of docs based on intent
-    if intent == "identity":
-        top_n_docs = 2
-    elif intent == "experience":
-        top_n_docs = 3
-    else:
-        top_n_docs = 3
-
-    top_docs = [doc for _, doc in doc_scores[:top_n_docs]]
+    top_docs = [doc for _, doc in doc_scores[:3]]
 
     results = []
 
@@ -418,48 +254,29 @@ def search(query, model, index, chunks, k=8):
     return [chunk for _, _, _, _, chunk in results]
 
 
-def build_prompt(question, results, intent):
+def build_prompt(question, results):
 
     context = "\n\n".join(
         f"""
-DOCUMENT: {r['document_path']}
-SECTION: {r['title']}
+    DOCUMENT: {r['document_path']}
+    SECTION: {r['title']}
 
-{r['content']}
-"""
+    {r['content']}
+    """
         for r in results
     )
-
     sources = list({r["document_path"] for r in results})
 
     prompt = f"""
 You are an expert documentation assistant.
 
-User Intent: {intent}
-
-Guidance:
-- identity → summarize the person clearly and concisely
-- experience → reference roles, companies, and projects
-- technical → explain systems, architecture, and implementation details
-
-You are answering questions about Michael Taylor, the author of this documentation.
-
-Context about Michael Taylor:
-- Documentation platform architect and systems designer
-- Specializes in RAG systems, AI ingestion pipelines, and enterprise knowledge systems
-- All provided documentation reflects his work, projects, and technical capabilities
-
-Instructions:
-- When asked about Michael Taylor, assume he is the author of all documentation provided
-- Infer his experience, skills, and project complexity from the documentation
-- Synthesize information across multiple documents when needed
+Use the provided documentation sections to answer the user's question.
 
 Rules:
-- Base your answer ONLY on the documentation below
-- The answer may require combining information from multiple sections
-- If the documentation implies the answer, explain it clearly
-- Do NOT say "no information available" if the answer can be inferred from the documentation
-- Do NOT invent information that is not supported by the documentation
+- Base your answer ONLY on the documentation below.
+- The answer may require combining information from multiple sections.
+- If the documentation implies the answer, explain it clearly.
+- Do NOT invent information that is not supported by the documentation.
 
 Documentation sections:
 {context}
@@ -486,10 +303,7 @@ def ask_llm(prompt, client):
 
 def load_graph():
 
-    BASE_DIR = os.path.dirname(__file__)
-    graph_path = os.path.join(BASE_DIR, "../data/knowledge_graph.json")
-
-    with open(graph_path, "r", encoding="utf-8") as f:
+    with open("data/knowledge_graph.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
 def expand_with_graph(results, graph):
@@ -548,7 +362,7 @@ def main():
 
         results = add_graph_chunks(results, related_paths, chunks)
 
-        prompt, sources = build_prompt(query, results, intent)
+        prompt, sources = build_prompt(query, results)
 
         answer = ask_llm(prompt, client)
 

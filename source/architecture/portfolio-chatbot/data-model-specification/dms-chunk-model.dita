@@ -39,6 +39,8 @@
                         chunk.</p>
                 </li>
             </ul>
+            <p>Metadata fields must retain their original types (e.g., tags as arrays) to support
+                accurate retrieval scoring.</p>
         </section>
         <section id="section_jw1_zpv_m3c">
             <title>5.3 Example Chunk Object</title>
@@ -50,7 +52,7 @@
   "metadata": {
     "type": "project",
     "category": "tooling",
-    "tags": "dita, automation, metadata",
+    "tags": ["dita", "automation", "metadata"],
     "date": "2026-03-01"
   }
 }</pre>

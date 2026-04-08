@@ -11,8 +11,42 @@
 → "metadata schema frontmatter pipeline workflow automation"</pre>
             <p>The expanded query is used for embedding generation.</p>
         </section>
+        <section id="section_pzm_mkd_w3c">
+            <title>6.2 Query Intent Classification</title>
+            <p>The system performs lightweight, rule-based query intent classification prior to
+                retrieval scoring.</p>
+            <p>Supported intents:</p>
+            <ul id="ul_f4w_nkd_w3c">
+                <li>
+                    <p>identity — questions about the author (e.g., "Who is Michael Taylor?")</p>
+                </li>
+                <li>
+                    <p>experience — questions about career history and projects</p>
+                </li>
+                <li>
+                    <p>technical — questions about system architecture, pipelines, and
+                        implementation</p>
+                </li>
+            </ul>
+            <p>Intent classification is based on keyword matching within the query.</p>
+            <p><b>Purpose</b></p>
+            <p>Intent is used to dynamically adjust retrieval scoring, improving alignment between
+                query intent and selected content.</p>
+            <p>This enables:</p>
+            <ul id="ul_nml_rkd_w3c">
+                <li>
+                    <p>prioritization of profile content for identity queries</p>
+                </li>
+                <li>
+                    <p>stronger weighting of experience-related documents for career queries</p>
+                </li>
+                <li>
+                    <p>emphasis on technical documentation for system-related questions</p>
+                </li>
+            </ul>
+        </section>
         <section id="section_g1h_pdw_t3c">
-            <title>6.2 Embedding Generation</title>
+            <title>6.3 Embedding Generation</title>
             <ul id="ul_x2h_fdw_t3c">
                 <li> Model: <codeph>sentence-transformers/all-MiniLM-L6-v2</codeph></li>
                 <li> Input: expanded query </li>
@@ -20,28 +54,29 @@
             </ul>
         </section>
         <section id="section_xyh_4dw_t3c">
-            <title>6.3 Vector Search</title>
+            <title>6.4 Vector Search</title>
             <ul id="ul_y2h_fdw_t3c">
                 <li> Index: FAISS (<codeph>kb_index.faiss</codeph>) </li>
                 <li> Retrieval size: top 30 candidates </li>
             </ul>
         </section>
         <section id="section_z2h_fdw_t3c">
-            <title>6.4 Hybrid Scoring</title>
+            <title>6.5 Hybrid Scoring</title>
             <p>Each candidate chunk is scored using:</p>
             <ul id="ul_afh_fdw_t3c">
                 <li> Vector similarity score </li>
                 <li> Keyword match score </li>
                 <li> Hierarchy (title) score </li>
+                <li>Metadata match score (category, tags)</li>
+                <li>Intent-aware scoring adjustments</li>
             </ul>
             <p><b>Score Fusion</b></p>
-            <pre>hybrid_score =
-  0.6 * vector_score +
-  0.25 * keyword_score +
-  0.15 * hierarchy_score</pre>
+            <p>Scoring is performed using a weighted hybrid model combining semantic, lexical,
+                structural, and metadata signals.</p>
+            <p>Weights may be dynamically adjusted based on query intent.</p>
         </section>
         <section id="section_bfh_fdw_t3c">
-            <title>6.5 MMR Diversity Selection</title>
+            <title>6.6 MMR Diversity Selection</title>
             <p>Maximal Marginal Relevance (MMR) is applied to reduce redundancy and improve
                 diversity.</p>
             <ul id="ul_cfh_fdw_t3c">
@@ -50,7 +85,7 @@
             </ul>
         </section>
         <section id="section_dmv_3dw_t3c">
-            <title>6.6 Semantic Reranking</title>
+            <title>6.7 Semantic Reranking</title>
             <ul id="ul_dfh_fdw_t3c">
                 <li> Model: <codeph>cross-encoder/ms-marco-MiniLM-L-6-v2</codeph></li>
                 <li> Method: query–chunk pair scoring </li>
@@ -58,7 +93,7 @@
             </ul>
         </section>
         <section id="section_efh_fdw_t3c">
-            <title>6.7 Document-Aware Selection</title>
+            <title>6.8 Document-Aware Selection</title>
             <p>Chunks are grouped by <codeph>document_path</codeph>.</p>
             <p>Selection strategy:</p>
             <ol id="ol_ffh_fdw_t3c">
@@ -68,7 +103,7 @@
             </ol>
         </section>
         <section id="section_gfh_fdw_t3c">
-            <title>6.8 Knowledge Graph Expansion</title>
+            <title>6.9 Knowledge Graph Expansion</title>
             <p>A document-level graph is used to identify related documents.</p>
             <ul id="ul_hfh_fdw_t3c">
                 <li> Source: <codeph>knowledge_graph.json</codeph></li>

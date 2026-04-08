@@ -6,6 +6,7 @@ class Chunk:
     document_path: str
     title: str
     content: str
+    metadata: dict
 
 import re
 
@@ -47,7 +48,8 @@ def chunk_markdown(document):
             Chunk(
                 document_path=document.path,
                 title=full_title,
-                content=section_text
+                content=section_text,
+                metadata=document.metadata
             )
         )
 

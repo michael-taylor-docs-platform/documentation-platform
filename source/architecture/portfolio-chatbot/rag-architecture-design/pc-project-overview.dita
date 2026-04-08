@@ -57,6 +57,9 @@
                     <p>metadata awareness</p>
                 </li>
                 <li>
+                    <p>intent-aware retrieval weighting</p>
+                </li>
+                <li>
                     <p>diversity selection</p>
                 </li>
                 <li>

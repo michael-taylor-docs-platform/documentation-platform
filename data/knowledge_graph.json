@@ -6,6 +6,23 @@
       "type": "document"
     },
     {
+      "id": "profile",
+      "label": "Profile",
+      "type": "section"
+    },
+    {
+      "id": "professional-resume",
+      "label": "professional resume",
+      "type": "document",
+      "path": "profile/professional-resume.md"
+    },
+    {
+      "id": "linkedin-profile",
+      "label": "linkedin profile",
+      "type": "document",
+      "path": "profile/linkedin-profile.md"
+    },
+    {
       "id": "portfolio-architecture",
       "label": "Portfolio Architecture",
       "type": "section"
@@ -21,6 +38,51 @@
       "label": "platform architecture",
       "type": "document",
       "path": "architecture/platform-architecture.md"
+    },
+    {
+      "id": "portfolio-chatbot",
+      "label": "Portfolio Chatbot",
+      "type": "section"
+    },
+    {
+      "id": "pc-portfolio-chatbot",
+      "label": "pc portfolio chatbot",
+      "type": "document",
+      "path": "architecture/portfolio-chatbot/rag-architecture-design/pc-portfolio-chatbot.md"
+    },
+    {
+      "id": "architecture",
+      "label": "Architecture",
+      "type": "section"
+    },
+    {
+      "id": "data-model-specification",
+      "label": "data model specification",
+      "type": "document",
+      "path": "architecture/portfolio-chatbot/data-model-specification/data-model-specification.md"
+    },
+    {
+      "id": "api-contract-specification",
+      "label": "api contract specification",
+      "type": "document",
+      "path": "architecture/portfolio-chatbot/api-contract-specification/api-contract-specification.md"
+    },
+    {
+      "id": "data-pipeline",
+      "label": "Data Pipeline",
+      "type": "section"
+    },
+    {
+      "id": "ai-ingestion-engine",
+      "label": "ai ingestion engine",
+      "type": "document",
+      "path": "architecture/portfolio-chatbot/ai-ingestion-engine/ai-ingestion-engine.md"
+    },
+    {
+      "id": "ai-ingestion-implementation",
+      "label": "ai ingestion implementation",
+      "type": "document",
+      "path": "architecture/portfolio-chatbot/ai-ingestion-engine/ai-ingestion-implementation.md"
     },
     {
       "id": "projects",
@@ -332,6 +394,16 @@
   ],
   "edges": [
     {
+      "from": "profile",
+      "to": "professional-resume",
+      "type": "contains"
+    },
+    {
+      "from": "profile",
+      "to": "linkedin-profile",
+      "type": "contains"
+    },
+    {
       "from": "portfolio-architecture",
       "to": "architecture-overview",
       "type": "contains"
@@ -339,6 +411,46 @@
     {
       "from": "portfolio-architecture",
       "to": "platform-architecture",
+      "type": "contains"
+    },
+    {
+      "from": "portfolio-architecture",
+      "to": "portfolio-chatbot",
+      "type": "contains"
+    },
+    {
+      "from": "portfolio-chatbot",
+      "to": "pc-portfolio-chatbot",
+      "type": "contains"
+    },
+    {
+      "from": "portfolio-chatbot",
+      "to": "architecture",
+      "type": "contains"
+    },
+    {
+      "from": "architecture",
+      "to": "data-model-specification",
+      "type": "contains"
+    },
+    {
+      "from": "architecture",
+      "to": "api-contract-specification",
+      "type": "contains"
+    },
+    {
+      "from": "portfolio-chatbot",
+      "to": "data-pipeline",
+      "type": "contains"
+    },
+    {
+      "from": "data-pipeline",
+      "to": "ai-ingestion-engine",
+      "type": "contains"
+    },
+    {
+      "from": "data-pipeline",
+      "to": "ai-ingestion-implementation",
       "type": "contains"
     },
     {
