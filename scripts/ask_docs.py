@@ -150,9 +150,9 @@ def detect_metadata(query: str, taxonomy: dict):
 
     return metadata
 
-from sentence_transformers import CrossEncoder
+# from sentence_transformers import CrossEncoder
 
-reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+# reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
 def rerank_results(query, candidates):
 
@@ -354,7 +354,7 @@ def search(query, model, index, chunks, k=8):
     candidates = mmr_select(candidates, model, query_embedding, k=12)
 
     # Semantic reranking
-    candidates = rerank_results(query, candidates)
+    #candidates = rerank_results(query, candidates)
 
     print("\n----- AFTER MMR DIVERSITY FILTER -----\n")
 
