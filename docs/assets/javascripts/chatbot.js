@@ -86,7 +86,7 @@
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ message }),
-        signal: controller.signal
+        mode: "cors"
       });
     } catch (err) {
       clearInterval(thinkingInterval);
