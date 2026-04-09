@@ -9,11 +9,10 @@ from ask_docs import (
     expand_with_graph,
     add_graph_chunks,
     build_prompt,
-    classify_query_intent,
-    SentenceTransformer,
-    MODEL_NAME,
-    OpenAI
+    classify_query_intent
 )
+
+from openai import OpenAI
 
 app = FastAPI()
 app.add_middleware(
@@ -24,7 +23,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-model = None
 index = None
 chunks = None
 graph = None
@@ -38,9 +36,8 @@ def chat(req: ChatRequest):
 
     global model, index, chunks, graph, client
 
-    if model is None:
-        print("Loading model + index...")
-        model = SentenceTransformer(MODEL_NAME)
+    if index is None:
+        print("Loading index + graph...")
         index, chunks = load_index()
         graph = load_graph()
         client = OpenAI()
@@ -48,7 +45,7 @@ def chat(req: ChatRequest):
 
     query = req.message
 
-    results = search(query, model, index, chunks)
+    results = search(query, client, index, chunks)
 
     related_paths = expand_with_graph(results, graph)
     results = add_graph_chunks(results, related_paths, chunks)

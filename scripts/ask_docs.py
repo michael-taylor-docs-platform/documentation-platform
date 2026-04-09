@@ -1,8 +1,6 @@
 import json
 import faiss
-from sentence_transformers import SentenceTransformer
 import re
-from openai import OpenAI
 import os
 import yaml
 
@@ -51,8 +49,6 @@ def classify_query_intent(query: str) -> str:
             return "experience"
 
     return "technical"
-
-MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
 def load_taxonomy():
     BASE_DIR = os.path.dirname(__file__)
@@ -176,18 +172,18 @@ def rerank_results(query, candidates):
         for _, hybrid, vector, keyword, hierarchy, chunk in reranked
     ]
 
-def mmr_select(candidates, model, query_embedding, k=12, lambda_param=0.9):
-
-    import numpy as np
+def mmr_select(candidates, query_embedding, k=12, lambda_param=0.9):
 
     selected = []
     selected_embeddings = []
 
     # extract chunk embeddings
+    import numpy as np
+
     chunk_embeddings = [
-        model.encode(c[4]["content"], normalize_embeddings=True)
+        np.array(c[4]["embedding"])
         for c in candidates
-    ]
+]
 
     remaining = list(range(len(candidates)))
 
@@ -222,7 +218,7 @@ def mmr_select(candidates, model, query_embedding, k=12, lambda_param=0.9):
 
     return selected
 
-def search(query, model, index, chunks, k=8):
+def search(query, client, index, chunks, k=8):
 
     expanded_query = expand_query(query)
 
@@ -234,10 +230,15 @@ def search(query, model, index, chunks, k=8):
     taxonomy = load_taxonomy()
     metadata_filters = detect_metadata(query, taxonomy)
 
-    query_embedding = model.encode(
-        [expanded_query],
-        normalize_embeddings=True
+    response = client.embeddings.create(
+        model="text-embedding-3-small",
+        input=expanded_query
     )
+
+    import numpy as np
+
+    query_embedding = np.array([response.data[0].embedding]).astype("float32")
+    faiss.normalize_L2(query_embedding)
 
     print("Expanded query:", expanded_query)
 
@@ -324,20 +325,6 @@ def search(query, model, index, chunks, k=8):
         # cap bonus
         metadata_bonus = min(metadata_bonus, 1.0)
 
-        for key, value in metadata_filters.items():
-
-            if key == "tags":
-                chunk_tags = chunk_meta.get("tags", [])
-
-                matches = sum(1 for t in value if t in chunk_tags)
-                metadata_bonus += 0.2 * matches
-
-            else:
-                if chunk_meta.get(key) == value:
-                    metadata_bonus += 0.3
-
-        metadata_bonus = min(metadata_bonus, 0.8)
-
         # --- final score ---
         hybrid_score = (
             0.6 * vector_score +
@@ -351,7 +338,7 @@ def search(query, model, index, chunks, k=8):
     candidates.sort(reverse=True, key=lambda x: x[0])
 
     # Apply MMR diversity selection
-    candidates = mmr_select(candidates, model, query_embedding, k=12)
+    # candidates = mmr_select(candidates, model, query_embedding, k=12)
 
     # Semantic reranking
     #candidates = rerank_results(query, candidates)
@@ -526,8 +513,8 @@ def main():
 
     client = OpenAI()
 
-    print("Loading model...")
-    model = SentenceTransformer(MODEL_NAME)
+#    print("Loading model...")
+#    model = SentenceTransformer(MODEL_NAME)
 
     print("Loading index...")
     index, chunks = load_index()
@@ -547,7 +534,9 @@ def main():
         related_paths = expand_with_graph(results, graph)
 
         results = add_graph_chunks(results, related_paths, chunks)
-
+        
+        intent = classify_query_intent(query)
+        
         prompt, sources = build_prompt(query, results, intent)
 
         answer = ask_llm(prompt, client)
