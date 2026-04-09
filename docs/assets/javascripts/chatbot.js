@@ -40,7 +40,7 @@
     const input = container.querySelector("#input");
     const chat = container.querySelector("#chat");
     const sendBtn = container.querySelector("#send");
-
+    const API_URL = "https://documentation-platform-production.up.railway.app";
     const controller = new AbortController();
     const timeout = setTimeout(() => {
       controller.abort();
@@ -80,7 +80,7 @@
     let response;
 
     try {
-      response = await fetch("http://127.0.0.1:8001/api/chat", {
+        response = await fetch(`${API_URL}/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
